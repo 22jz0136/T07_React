@@ -4,11 +4,15 @@ import Login from "./components/login";
 import { useEffect, useState } from 'react';
 import { gapi } from 'gapi-script';
 import Logout from "./components/logout"; 
+import React, { Component } from 'react';
+import { BrowserRouter, Route, Link } from 'react-router-dom';
 
 
 const clientId = "506551363779-1752jnu0oeua2lr415m1vdjs4gp50ltt.apps.googleusercontent.com";
 
+
 function App() {
+  
 
   // ログイン状態を管理するステート
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -17,7 +21,6 @@ function App() {
 
   // Googleログイン成功時の処理
   const responseGoogle = (response) => {
-    console.log(response); // レスポンスをコンソールに表示
     setIsLoggedIn(true); // ログイン状態を更新
     setError(''); // エラーメッセージをクリア
   };

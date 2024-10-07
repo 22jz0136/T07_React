@@ -7,7 +7,7 @@ function Login({ onSuccess, onFailure, error }) {
       <div id="signInButton">
         <GoogleLogin
           clientId={clientId}
-          buttonText='Login with Google'
+          buttonText='Googleでログイン'
           onSuccess={onSuccess} // App.jsから渡された成功時のコールバック
           onFailure={onFailure} // App.jsから渡された失敗時のコールバック
           cookiePolicy={'single_host_origin'}

@@ -58,7 +58,7 @@ function App() {
         </div>
       ) :  (
         <div>
-          <h1>Login with Google</h1>
+          <h1>ログイン</h1>
           <Login 
             onSuccess={responseGoogle} // コールバックを渡す
             onFailure={onFailure} // コールバックを渡す

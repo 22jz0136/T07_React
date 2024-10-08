@@ -5,19 +5,22 @@ import { Link } from 'react-router-dom';
 function TopAdmin({ userImage, userName }) {
   return (
     <div className='header'>
-
-        <div className='navi'>
-            <h1>Top Admin画面</h1>
-            {/* プロフィール画像の表示 */}
-            <img src={userImage} alt="プロフィール" style={{ width: '30px', borderRadius: '50%' }} />
-
-            {/* ユーザー名の表示 */}
-            <span>{userName}</span>
+      <h1>Top Admin画面</h1>
+        <div className='loginProfile'> 
+          <img src={userImage} alt="プロフィール" style={{ width: '30px', borderRadius: '50%' }} />
+          <span>{userName}</span>
         </div>
 
-        <ul>
-          <li> <Link to="/top">TopUser</Link></li>
+        <div className='managementList'>
+          <ul>
+            <li> <Link to="/top">TopUser</Link></li>
+            <li>利用者を管理する</li>
+            <li>物品を管理する</li>
+            <li>Q&Aを管理する</li>
+            <li>ログアウト</li>
         </ul>
+        </div>
+        
 
     </div>
   );

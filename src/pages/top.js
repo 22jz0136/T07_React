@@ -1,5 +1,5 @@
 import React from 'react';
-import './styles.css';
+import '../css/top.css';
 import searchIcon from './src/img/search.png';
 import bellIcon from './src/img/bell-icon.png';
 import homeIcon from './src/img/home-icon.png';

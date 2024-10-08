@@ -1,15 +1,15 @@
 import React from 'react';
-import './styles.css';
-import searchIcon from './src/img/search.png';
-import bellIcon from './src/img/bell-icon.png';
-import homeIcon from './src/img/home-icon.png';
-import searchFooterIcon from './src/img/search-icon.png';
-import uploadIcon from './src/img/upload-icon.png';
-import messageIcon from './src/img/message-icon.png';
-import myPageIcon from './src/img/mypage-icon.png';
-import avatar1 from './src/img/avatar1.png';
-import tvImage from './src/img/tv-image.png';
-import heartIcon from './src/img/heart.png';
+// import '..css/top.';
+import searchIcon from '../img/search.png';
+import bellIcon from '../img/bell-icon.png';
+import homeIcon from '../img/home-icon.png';
+import searchFooterIcon from '../img/search-icon.png';
+import uploadIcon from '../img/upload-icon.png';
+import messageIcon from '../img/message-icon.png';
+import myPageIcon from '../img/mypage-icon.png';
+import avatar1 from '../img/avatar1.png';
+import tvImage from '../img/tv-image.png';
+import heartIcon from '../img/heart.png';
 
 function Header() {
   return (

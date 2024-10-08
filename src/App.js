@@ -5,11 +5,9 @@ import { gapi } from 'gapi-script';
 import Logout from "./components/logout"; 
 import { BrowserRouter as Router, Route, Routes, useNavigate } from 'react-router-dom';
 import TopAdmin from './pages/topAdmin';
-
-
+import TopUser from './pages/top';
 
 const clientId = "506551363779-1752jnu0oeua2lr415m1vdjs4gp50ltt.apps.googleusercontent.com";
-
 
 function App() {
 
@@ -70,6 +68,7 @@ function App() {
               <Routes>
                 <Route path="/" element={<TopAdmin userName={userName} userImage={userImage} />} />
                 <Route path="/topadmin" element={<TopAdmin userName={userName} userImage={userImage} />} /> 
+                <Route path="/top" element={<TopUser userName={userName} userImage={userImage} />} />
               </Routes>
             </Router>
             <Logout onLogout={handleLogout}/>

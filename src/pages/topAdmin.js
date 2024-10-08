@@ -1,5 +1,6 @@
 import '../css/topAdmin.css';
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 function TopAdmin({ userImage, userName }) {
   return (
@@ -13,6 +14,10 @@ function TopAdmin({ userImage, userName }) {
             {/* ユーザー名の表示 */}
             <span>{userName}</span>
         </div>
+
+        <ul>
+          <li> <Link to="/top">TopUser</Link></li>
+        </ul>
 
     </div>
   );

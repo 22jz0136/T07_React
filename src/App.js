@@ -80,14 +80,14 @@ function App() {
             <Logout onLogout={handleLogout}/>
           </div>
         ) : (
-          <div>
+          <div className='container'>
             <h1>ログイン</h1>
             <Login 
               onSuccess={responseGoogle} // コールバックを渡す
               onFailure={onFailure} // コールバックを渡す
               error={error} // エラーメッセージを渡す
             />
-            </div>
+          </div>
         )}
       </div>
     

@@ -1,21 +1,26 @@
-import { GoogleLogin} from 'react-google-login';
-
-const clientId = "506551363779-1752jnu0oeua2lr415m1vdjs4gp50ltt.apps.googleusercontent.com";
+import React from 'react';
+import { GoogleLogin } from '@react-oauth/google';
+import { jwtDecode } from 'jwt-decode'; 
 
 function Login({ onSuccess, onFailure, error }) {
+    const handleLoginSuccess = (credentialResponse) => {
+        const userObject = jwtDecode(credentialResponse.credential); // JWTをデコード
+        onSuccess(userObject); // App.jsから渡された成功時のコールバック
+    };
+
+    const handleLoginError = (error) => {
+        onFailure(error); // App.jsから渡された失敗時のコールバック
+    };
+
     return (
-      <div id="signInButton">
-        <GoogleLogin
-          clientId={clientId}
-          buttonText='Googleでログイン'
-          onSuccess={onSuccess} // App.jsから渡された成功時のコールバック
-          onFailure={onFailure} // App.jsから渡された失敗時のコールバック
-          cookiePolicy={'single_host_origin'}
-          isSignedIn={true}
-        />
-        {error && <p style={{ color: 'red' }}>{error}</p>} {/* エラーメッセージの表示 */}
-      </div>
+        <div id="signInButton">
+            <GoogleLogin
+                onSuccess={handleLoginSuccess}
+                onError={handleLoginError}
+            />
+            {error && <p style={{ color: 'red' }}>{error}</p>} 
+        </div>
     );
-  }
-  
-  export default Login;
+}
+
+export default Login;

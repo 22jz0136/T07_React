@@ -7,8 +7,15 @@ import { BrowserRouter as Router, Route, Routes, useNavigate } from 'react-route
 import TopAdmin from './pages/topAdmin';
 import TopUser from './pages/top';
 import TopUser2 from './pages/top2';
+<<<<<<< HEAD
 import ItemListing from './pages/ItemListing';
 
+=======
+import UserManagement from './pages/UserManagement';
+import ItemManagement from './pages/ItemManagement';
+import QAManagement from './pages/QAManagement';
+import Sidebar from './components/Sidebar';
+>>>>>>> 5e0fb79d382a05e093fad1b5f937b2f1c2cef9f4
 
 
 const clientId = "506551363779-1752jnu0oeua2lr415m1vdjs4gp50ltt.apps.googleusercontent.com";
@@ -74,10 +81,14 @@ function App() {
                 <Route path="/topadmin" element={<TopAdmin userName={userName} userImage={userImage} />} /> 
                 <Route path="/top" element={<TopUser userName={userName} userImage={userImage} />} />
                 <Route path="/top2" element={<TopUser2 userName={userName} userImage={userImage} />} />
-                <Route path="/ItemListing" element={<ItemListing userName={userName} userImage={userImage} />} />
+                <Route path="/usermanagement" element={<UserManagement userName={userName} userImage={userImage} />} />
+                <Route path="/itemmanagement" element={<ItemManagement userName={userName} userImage={userImage} />} />
+                <Route path="/qamanagement" element={<QAManagement userName={userName} userImage={userImage} />} />
+                <Route path="/sidebar" element={<Sidebar userName={userName} userImage={userImage} />} />
               </Routes>
             </Router>
             <Logout onLogout={handleLogout}/>
+            
           </div>
         ) : (
           <div className='container'>

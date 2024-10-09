@@ -7,15 +7,8 @@ import { BrowserRouter as Router, Route, Routes, useNavigate } from 'react-route
 import TopAdmin from './pages/topAdmin';
 import TopUser from './pages/top';
 import TopUser2 from './pages/top2';
-<<<<<<< HEAD
 import ItemListing from './pages/ItemListing';
 
-=======
-import UserManagement from './pages/UserManagement';
-import ItemManagement from './pages/ItemManagement';
-import QAManagement from './pages/QAManagement';
-import Sidebar from './components/Sidebar';
->>>>>>> 5e0fb79d382a05e093fad1b5f937b2f1c2cef9f4
 
 
 const clientId = "506551363779-1752jnu0oeua2lr415m1vdjs4gp50ltt.apps.googleusercontent.com";

@@ -6,6 +6,8 @@ import Logout from "./components/logout";
 import { BrowserRouter as Router, Route, Routes, useNavigate } from 'react-router-dom';
 import TopAdmin from './pages/topAdmin';
 import TopUser from './pages/top';
+import TopUser2 from './pages/top2';
+
 
 const clientId = "506551363779-1752jnu0oeua2lr415m1vdjs4gp50ltt.apps.googleusercontent.com";
 
@@ -69,6 +71,7 @@ function App() {
                 <Route path="/" element={<TopAdmin userName={userName} userImage={userImage} />} />
                 <Route path="/topadmin" element={<TopAdmin userName={userName} userImage={userImage} />} /> 
                 <Route path="/top" element={<TopUser userName={userName} userImage={userImage} />} />
+                <Route path="/top2" element={<TopUser2 userName={userName} userImage={userImage} />} />
               </Routes>
             </Router>
             <Logout onLogout={handleLogout}/>

@@ -16,7 +16,7 @@ function TopAdmin({ userImage, userName }) {
         </div>
 
         <ul>
-          <li> <Link to="/top">TopUser</Link></li>
+          <li> <Link to="/ItemListing">TopUser</Link></li>
         </ul>
 
     </div>

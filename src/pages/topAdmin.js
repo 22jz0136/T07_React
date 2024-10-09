@@ -14,9 +14,9 @@ function TopAdmin({ userImage, userName }) {
         <div className='managementList'>
           <ul>
             <li> <Link to="/top">TopUser</Link></li>
-            <li>利用者を管理する</li>
-            <li>物品を管理する</li>
-            <li>Q&Aを管理する</li>
+            <li><Link to="/usermanagement">利用者を管理する</Link></li>
+            <li><Link to="/itemmanagement">物品を管理する</Link></li>
+            <li><Link to="/qamanagement">Q&Aを管理する</Link></li>
             <li>ログアウト</li>
         </ul>
         </div>

@@ -4,48 +4,8 @@
     box-sizing: border-box;
 }
 
-.UserManagement {
-    width: 100%;
-
-    text-align: left;
-}
-
-.Sidebar {
-    height: 100%;
-    width: 250px;
-    background-color: aqua;
-}
-
-.SidebarList {
-    height: auto;
-    padding: 0;
-    width: 100%;
-}
-
-.SidebarList #active {
-    background-color: rgb(3, 171, 171);
-}
-
-.SidebarList .row {
-    width: 100%;
-    height: 60px;
-    /* background-color: rgb(56, 214, 140); */
+.columnBrake {
     display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.SidebarList .row:hover {
-    cursor: pointer;
-    background-color: rgb(38, 149, 97);
-}
-
-.row #icon {
-    flex: 30%;
-    display: grid;
-    place-items: center;
-}
-
-.row #title {
-    flex: 70%;
-}
+    width: 100%;
+    height: 100vh;
+  }

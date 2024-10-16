@@ -7,8 +7,10 @@ function ItemManagement() {
     <div>
       
       <Navbar/>
-      <h1>物品管理画面</h1>
-      <Sidebar/>
+      <div className='columnBrake'>
+          <Sidebar/>
+          <h1>物品管理画面</h1>
+        </div>
     </div>
   )
 }

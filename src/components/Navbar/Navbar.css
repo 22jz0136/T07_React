@@ -42,10 +42,7 @@ body {
     text-decoration: none;
     font-size: medium;
   }
-  /* .nav-links-mobile {
-    color: rgb(72, 0, 255);
-    text-decoration: none;
-  } */
+ 
   li:hover {
     background-color: white;
 }

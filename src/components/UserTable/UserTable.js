@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'; // Reactと必要なフックをインポート
 // import axios from 'axios'; // APIリクエスト用にaxiosをインポート
 import './UserTable.css'; // CSSファイルをインポート
+import NotInterestedIcon from '@mui/icons-material/NotInterested';
+import WarningIcon from '@mui/icons-material/Warning';
 
 const UserTable = () => {
   const [users, setUsers] = useState([]); // ユーザー情報を格納する状態を定義
@@ -16,13 +18,13 @@ const UserTable = () => {
         // 偽のデータをセット（Laravel側が終わったらこの部分を修正）
         const fakeData = [
           {
-            id: 1,
+            id: 12345,
             name: "山田 太郎",
             email: "taro.yamada@example.com",
             login_at: "2024-10-16 10:00:00"
           },
           {
-            id: 2,
+            id: 67890,
             name: "鈴木 花子",
             email: "hanako.suzuki@example.com",
             login_at: "2024-10-15 09:30:00"
@@ -61,7 +63,7 @@ const UserTable = () => {
 
   return (
     <div>
-      <h1>ユーザー一覧</h1> {/* テーブルのタイトル */}
+      <h1>ユーザー一覧</h1> 
       <table>
         <thead>
           <tr>
@@ -70,7 +72,7 @@ const UserTable = () => {
             <th>メールアドレス</th>
             <th>ログイン日時</th>
             <th>警告</th>
-            <th>Ban</th>
+            <th>BAN</th>
           </tr>
         </thead>
         <tbody>
@@ -87,11 +89,11 @@ const UserTable = () => {
                 <td>{user.login_at}</td>     {/* ログイン日時 */}
                 <td>
                   {/* 警告ボタン。クリック時にsendWarning関数を呼び出す */}
-                  <button onClick={() => sendWarning(user.id)}>警告</button>
+                  <button onClick={() => sendWarning(user.id)}><WarningIcon/></button>
                 </td>
                 <td>
                   {/* Banボタン。クリック時にbanUser関数を呼び出す */}
-                  <button onClick={() => banUser(user.id)}>Ban</button>
+                  <button onClick={() => banUser(user.id)}><NotInterestedIcon/></button>
                 </td>
               </tr>
             ))

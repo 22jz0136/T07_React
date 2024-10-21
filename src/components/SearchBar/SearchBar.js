@@ -5,8 +5,8 @@ import SearchIcon from '@mui/icons-material/Search'; // MUIの検索アイコン
 export default function SearchBar() {
     return (
         <div className='searchBar'>
-            <SearchIcon className="searchIcon" /> {/* アイコンを表示 */}
             <input type="text" placeholder="利用者IDを入力してください..." />
+            <SearchIcon className="searchIcon" /> {/* アイコンを表示 */}
         </div>
     );
 }

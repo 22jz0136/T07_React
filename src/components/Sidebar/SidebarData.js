@@ -8,7 +8,7 @@ export const SidebarData = [
     {
         title: "利用者を管理する",
         icon: <PersonAddAltIcon/>,
-        link: "/usermanagement",
+        link: "/",
     },
     {
         title: "物品を管理する",

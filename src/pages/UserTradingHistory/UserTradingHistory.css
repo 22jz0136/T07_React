@@ -1,0 +1,38 @@
+.message-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.message-card {
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.your-message {
+    background-color: #e1ffc7; /* あなたのメッセージの背景色 */
+    align-self: flex-end; /* あなたのメッセージを右揃え */
+}
+
+.other-message {
+    background-color: #f0f0f0; /* 相手のメッセージの背景色 */
+    align-self: flex-start; /* 相手のメッセージを左揃え */
+}
+
+.message-sender {
+    font-weight: bold;
+    margin: 0;
+}
+
+.message-text {
+    margin: 5px 0;
+}
+
+.message-time {
+    font-size: 0.8em;
+    color: gray;
+    align-self: flex-end; /* 時間を右揃え */
+}

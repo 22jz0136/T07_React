@@ -1,10 +1,11 @@
 import React from 'react'
-import Navbar from './components/Navbar/Navbar';
-import Sidebar from './components/Sidebar/Sidebar';
 import "./App.css"
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import UserManagement from './pages/UserManagement/UserManagement';
 import ItemManagement from './pages/ItemManagement/ItemManagement';
+import UserItemList from './pages/UserItemList/UserItemList';
+import UserRequestList from './pages/UserRequestList/UserRequestList';
+import UserTradingHistory from './pages/UserTradingHistory/UserTradingHistory';
 
 function App() {
 
@@ -12,9 +13,11 @@ function App() {
         <div className='App'>
              <BrowserRouter>
                 <Routes>
-                    <Route path="/usermanagement" element={<UserManagement />} />
+                    <Route path="/" element={<UserManagement />} />
                     <Route path="/itemmanagement" element={<ItemManagement />} />
-                    {/* <Route path="*" element={<NoMatch />} /> */}
+                    <Route path="/useritemlist" element={<UserItemList />} />
+                    <Route path="/userrequestlist" element={<UserRequestList />} />
+                    <Route path="/usertradinghistorylist" element={<UserTradingHistory />} />
                 </Routes>
             </BrowserRouter>
       

@@ -8,8 +8,6 @@ import './UserItemList.css';
 
 function UserItemList({ userId }) {
   const [items, setItems] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
 
   const mockItems = [
     {
@@ -44,8 +42,7 @@ function UserItemList({ userId }) {
   useEffect(() => {
     setTimeout(() => {
       setItems(mockItems);
-      setLoading(false);
-    }, 1000);
+    });
   }, []);
 
   const handleHide = (id) => {
@@ -59,14 +56,6 @@ function UserItemList({ userId }) {
   const handleWarn = (id) => {
     alert(`Item ${id} に警告を送りました`);
   };
-
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
-  if (error) {
-    return <div>{error}</div>;
-  }
 
   return (
     <div>

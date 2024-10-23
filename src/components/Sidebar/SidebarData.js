@@ -18,12 +18,12 @@ export const SidebarData = [
     {
         title: "Q&Aを管理する",
         icon: <QuestionAnswerIcon/>,
-        link: "/qamanagement",
+        link: "/qalist",
     },
     {
         title: "ログアウト",
         icon: <LogoutIcon/>,
-        link: "/",
+        link: "",
     },
 
 ];

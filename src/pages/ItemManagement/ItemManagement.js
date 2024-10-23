@@ -13,12 +13,10 @@ function ItemManagement() {
       <Navbar/>
       <div className='columnBrake'>
           <Sidebar/>
-          
           <div>
             <h1>物品管理画面</h1>
             <SearchBar/>
             <Profile/>
-            
           </div>
         </div>
     </div>

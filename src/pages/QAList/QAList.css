@@ -1,0 +1,60 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh; /* Full screen height */
+  }
+  
+  .qa-list {
+    width: 100%; /* Use full width of the container */
+    margin: 20px;
+    text-align: center;
+  }
+  
+  .question-list {
+    list-style-type: none;
+    padding: 0;
+    width: 100%; /* Adjust to take full width */
+  }
+  
+  .question-item {
+    width: 100%; /* Full width of the parent */
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    margin: 5px;
+    margin-left: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    align-items: center;
+    line-height: normal;
+  }
+  
+  .add-button, .delete-button, .edit-button {
+    background-color: #000000;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
+  }
+  
+  .delete-button {
+    background-color: #d53e3e;
+  }
+  
+  .add-button {
+    margin: 10px;
+  }
+  
+  .edit-button {
+    margin-left: 10px;
+  }
+  
+  .add-button:hover, .delete-button:hover, .edit-button:hover {
+    opacity: 0.8;
+  }
+  
+
+  .columnBrake {
+    float: left;
+  }

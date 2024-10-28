@@ -30,8 +30,6 @@ function QAEdit() {
                   <textarea defaultValue="ここに回答を入力" />
                   <br />
                 </div>
-                
-                
               </div>  
                 <button type="submit">変更する</button>
             </form>

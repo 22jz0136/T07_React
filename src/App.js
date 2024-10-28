@@ -9,6 +9,8 @@ import UserTradingHistory from './pages/UserTradingHistory/UserTradingHistory';
 import QAList from './pages/QAList/QAList';
 import QAEdit from './pages/QAEdit/QAEdit';
 import QAadd from './pages/QAadd/QAadd';
+import UserWarning from './pages/UserWarning/UserWarning';
+import ProductWarning from './pages/ProductWarning/ProductWarning';
 
 function App() {
 
@@ -24,6 +26,9 @@ function App() {
                     <Route path="/qalist" element={<QAList />} />
                     <Route path="/edit/:id" element={<QAEdit />} />
                     <Route path="/qaadd" element={<QAadd />} />
+                    <Route path="/userwarning" element={<UserWarning />} />
+                    <Route path="/user-warning/:userId" element={<UserWarning />} />
+                    <Route path="/productwarning" element={<ProductWarning />} />
                 </Routes>
             </BrowserRouter>
       

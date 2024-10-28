@@ -1,0 +1,30 @@
+.userWarningContainer {
+    display: flex;
+}
+
+.Sidebar {
+    height:100vh;
+}
+
+.userInfo {
+    margin: 20px;
+}
+
+.userWarningBody {
+    margin: 10px;
+    padding: 10px;
+
+}
+
+.userWarningBody .userInfo p {
+    line-height: 300%;
+}
+
+.userWarningBody .userWarningForm {
+    display: grid;
+}
+
+.userWarningBody .userWarningForm textarea {
+    margin: 10px;
+    padding: 10px;
+}

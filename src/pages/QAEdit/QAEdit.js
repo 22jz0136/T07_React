@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import Navbar from '../../components/Navbar/Navbar';
 import Sidebar from '../../components/Sidebar/Sidebar';
 import SearchBar from '../../components/SearchBar/SearchBar';
+import './QAEdit.css';
 
 function QAEdit() {
   const { id } = useParams(); // URLから質問IDを取得
@@ -14,18 +15,25 @@ function QAEdit() {
         <Navbar/>
         <div className='columnBrake'>
           <Sidebar/>
-          
-            
-            <SearchBar/>
-            
-                <form>
-                <label>質問内容:</label>
-                <input type="text" defaultValue={`Q${id}:`} />
-                <br />
-                <label>回答内容:</label>
-                <textarea defaultValue="ここに回答を入力" />
-                <br />
-                <button type="submit">保存</button>
+            <form className='formEdit'>
+              <div className='formText'>
+                <div className='formTextarea'>
+                  <label>質問内容</label>
+                  <input type="text" defaultValue={`Q${id}:`} />
+                  <br />
+                </div>
+              </div>
+
+              <div className='formText'>
+                <div className='formTextarea'>
+                  <label>回答内容</label>
+                  <textarea defaultValue="ここに回答を入力" />
+                  <br />
+                </div>
+                
+                
+              </div>  
+                <button type="submit">変更する</button>
             </form>
          
         </div>   

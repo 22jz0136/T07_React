@@ -8,6 +8,7 @@ import UserRequestList from './pages/UserRequestList/UserRequestList';
 import UserTradingHistory from './pages/UserTradingHistory/UserTradingHistory';
 import QAList from './pages/QAList/QAList';
 import QAEdit from './pages/QAEdit/QAEdit';
+import QAadd from './pages/QAadd/QAadd';
 
 function App() {
 
@@ -22,6 +23,7 @@ function App() {
                     <Route path="/usertradinghistorylist" element={<UserTradingHistory />} />
                     <Route path="/qalist" element={<QAList />} />
                     <Route path="/edit/:id" element={<QAEdit />} />
+                    <Route path="/qaadd" element={<QAadd />} />
                 </Routes>
             </BrowserRouter>
       

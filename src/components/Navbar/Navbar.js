@@ -8,7 +8,7 @@ export default function Navbar() {
       <Nav className="NavbarItems">
         <h1 className="Navbar-logo">Loop+</h1>
         <div className="menu-icon"></div>
-        <ul>
+        {/* <ul>
           {MenuItems.map((item, index) => {
             return (
               <li key={index}>
@@ -18,7 +18,7 @@ export default function Navbar() {
               </li>
             );
           })}
-        </ul>
+        </ul> */}
       </Nav>
     );
   }

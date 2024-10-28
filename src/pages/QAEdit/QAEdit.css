@@ -1,0 +1,42 @@
+.formEdit {
+    width: 641px;
+    height: 72vh;
+    text-align: center;
+    padding: 50px;
+    margin: 50px;
+    background-color: rgb(240, 240, 240);
+    border-radius: 5px;
+}
+
+.formEdit .formText  {
+    font-size: 15px;
+    padding: 10px;
+    margin: 10px;
+}
+
+.formEdit .formText input {
+    width: 500px;
+    line-height: normal;
+    padding: 10px;
+    border-radius: 5px;
+
+}
+
+.formEdit .formText textarea {
+    width: 500px;
+    line-height: normal;
+    padding: 10px;
+    border-radius: 5px;
+    
+}
+
+.formEdit .formText label {
+    font-size: 20px;
+    margin: 10px;
+    padding: 10px;
+    text-align: left;
+}
+
+.formEdit .formText .formTextarea {
+    display: grid;
+}

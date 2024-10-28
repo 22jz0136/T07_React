@@ -11,6 +11,7 @@ import QAEdit from './pages/QAEdit/QAEdit';
 import QAadd from './pages/QAadd/QAadd';
 import UserWarning from './pages/UserWarning/UserWarning';
 import ProductWarning from './pages/ProductWarning/ProductWarning';
+import ListedProducts from './pages/ListedProducts/ListedProducts';
 
 function App() {
 
@@ -29,6 +30,7 @@ function App() {
                     <Route path="/userwarning" element={<UserWarning />} />
                     <Route path="/user-warning/:userId" element={<UserWarning />} />
                     <Route path="/productwarning" element={<ProductWarning />} />
+                    <Route path="/listedproducts" element={<ListedProducts />} />
                 </Routes>
             </BrowserRouter>
       

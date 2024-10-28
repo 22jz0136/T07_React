@@ -8,8 +8,7 @@ import Profile from '../../components/Profile/Profile';
 
 function ItemManagement() {
   return (
-    <div>
-      
+    <div> 
       <Navbar/>
       <div className='columnBrake'>
           <Sidebar/>

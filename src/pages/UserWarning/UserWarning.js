@@ -47,7 +47,7 @@ const UserWarning = () => {
             </div>
           )}
 
-          <form onSubmit={handleSubmit}>
+          <form className='form' onSubmit={handleSubmit}>
             <div className='userWarningForm'>
                 <label>警告内容</label>
                 <textarea

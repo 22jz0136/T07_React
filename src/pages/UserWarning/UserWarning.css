@@ -4,6 +4,7 @@
 
 .Sidebar {
     height:100vh;
+    flex-shrink: 0;
 }
 
 .userInfo {
@@ -21,10 +22,24 @@
 }
 
 .userWarningBody .userWarningForm {
-    display: grid;
+    display: flex;
+    flex-direction: column;
+    width: 400px;
 }
 
 .userWarningBody .userWarningForm textarea {
     margin: 10px;
     padding: 10px;
+}
+
+.userWarningContent {
+    flex-grow: 1;
+}
+
+.form button {
+    margin-top: 10px; 
+    border: none; 
+    border-radius: 5px; 
+    cursor: pointer; 
+    margin-left: 12%;
 }

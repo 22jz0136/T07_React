@@ -16,7 +16,7 @@ import ListedProducts from './pages/ListedProducts/ListedProducts';
 function App() {
 
     return (
-        <div className='App'>
+        <div>
              <BrowserRouter>
                 <Routes>
                     <Route path="/" element={<UserManagement />} />

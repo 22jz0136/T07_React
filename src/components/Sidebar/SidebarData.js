@@ -13,7 +13,7 @@ export const SidebarData = [
     {
         title: "物品を管理する",
         icon: <InventoryIcon/>,
-        link: "/itemmanagement",
+        link: "/listedproducts",
     },
     {
         title: "Q&Aを管理する",

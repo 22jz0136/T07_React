@@ -19,13 +19,19 @@ const UserTable = () => {
     fetchData();
   }, []);
 
-  const sendWarning = (userId) => {
-    // 警告ページにユーザーIDを渡して遷移
-    navigate(`/user-warning/${userId}`);
+  const sendWarning = (e, userId) => {
+    e.stopPropagation(); // クリックイベントの伝播を防止
+    navigate(`/user-warning/${userId}`); // 警告ページにユーザーIDを渡して遷移
   };
 
-  const banUser = (userId) => {
+  const banUser = (e, userId) => {
+    e.stopPropagation(); // クリックイベントの伝播を防止
     alert('ユーザーがBanされました。');
+  };
+
+  const handleRowClick = (userId) => {
+    // ユーザーのプロフィールページに遷移し、ユーザーIDを渡す
+    navigate(`/user-profile/${userId}`);
   };
 
   return (
@@ -49,16 +55,20 @@ const UserTable = () => {
             </tr>
           ) : (
             users.map(user => (
-              <tr key={user.id}>
+              <tr key={user.id} onClick={() => handleRowClick(user.id)} style={{ cursor: 'pointer' }}>
                 <td>{user.id}</td>
                 <td>{user.name}</td>
                 <td>{user.email}</td>
                 <td>{user.login_at}</td>
                 <td>
-                  <button onClick={() => sendWarning(user.id)}><WarningIcon /></button>
+                  <button onClick={(e) => sendWarning(e, user.id)}>
+                    <WarningIcon />
+                  </button>
                 </td>
                 <td>
-                  <button onClick={() => banUser(user.id)}><NotInterestedIcon /></button>
+                  <button onClick={(e) => banUser(e, user.id)}>
+                    <NotInterestedIcon />
+                  </button>
                 </td>
               </tr>
             ))

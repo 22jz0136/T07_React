@@ -1,7 +1,6 @@
 /* テーブル全体のスタイル */
 table {
-  width: 131%;  /* 画面の幅に合わせる */
-  height: auto; /* 高さを自動調整 */
+  width: -webkit-fill-available;
   border-collapse: collapse;  /* セルのボーダーを結合 */
   table-layout: auto;  /* 各列の幅を自動調整 */
   margin: 20px;  /* テーブルの上下に余白を設定 */

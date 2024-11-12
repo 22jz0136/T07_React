@@ -9,3 +9,7 @@
   height: 100vh; /* Full screen height */
   }
 
+.mainbody {
+    flex-grow: 1;
+}
+

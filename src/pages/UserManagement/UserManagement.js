@@ -11,22 +11,13 @@ function UserManagement() {
         <Navbar/>
         <div className='columnBrake'>
           <Sidebar/>
-          <div>
-            
+          <div className='mainbody'>
             <SearchBar/>
             <div className='usertable'>
               <UserTable/>
             </div>
-            
           </div>
-          
-          
         </div>
-
-        
-
-        
-        
       </div>
     )
 }

@@ -1,4 +1,6 @@
+// ListedProducts.js
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Navbar from '../../components/Navbar/Navbar';
 import Sidebar from '../../components/Sidebar/Sidebar';
 import SearchBar from '../../components/SearchBar/SearchBar';
@@ -7,7 +9,8 @@ import tvimage from '../../img/tv-image.png';
 import avatar1 from '../../img/avatar1.png';
 
 const ListedProducts = () => {
-  const [filter, setFilter] = useState(null); // 初期状態は全商品表示
+  const navigate = useNavigate();
+  const [filter, setFilter] = useState(null);
 
   const toggleFilter = (type) => {
     setFilter((prevFilter) => (prevFilter === type ? null : type));
@@ -73,6 +76,10 @@ const ListedProducts = () => {
 
   const filteredProducts = filter ? products.filter((product) => product.type === filter) : products;
 
+  const handleProductClick = (product) => {
+    navigate(`/product/${product.id}`, { state: product }); // 商品情報もstateに渡す
+  };
+
   return (
     <div>
       <Navbar />
@@ -92,7 +99,7 @@ const ListedProducts = () => {
               <p>表示する商品がありません。</p>
             ) : (
               filteredProducts.map((product) => (
-                <div key={product.id} className="product-item">
+                <div key={product.id} className="product-item" onClick={() => handleProductClick(product)}>
                   <div className="product-header">
                     <img src={product.profileImage} alt="Profile" className="profile-image" />
                     <span className="username">{product.username}</span>
@@ -111,8 +118,6 @@ const ListedProducts = () => {
                       <p>受け渡し場所: {product.location}</p>
                     </div>
                   </div>　
-
-                  
                 </div>
               ))
             )}

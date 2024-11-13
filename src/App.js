@@ -13,6 +13,7 @@ import UserWarning from './pages/UserWarning/UserWarning';
 import ProductWarning from './pages/ProductWarning/ProductWarning';
 import ListedProducts from './pages/ListedProducts/ListedProducts';
 import Login from './pages/Login/Login';
+import ProductDetail from './pages/ProductDetail/ProductDetail';
 
 function App() {
 
@@ -30,11 +31,11 @@ function App() {
                     <Route path="/edit/:id" element={<QAEdit />} />
                     <Route path="/qaadd" element={<QAadd />} />
                     <Route path="/user-warning/:userId" element={<UserWarning />} />
-                    <Route path="/productwarning" element={<ProductWarning />} />
                     <Route path="/listedproducts" element={<ListedProducts />} />
+                    <Route path="/product/:id" element={<ProductDetail />} />
+                    <Route path="/product-warning/:productId" element={<ProductWarning />} />
                 </Routes>
             </BrowserRouter>
-      
         </div>
     )
 }

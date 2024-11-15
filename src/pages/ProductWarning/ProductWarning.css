@@ -45,3 +45,35 @@
     background-color: #f0f0f0;
   }
   
+
+  .userWarningForm {
+    display: flex;
+    flex-direction: column;
+}
+
+.userWarningForm textarea {
+  width: 400px;
+  height: 100px;
+  border-radius: 5px;
+  font-size: 12px;
+  line-height: 2rem;
+  padding: 5px;
+  margin: 10px;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+label {
+  margin: 10px 0 0 10px;
+}
+
+img {
+  margin: 10px;
+}
+
+.form button {
+  margin-top: 10px; 
+  border: none; 
+  border-radius: 5px; 
+  cursor: pointer; 
+  margin-left: 15%;
+}

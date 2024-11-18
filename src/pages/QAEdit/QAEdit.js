@@ -51,7 +51,11 @@ const QAEdit = () => {
                     onChange={(e) => setQuestion({ ...question, answer: e.target.value })}
                   />
                 </div>
-                <button onClick={handleSave}>保存</button>
+
+                <div className='qaedit-button'>
+                  <button onClick={handleSave}>保存</button>
+                </div>
+                
               </div>
             ) : (
               <p>読み込み中...</p>

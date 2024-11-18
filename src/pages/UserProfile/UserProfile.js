@@ -30,7 +30,7 @@ function UserProfile() {
       <Navbar />
       <div className='columnBrake'>
         <Sidebar />
-        <div className='mainContent'>
+        <div className='mainbody'>
           <h1>User Profile</h1>
           <SearchBar />
           {userData ? (

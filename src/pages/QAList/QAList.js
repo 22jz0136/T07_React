@@ -1,3 +1,4 @@
+// QAList.js
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navbar from '../../components/Navbar/Navbar';
@@ -9,9 +10,9 @@ function QAList() {
   const navigate = useNavigate();
 
   const [questions, setQuestions] = useState([
-    { id: 1, question: 'Q1: サイトの利用方法について教えてください。', answer: 'A1: サイトにアクセスし、アカウントを作成してから商品の検索や購入が可能です。' },
-    { id: 2, question: 'Q2: パスワードを忘れた場合はどうすればいいですか？', answer: 'A2: ログイン画面の「パスワードを忘れた場合」リンクから再設定できます。' },
-    { id: 3, question: 'Q3: 配送にはどれくらいの時間がかかりますか？', answer: 'A3: 通常、注文後2～3営業日以内に発送されます。' },
+    { id: 1, question: 'サイトの利用方法について教えてください。', answer: 'サイトにアクセスし、アカウントを作成してから商品の検索や購入が可能です。' },
+    { id: 2, question: 'パスワードを忘れた場合はどうすればいいですか？', answer: 'ログイン画面の「パスワードを忘れた場合」リンクから再設定できます。' },
+    { id: 3, question: '配送にはどれくらいの時間がかかりますか？', answer: '通常、注文後2～3営業日以内に発送されます。' },
   ]);
 
   const [selectedQuestions, setSelectedQuestions] = useState([]);
@@ -22,16 +23,12 @@ function QAList() {
     setSelectedQuestions([]);
   };
 
-  const handleAdd = (newQuestion) => {
-    setQuestions([...questions, newQuestion]);
-  };
-
   const handleNavigateToAdd = () => {
-    navigate('/qaadd'); // 質問追加ページに遷移
+    navigate('/qaadd');
   };
 
   const handleEdit = (id) => {
-    navigate(`/edit/${id}`); // 編集ページに遷移
+    navigate(`/qalist/${id}`);
   };
 
   const handleSelect = (id) => {
@@ -42,21 +39,28 @@ function QAList() {
     );
   };
 
+  const handleNavigateToDetail = (question) => {
+    navigate('/qadetail', { state: question }); // 詳細画面に質問情報を渡して遷移
+  };
+
   return (
     <div>
       <Navbar />
       <div className="columnBrake">
         <Sidebar />
-        <div>
+        <div className='mainbody'>
           <h1>Q&A管理</h1>
           <SearchBar />
           <div className="qa-list">
-            <button className="add-button" onClick={handleNavigateToAdd}>
-              ＋ 質問を追加
-            </button>
-            <button className="delete-button" onClick={handleDelete} disabled={selectedQuestions.length === 0}>
-              削除
-            </button>
+            <div className='add-delete-button'>
+              <button className="add-button" onClick={handleNavigateToAdd}>
+                ＋ 質問を追加
+              </button>
+              <button className="delete-button" onClick={handleDelete} disabled={selectedQuestions.length === 0}>
+                削除
+              </button>
+            </div>
+            
             <ul className="question-list">
               {questions.map(q => (
                 <li key={q.id} className="question-item">
@@ -65,8 +69,13 @@ function QAList() {
                     checked={selectedQuestions.includes(q.id)}
                     onChange={() => handleSelect(q.id)}
                   />
-                  <span>{q.question}</span>
+
+                  <div className="qa-content" onClick={() => handleEdit(q.id)}>
+                    <p><strong>{q.question}</strong></p>
+                    <p>{q.answer}</p>
+                  </div>
                   <button className="edit-button" onClick={() => handleEdit(q.id)}>編集</button>
+                  
                 </li>
               ))}
             </ul>

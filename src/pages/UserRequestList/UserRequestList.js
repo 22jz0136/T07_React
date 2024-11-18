@@ -41,7 +41,7 @@ function UserRequestList() {
       <Navbar/>
       <div className='columnBrake'>
           <Sidebar/>
-          <div>
+          <div className='mainbody'>
             <h1>リクエスト一覧</h1>
             <SearchBar/>
             <Profile/>

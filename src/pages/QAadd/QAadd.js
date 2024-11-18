@@ -5,7 +5,7 @@ import Sidebar from '../../components/Sidebar/Sidebar';
 import './QAadd.css';
 
 function QAadd({ onAddQuestion }) {
-  const [question, setQuestion] = useState('');
+  const [question, setQuestion] = useState(''); 
   const [answer, setAnswer] = useState('');
   const navigate = useNavigate(); // ページ遷移用
 

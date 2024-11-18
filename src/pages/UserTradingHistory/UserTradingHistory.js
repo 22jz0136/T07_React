@@ -19,7 +19,7 @@ function UserTradingHistory() {
       <Navbar />
       <div className='columnBrake'>
         <Sidebar />
-        <div>
+        <div className='mainbody'>
           <h1>取引履歴一覧</h1>
           <SearchBar />
           <Profile />

@@ -5,12 +5,48 @@ import Sidebar from '../../components/Sidebar/Sidebar';
 import SearchBar from '../../components/SearchBar/SearchBar';
 import Profile from '../../components/Profile/Profile';
 
-// 仮のデータ
+// 仮の取引データ
 const transactions = [
-  { id: 1, sender: 'あなた', message: 'こんにちは！', time: '2024-10-20 14:30' },
-  { id: 2, sender: '相手', message: 'お疲れ様です。', time: '2024-10-20 14:31' },
-  { id: 3, sender: 'あなた', message: '取引はどうなりましたか？', time: '2024-10-20 14:32' },
-  { id: 4, sender: '相手', message: 'もう少し待ってください。', time: '2024-10-20 14:33' },
+  {
+    id: 1,
+    sender: '田中 太郎',
+    recipient: '鈴木 次郎',
+    product: 'スマホ',
+    location: '12号館',
+    method: '譲渡',
+    time: '2024-10-20 14:30',
+    status: '取引中',
+  },
+  {
+    id: 2,
+    sender: '鈴木 次郎',
+    recipient: '田中 太郎',
+    product: 'イヤフォン',
+    location: '1号館',
+    method: 'レンタル',
+    time: '2024-10-20 14:31',
+    status: '完了',
+  },
+  {
+    id: 3,
+    sender: '田中 太郎',
+    recipient: '鈴木 次郎',
+    product: 'ノートパソコン',
+    location: '７号館',
+    method: '譲渡',
+    time: '2024-10-20 14:32',
+    status: '完了',
+  },
+  {
+    id: 4,
+    sender: '鈴木 次郎',
+    recipient: '田中 太郎',
+    product: 'ゲーム機',
+    location: '1号館',
+    method: '譲渡',
+    time: '2024-10-20 14:33',
+    status: '完了',
+  },
 ];
 
 function UserTradingHistory() {
@@ -24,14 +60,18 @@ function UserTradingHistory() {
           <SearchBar />
           <Profile />
           <div>
-            <h2>取引履歴</h2>
-            <ul className="message-list">
+            <ul className="list">
               {transactions.map(transaction => (
-                <li key={transaction.id} className={`message-card ${transaction.sender === 'あなた' ? 'your-message' : 'other-message'}`}>
-                  <div className="message-content">
-                    <p className="message-sender">{transaction.sender}</p>
-                    <p className="message-text">{transaction.message}</p>
-                    <span className="message-time">{transaction.time}</span>
+                <li key={transaction.id} className={`card ${transaction.sender === '田中 太郎' ? 'your' : 'other'}`}>
+                  <div className="details">
+                    <p className="sender">{transaction.sender} → {transaction.recipient}</p>
+                    <p className="product">商品: {transaction.product}</p>
+                    <p className="location">場所: {transaction.location}</p>
+                    <p className="method">方法: {transaction.method}</p>
+                    <span className="time">{transaction.time}</span>
+                    <p className={`status ${transaction.status === '進行中' ? 'ongoing' : 'completed'}`}>
+                      ステータス: {transaction.status}
+                    </p>
                   </div>
                 </li>
               ))}
@@ -40,7 +80,7 @@ function UserTradingHistory() {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
 export default UserTradingHistory;

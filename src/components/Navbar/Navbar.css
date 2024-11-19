@@ -23,32 +23,4 @@ body {
     width: 20%;
     float: left;
   }
-  .navbar-ul {
-    width: 80%;
-    float: left;
-    list-style: none;
-    margin: 0px;
-    padding: 0;
-  }
-  li {
-    display: inline;
-    list-style: none;
-    font-size: 18px;
-    padding: 10px;
-    line-height: 80px;
-  }
-  .nav-links {
-    color: rgb(255, 255, 255);
-    text-decoration: none;
-    font-size: medium;
-  }
- 
-  li:hover {
-    background-color: white;
-}
-li:hover .nav-links {
-  color: black;
-}
-li:hover .nav-links-mobile {
-  color: black;
-}
+

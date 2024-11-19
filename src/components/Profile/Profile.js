@@ -27,4 +27,4 @@ export function Profile({ userImage, userName }) {
   )
 }
 
-export default Profile
+export default Profile;

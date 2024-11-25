@@ -11,8 +11,8 @@ const UserTable = () => {
   useEffect(() => {
     const fetchData = async () => {
       const fakeData = [
-        { id: 12345, name: "山田 太郎", email: "taro.yamada@example.com", login_at: "2024-10-16 10:00:00" },
-        { id: 67890, name: "鈴木 花子", email: "hanako.suzuki@example.com", login_at: "2024-10-15 09:30:00" },
+        { id: 12345, name: "山田 太郎", email: "taro.yamada@example.com", login_at: "2024-10-16 10:00" },
+        { id: 67890, name: "鈴木 花子", email: "hanako.suzuki@example.com", login_at: "2024-10-15 09:30" },
       ];
       setUsers(fakeData);
     };
@@ -36,7 +36,7 @@ const UserTable = () => {
 
   return (
     <div>
-      <h1>ユーザー一覧</h1> 
+      <h1>User一覧</h1> 
       <table>
         <thead>
           <tr>

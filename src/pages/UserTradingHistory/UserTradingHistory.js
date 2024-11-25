@@ -14,7 +14,7 @@ const transactions = [
     product: 'スマホ',
     location: '12号館',
     method: '譲渡',
-    time: '2024-10-20 14:30',
+    time: '2024-10-20 ',
     status: '取引中',
   },
   {
@@ -24,7 +24,7 @@ const transactions = [
     product: 'イヤフォン',
     location: '1号館',
     method: 'レンタル',
-    time: '2024-10-20 14:31',
+    time: '2024-10-20 ',
     status: '完了',
   },
   {
@@ -34,7 +34,7 @@ const transactions = [
     product: 'ノートパソコン',
     location: '７号館',
     method: '譲渡',
-    time: '2024-10-20 14:32',
+    time: '2024-10-20 ',
     status: '完了',
   },
   {
@@ -44,7 +44,7 @@ const transactions = [
     product: 'ゲーム機',
     location: '1号館',
     method: '譲渡',
-    time: '2024-10-20 14:33',
+    time: '2024-10-20 ',
     status: '完了',
   },
 ];
@@ -59,16 +59,18 @@ function UserTradingHistory() {
           <h1>取引履歴一覧</h1>
           <SearchBar />
           <Profile />
-          <div>
+          <div className='trading-list'>
             <ul className="list">
               {transactions.map(transaction => (
                 <li key={transaction.id} className={`card ${transaction.sender === '田中 太郎' ? 'your' : 'other'}`}>
                   <div className="details">
-                    <p className="sender">{transaction.sender} → {transaction.recipient}</p>
+                    <div className='seder-time'>
+                      <strong><p className="sender">{transaction.sender} → {transaction.recipient}</p></strong>
+                      <span className="time">{transaction.time}</span>
+                    </div>
                     <p className="product">商品: {transaction.product}</p>
                     <p className="location">場所: {transaction.location}</p>
                     <p className="method">方法: {transaction.method}</p>
-                    <span className="time">{transaction.time}</span>
                     <p className={`status ${transaction.status === '進行中' ? 'ongoing' : 'completed'}`}>
                       ステータス: {transaction.status}
                     </p>

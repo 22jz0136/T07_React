@@ -1,9 +1,11 @@
 import React from 'react';
-import './UserRequestList.css';
+import '../UserItemList/UserItemList.css'; // UserItemList.css をインポート
 import Navbar from '../../components/Navbar/Navbar';
 import Sidebar from '../../components/Sidebar/Sidebar';
 import SearchBar from '../../components/SearchBar/SearchBar';
 import Profile from '../../components/Profile/Profile';
+import tvImage from '../../img/tv-image.png'; 
+
 
 function UserRequestList() {
   const requests = [ // 仮のデータを追加
@@ -13,7 +15,7 @@ function UserRequestList() {
       description: '商品Aの説明',
       location: '東京',
       status: '完了',
-      image: 'https://via.placeholder.com/100', // プレースホルダー画像
+      image: tvImage,
       expired: false,
     },
     {
@@ -22,7 +24,7 @@ function UserRequestList() {
       description: '商品Bの説明',
       location: '大阪',
       status: '進行中',
-      image: 'https://via.placeholder.com/100',
+      image: tvImage,
       expired: true,
     },
     {
@@ -31,7 +33,7 @@ function UserRequestList() {
       description: '商品Cの説明',
       location: '福岡',
       status: '完了',
-      image: 'https://via.placeholder.com/100',
+      image: tvImage,
       expired: false,
     },
   ];
@@ -60,9 +62,9 @@ function UserRequestList() {
                         </div>
                       </div>
                       <div className="item-actions">
-                        <button className="action-button" onClick={() => alert(`Request ${request.id} を非表示にしました`)}>非表示</button>
+                        <button  onClick={() => alert(`Request ${request.id} を非表示にしました`)}>非表示</button>
                         {request.expired && <button className="action-button" onClick={() => alert(`Request ${request.id} の取引を完了しました`)}>取引完了</button>}
-                        <button className="action-button" onClick={() => alert(`Request ${request.id} に警告を送りました`)}>警告</button>
+                        <button onClick={() => alert(`Request ${request.id} に警告を送りました`)}>警告</button>
                       </div>
                     </li>
                   ))

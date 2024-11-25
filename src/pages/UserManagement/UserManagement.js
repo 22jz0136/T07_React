@@ -8,9 +8,14 @@ import UserTable from '../../components/UserTable/UserTable';
 function UserManagement() {
   return (
       <div>
-        <Navbar/>
+        <div className="navbar">
+           <Navbar />
+        </div>
+
         <div className='columnBrake'>
-          <Sidebar/>
+          <div className="sidebar">
+            <Sidebar />
+          </div>
           <div className='mainbody'>
             <SearchBar/>
             <div className='usertable'>

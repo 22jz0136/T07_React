@@ -45,7 +45,7 @@
   }
   
   .edit-button {
-    margin-left: 10px;
+    margin: 10px;
   }
   
   .add-button:hover, .delete-button:hover, .edit-button:hover {

@@ -33,33 +33,36 @@ const QAEdit = () => {
         <div className='columnBrake'>
           <Sidebar/>
           <div className='mainbody'>
-            <h1>質問の編集</h1>
-            {question ? (
-              <div>
-                <div>
-                  <label>質問:</label>
-                  <input
-                    type="text"
-                    value={question.question}
-                    onChange={(e) => setQuestion({ ...question, question: e.target.value })}
-                  />
-                </div>
-                <div>
-                  <label>回答:</label>
-                  <textarea
-                    value={question.answer}
-                    onChange={(e) => setQuestion({ ...question, answer: e.target.value })}
-                  />
-                </div>
+            <div className='qaedit-form'>
+              <h2>質問の編集</h2>
+              {question ? (
+                <div className='qaedit-question-form'>
+                  <div className='qaedit-question'>
+                    <label>質問</label>
+                    <input
+                      type="text"
+                      value={question.question}
+                      onChange={(e) => setQuestion({ ...question, question: e.target.value })}
+                    />
+                  </div>
+                  <div className='qaedit-question'>
+                    <label>回答</label>
+                    <textarea
+                      value={question.answer}
+                      onChange={(e) => setQuestion({ ...question, answer: e.target.value })}
+                    />
+                  </div>
 
-                <div className='qaedit-button'>
-                  <button onClick={handleSave}>保存</button>
+                  <div className='qaedit-button'>
+                    <button onClick={handleSave}>保存</button>
+                  </div>
+                  
                 </div>
-                
-              </div>
-            ) : (
-              <p>読み込み中...</p>
-            )}
+              ) : (
+                <p>読み込み中...</p>
+              )}
+            </div>
+            
           </div>
         </div>
     </div>      

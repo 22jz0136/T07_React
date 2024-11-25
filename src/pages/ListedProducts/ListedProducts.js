@@ -85,43 +85,46 @@ const ListedProducts = () => {
       <Navbar />
       <div className='columnBrake'>
         <Sidebar />
-        <div className='product-manager'>
-          <h1>出品した商品一覧</h1>
-          <SearchBar />
-          <div className="filter-buttons">
-            <button onClick={() => toggleFilter('ongoing')}>取引中</button>
-            <button onClick={() => toggleFilter('completed')}>取引完了</button>
-            <button onClick={() => toggleFilter('hidden')}>非表示</button>
-            <button onClick={() => toggleFilter('warning')}>警告済商品</button>
-          </div>
-          <div className="products-list">
-            {filteredProducts.length === 0 ? (
-              <p>表示する商品がありません。</p>
-            ) : (
-              filteredProducts.map((product) => (
-                <div key={product.id} className="product-item" onClick={() => handleProductClick(product)}>
-                  <div className="product-header">
-                    <img src={product.profileImage} alt="Profile" className="profile-image" />
-                    <span className="username">{product.username}</span>
-                    <span className="date">{new Date(product.date).toLocaleString('ja-JP', 
-                    { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' })}</span><br />
-                  </div>
-
-                  <div className='image-detail-flex'>
-                    <img src={product.image} alt={product.details} className="product-image" />
-                    <div className="product-details">
-                      <div className='product-details-title'>
-                        <p >{product.details}</p>
-                      </div>
-                      
-                      <p>{product.status}</p>
-                      <p>受け渡し場所: {product.location}</p>
+        <div className='mainbody'>
+          <div className='product-manager'>
+            <h1>出品した商品一覧</h1>
+            <SearchBar />
+            <div className="filter-buttons">
+              <button onClick={() => toggleFilter('ongoing')}>取引中</button>
+              <button onClick={() => toggleFilter('completed')}>取引完了</button>
+              <button onClick={() => toggleFilter('hidden')}>非表示</button>
+              <button onClick={() => toggleFilter('warning')}>警告済商品</button>
+            </div>
+            <div className="products-list">
+              {filteredProducts.length === 0 ? (
+                <p>表示する商品がありません。</p>
+              ) : (
+                filteredProducts.map((product) => (
+                  <div key={product.id} className="product-item" onClick={() => handleProductClick(product)}>
+                    <div className="product-header">
+                      <img src={product.profileImage} alt="Profile" className="profile-image" />
+                      <span className="username">{product.username}</span>
+                      <span className="date">{new Date(product.date).toLocaleString('ja-JP', 
+                      { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' })}</span><br />
                     </div>
-                  </div>　
-                </div>
-              ))
-            )}
+
+                    <div className='image-detail-flex'>
+                      <img src={product.image} alt={product.details} className="product-image" />
+                      <div className="product-details">
+                        <div className='product-details-title'>
+                          <p >{product.details}</p>
+                        </div>
+                        
+                        <p>{product.status}</p>
+                        <p>受け渡し場所: {product.location}</p>
+                      </div>
+                    </div>　
+                  </div>
+                ))
+              )}
+            </div>
           </div>
+
         </div>
       </div>
     </div>

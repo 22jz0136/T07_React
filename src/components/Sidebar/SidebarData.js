@@ -23,7 +23,7 @@ export const SidebarData = [
     {
         title: "ログアウト",
         icon: <LogoutIcon/>,
-        link: "",
+        link: "/login",
     },
 
 ];

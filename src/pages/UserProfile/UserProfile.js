@@ -13,13 +13,12 @@ function UserProfile() {
   useEffect(() => {
     const fetchUserData = async () => {
       // APIからデータを取得（ここではダミーデータを使用）
-      const fakeData = {
-        id: id,
-        name: '山田 太郎',
-        email: 'taro.yamada@example.com',
-        login_at: '2024-10-16 10:00:00',
-      };
-      setUserData(fakeData);
+      const response = await fetch(`https://loopplus.mydns.jp/admin/user/${id}`);
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      const data = await response.json();
+      setUserData(data);
     };
 
     fetchUserData();

@@ -10,11 +10,12 @@ const UserTable = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const fakeData = [
-        { id: 12345, name: "山田 太郎", email: "taro.yamada@example.com", login_at: "2024-10-16 10:00" },
-        { id: 67890, name: "鈴木 花子", email: "hanako.suzuki@example.com", login_at: "2024-10-15 09:30" },
-      ];
-      setUsers(fakeData);
+      const response = await fetch('https://loopplus.mydns.jp/user');
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      const data = await response.json();
+      setUsers(data);
     };
     fetchData();
   }, []);
@@ -51,22 +52,22 @@ const UserTable = () => {
         <tbody>
           {users.length === 0 ? (
             <tr>
-              <td colSpan="6" style={{ textAlign: 'center' }}>データがありません</td>
+              <td colSpan="6" style={{ textAlign: 'center' }}>読み込み中</td>
             </tr>
           ) : (
             users.map(user => (
-              <tr key={user.id} onClick={() => handleRowClick(user.id)} style={{ cursor: 'pointer' }}>
-                <td>{user.id}</td>
-                <td>{user.name}</td>
-                <td>{user.email}</td>
-                <td>{user.login_at}</td>
+              <tr key={user.UserID} onClick={() => handleRowClick(user.id)} style={{ cursor: 'pointer' }}>
+                <td>{user.UserID}</td>
+                <td>{user.Username}</td>
+                <td>{user.Email}</td>
+                {/* <td>{user.login_at}</td> */}
                 <td>
-                  <button onClick={(e) => sendWarning(e, user.id)}>
+                  <button onClick={(e) => sendWarning(e, user.UserID)}>
                     <WarningIcon />
                   </button>
                 </td>
                 <td>
-                  <button onClick={(e) => banUser(e, user.id)}>
+                  <button onClick={(e) => banUser(e, user.UserID)}>
                     <NotInterestedIcon />
                   </button>
                 </td>

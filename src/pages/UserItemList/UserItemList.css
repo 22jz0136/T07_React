@@ -1,8 +1,11 @@
 .item-list {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-  }
+  margin: 0;
+  padding: 0;
+  height: 59vh;
+  width: 99%;
+  overflow-y: scroll;
+  list-style-type: none;
+}
   
   .item-card {
     display: flex;
@@ -65,3 +68,5 @@ h3 {
     width: 80px;
     border-radius: 5px;
 }
+
+

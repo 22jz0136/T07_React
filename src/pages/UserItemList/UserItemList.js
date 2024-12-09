@@ -59,7 +59,7 @@ function UserItemList({ userId }) {
 
   return (
     <div>
-      <Navbar />
+        <Navbar />
       <div className="columnBrake">
         <Sidebar />
         <div className='mainbody'>

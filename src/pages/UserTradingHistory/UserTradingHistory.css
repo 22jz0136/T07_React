@@ -18,3 +18,12 @@
 .time {
     color: rgb(106, 107, 107);
 }
+
+.list {
+    margin: 0;
+    padding: 0;
+    height: 59vh;
+    width: 99%;
+    overflow-y: scroll;
+    list-style-type: none;
+}

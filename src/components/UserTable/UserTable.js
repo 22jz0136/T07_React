@@ -37,16 +37,16 @@ const UserTable = () => {
 
   return (
     <div>
-      <h1>User一覧</h1> 
-      <table>
+      
+      <table className='fixed-tbody'>
         <thead>
           <tr>
-            <th>ユーザーID</th>
-            <th>ユーザー名</th>
-            <th>メールアドレス</th>
-            <th>ログイン日時</th>
-            <th>警告</th>
-            <th>BAN</th>
+            <th className='fixed-th'>ユーザーID</th>
+            <th className='fixed-th'>ユーザー名</th>
+            <th className='fixed-th'>メールアドレス</th>
+            <th className='fixed-th'>ログイン日時</th>
+            <th className='fixed-th'>警告</th>
+            <th className='fixed-th'>BAN</th>
           </tr>
         </thead>
         <tbody>

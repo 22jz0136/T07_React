@@ -4,6 +4,7 @@ table {
   border-collapse: collapse;  /* セルのボーダーを結合 */
   table-layout: auto;  /* 各列の幅を自動調整 */
   margin: 20px;  /* テーブルの上下に余白を設定 */
+
 }
 
 h1 {
@@ -13,10 +14,10 @@ h1 {
 
 /* ヘッダーのスタイル */
 th {
-  color: #333; /* ヘッダーの文字色 */
-  padding: 20px ; /* ヘッダーセルの内側の余白 */
-  text-align: center; /* センタリング */
-  background-color: #dedede86; /* 背景色 */
+  color: #333; 
+  padding: 20px ;
+  text-align: center;
+  background-color: #dedede86; 
 }
 
 /* セルのスタイル */
@@ -26,6 +27,8 @@ td {
   text-align: center;
   width: auto;
 }
+
+
 
 /* 行のホバー時のスタイル */
 tr:hover {
@@ -46,3 +49,13 @@ button {
 button:hover {
   background-color: #444; /* ホバー時のボタンの背景色 */
 }
+
+
+.fixed-th{
+  position: sticky;
+  top: 0;
+  color: #fff;
+  background: #333;
+  border: 1px solid #ccc;
+} 
+

@@ -50,7 +50,7 @@ function QAList() {
         <Sidebar />
         <div className='mainbody'>
           <h1>Q&A管理</h1>
-          <SearchBar />
+          
           <div className="qa-list">
             <div className='add-delete-button'>
               <button className="add-button" onClick={handleNavigateToAdd}>

@@ -17,9 +17,12 @@ function UserManagement() {
             <Sidebar />
           </div>
           <div className='mainbody'>
-            <SearchBar/>
+            
             <div className='usertable'>
-              <UserTable/>
+              <SearchBar/>
+              <div className='usertable-y'>
+                <UserTable/> 
+              </div>
             </div>
           </div>
         </div>

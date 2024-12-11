@@ -40,8 +40,9 @@ const ListedProducts = () => {
   const filteredProducts = filter ? products.filter((product) => product.type === filter) : products;
 
   const handleProductClick = (product) => {
-    navigate(`/product/${product.id}`, { state: product }); // 商品情報もstateに渡す
+    navigate(`/product/${product.ItemID}`, { state: { itemId: product.ItemID } }); // itemIdをstateに渡す
   };
+  
 
   if (loading) {
     return <p>ロード中...</p>; // ローディング中の表示
@@ -88,14 +89,14 @@ const ListedProducts = () => {
                 <p>表示する商品がありません。</p>
               ) : (
                 filteredProducts.map((item) => (
-                  <Item 
-                    key={item.ItemID} 
+                  <Item
+                    key={item.ItemID}
                     name={item.User ? item.User.UserName : '不明'} // ユーザー名を渡す
                     userIcon={item.User && item.User.Icon ? item.User.Icon : avatar1} // デフォルトアイコンを使用
-                    itemId={item.ItemID} 
-                    title={item.ItemName} 
+                    itemId={item.ItemID}
+                    title={item.ItemName}
                     imageSrc={`https://loopplus.mydns.jp/${item.ItemImage}`} // 画像のURL
-                    description={item.Description} 
+                    description={item.Description}
                     onClick={() => handleProductClick(item)} // 商品クリック時の処理
                   />
                 ))

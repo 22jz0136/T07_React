@@ -1,19 +1,62 @@
 // ProductDetail.js
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import './ProductDetail.css';
+import './ProductDetail.css'; // スタイルシートのインポート
 import Navbar from '../../components/Navbar/Navbar';
 import Sidebar from '../../components/Sidebar/Sidebar';
 import SearchBar from '../../components/SearchBar/SearchBar';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 const ProductDetail = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const product = location.state;
+  const [product, setProduct] = useState(null); // 商品情報の状態
+  const [loading, setLoading] = useState(true); // ローディング状態
+  const productId = location.state?.itemId || null; // 商品IDを取得
+
+  useEffect(() => {
+    const fetchProductDetails = async () => {
+      if (!productId) {
+        alert('商品IDが取得できません。');
+        setLoading(false);
+        return;
+      }
+
+      try {
+        const response = await fetch(`https://loopplus.mydns.jp/api/item/${productId}`); // 商品詳細を取得するAPI
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+        setProduct(data); // APIから取得したデータを設定
+      } catch (error) {
+        console.error('Error fetching product details:', error);
+        alert('商品情報の取得に失敗しました。');
+      } finally {
+        setLoading(false); // ローディング完了
+      }
+    };
+
+    fetchProductDetails();
+  }, [productId]);
+
+  if (loading) {
+    return <p>ロード中...</p>; // ローディング中の表示
+  }
 
   if (!product) {
-    return <p>商品情報が見つかりません。</p>;
+    return <p>商品情報が見つかりません。</p>; // 商品情報がない場合の表示
   }
+
+  // 必要なデータを取得
+  const {
+    UserName,
+    CreatedAt,
+    itemImage,
+    itemName,
+    itemContent,
+    itemId,
+  } = product;
 
   // 非表示ボタンのハンドラ
   const handleHideProduct = () => {
@@ -30,18 +73,15 @@ const ProductDetail = () => {
   // 警告するボタンのハンドラ
   const handleWarnUser = () => {
     console.log('警告するボタンがクリックされました。');
-    navigate(`/product-warning/${product.id}`, { 
+    navigate(`/product-warning/${itemId}`, { 
       state: { 
-        productId: product.id, 
-        username: product.username,  
-        productName: product.name, 
-        productDetails: product.details, 
-        productLocation: product.location, 
-        productImage: product.image, 
-        profileImage: product.profileImage,
-        status: product.status,
-        date: product.date
-        } 
+        productId: itemId, 
+        username: UserName,  
+        productName: itemName, 
+        productDetails: itemContent, 
+        productImage: itemImage, 
+        createdAt: CreatedAt,
+      } 
     });
   };
 
@@ -53,23 +93,20 @@ const ProductDetail = () => {
         <div className='mainbody'>
           <div className='productmanager'>
             <SearchBar />
-            <div key={product.id} className="productitem">
+            <div key={itemId} className="productitem">
               <div className="product-header">
-                <img src={product.profileImage} alt="Profile" className="profile-image" />
-                <span className="username">{product.username}</span>
-                <span className="date">{new Date(product.date).toLocaleString('ja-JP', 
+                <AccountCircleIcon className="avatar-icon" style={{ fontSize: '40px', color: '#374151' }} />
+                <span className="username">{UserName || 'ユーザー名が取得できません'}</span>
+                <span className="date">{new Date(CreatedAt).toLocaleString('ja-JP', 
                   { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' })}</span><br />
               </div>
 
               <div className='imagedetail-flex'>
-                <img src={product.image} alt={product.details} className="productimage" />
+                <img src={itemImage} alt={itemName} className="productimage" />
                 <div className="productdetails">
                   <div className='product-details-title'>
-                    <p>{product.details}</p>
-                  </div>
-                  <p>希望取引方法:{product.status}</p>
-                  <div className='poduct-location'>
-                    <p>受け渡し場所: <span className="location-text">{product.location}</span></p>
+                    <h2>{itemName}</h2> {/* アイテム名 */}
+                    <p>{itemContent}</p> {/* アイテムの説明 */}
                   </div>
                 </div>
 

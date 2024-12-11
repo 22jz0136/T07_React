@@ -52,7 +52,7 @@ const UserTable = () => {
         <tbody>
           {users.length === 0 ? (
             <tr>
-              <td colSpan="6" style={{ textAlign: 'center' }}>読み込み中</td>
+              <td colSpan="6" style={{ textAlign: 'center' }}>読み込み中です。しばらくお待ちください。</td>
             </tr>
           ) : (
             users.map(user => (
@@ -60,7 +60,7 @@ const UserTable = () => {
                 <td>{user.UserID}</td>
                 <td>{user.Username}</td>
                 <td>{user.Email}</td>
-                {/* <td>{user.login_at}</td> */}
+                <td>{user.login_at}</td>
                 <td>
                   <button onClick={(e) => sendWarning(e, user.UserID)}>
                     <WarningIcon />

@@ -44,9 +44,8 @@ const ListedProducts = () => {
   };
   
 
-  if (loading) {
-    return <p>ロード中...</p>; // ローディング中の表示
-  }
+  if (loading) return <div className="loading"><img src="/Loading.gif" alt="Loading" /></div>;
+
 
   // Itemコンポーネントの定義
   const Item = ({ itemId, name, userIcon, title, imageSrc, description, onClick }) => {

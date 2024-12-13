@@ -88,3 +88,12 @@ p {
   font-weight: bold; 
   white-space: normal;
 }
+
+.loading {
+  margin-top: 200px;
+  text-align: center;
+}
+.loading img {
+  max-width: 80%;
+  max-height: 100px;
+}

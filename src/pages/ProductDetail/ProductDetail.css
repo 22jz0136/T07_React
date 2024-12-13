@@ -61,3 +61,12 @@ p {
 .location-text {
     color: rgb(1, 128, 179);
   }
+
+  .loading {
+    margin-top: 200px;
+    text-align: center;
+  }
+  .loading img {
+    max-width: 80%;
+    max-height: 100px;
+  }

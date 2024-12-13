@@ -15,6 +15,7 @@ import ProductWarning from './pages/ProductWarning/ProductWarning';
 import ListedProducts from './pages/ListedProducts/ListedProducts';
 import Login from './pages/Login/Login';
 import ProductDetail from './pages/ProductDetail/ProductDetail';
+import SearchResult from './components/SearchBar/SearchResult';
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
           <Route path="/product/:id" element={<ProductDetail />} />
           <Route path="/product-warning/:productId" element={<ProductWarning />} />
           <Route path="/qalist/:id" element={<QAEdit />} /> 
+          <Route path="/searchresult" element={<SearchResult />} />
         </Routes>
       </BrowserRouter>
     </div>

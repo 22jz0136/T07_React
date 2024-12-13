@@ -56,7 +56,7 @@ const UserTable = () => {
             </tr>
           ) : (
             users.map(user => (
-              <tr key={user.UserID} onClick={() => handleRowClick(user.id)} style={{ cursor: 'pointer' }}>
+              <tr key={user.UserID} onClick={() => handleRowClick(user.UserID)} style={{ cursor: 'pointer' }}>
                 <td>{user.UserID}</td>
                 <td>{user.Username}</td>
                 <td>{user.Email}</td>

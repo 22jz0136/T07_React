@@ -1,26 +1,59 @@
+// QAadd.js
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // useNavigateフックを使う
+import { useNavigate } from 'react-router-dom';
 import Navbar from '../../components/Navbar/Navbar';
 import Sidebar from '../../components/Sidebar/Sidebar';
-import './QAadd.css'; // QAEdit.jsと同じCSSを使用
+import './QAadd.css';
 
-function QAadd({ onAddQuestion }) {
+function QAadd({ addQuestion }) {
   const [question, setQuestion] = useState('');
   const [answer, setAnswer] = useState('');
-  const navigate = useNavigate(); // ページ遷移用
+  const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // 新しい質問を追加するための関数呼び出し
-    onAddQuestion({
-      id: Date.now(), // ユニークなIDを生成
-      question: `Q: ${question}`,
-      answer: `A: ${answer}`,
-    });
+    // バリデーションチェック
+    if (!question.trim() || !answer.trim()) {
+      alert('質問と回答を入力してください。');
+      return;
+    }
 
-    // 質問リストに戻る
-    navigate('/qalist');
+    try {
+      const response = await fetch('https://loopplus.mydns.jp/api/qa/store', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          QuestionContent: question,
+          AnswerContent: answer,
+        }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || 'Q&Aの追加に失敗しました');
+      }
+
+      const responseData = await response.json();
+      console.log('Q&A追加成功:', responseData);
+
+      // 新しい質問を親コンポーネントに渡す
+      if (addQuestion) {
+        const newQuestion = {
+          id: responseData.id || Date.now(),
+          question: question,
+          answer: answer,
+        };
+        addQuestion(newQuestion);
+      }
+
+      navigate('/qalist');
+    } catch (error) {
+      console.error('Error adding Q&A:', error);
+      alert(`質問の追加に失敗しました: ${error.message}`);
+    }
   };
 
   return (
@@ -31,7 +64,7 @@ function QAadd({ onAddQuestion }) {
         <div className="mainbody">
           <div className="qaedit-form">
             <h2>新しい質問追加</h2>
-            <div className="qaedit-question-form">
+            <form onSubmit={handleSubmit} className="qaedit-question-form">
               <div className="qaedit-question">
                 <label>質問</label>
                 <input
@@ -52,9 +85,9 @@ function QAadd({ onAddQuestion }) {
                 />
               </div>
               <div className="qaedit-button">
-                <button onClick={handleSubmit}>追加する</button>
+                <button type="submit">追加する</button>
               </div>
-            </div>
+            </form>
           </div>
         </div>
       </div>

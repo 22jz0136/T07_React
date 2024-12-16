@@ -85,7 +85,7 @@ const ProductDetail = () => {
                     src={`https://loopplus.mydns.jp/${user.Icon}`}
                     alt="User Icon"
                     className="avatar-icon"
-                    style={{ width: '40px', height: '40px' }}
+                    style={{ width: '40px', height: '40px' , borderRadius: '50%'}}
                   />
                 ) : (
                   <AccountCircleIcon style={{ fontSize: 40 }} />
@@ -105,21 +105,24 @@ const ProductDetail = () => {
                 <br />
               </div>
 
-              <div className='imagedetail-flex'>
-                <img src={`https://loopplus.mydns.jp/${ItemImage}`} alt={ItemName} className="productimage" />
-                <div className="productdetails">
-                  <div className='product-details-title'>
-                    <h2>{ItemName}</h2> {/* アイテム名 */}
-                    <p>{Description}</p> {/* アイテムの説明 */}
+              <div className='productdetails-flex'>
+                <div className='imagedetail-flex'>
+                  <img src={`https://loopplus.mydns.jp/${ItemImage}`} alt={ItemName} className="productimage"  />
+                  <div className="productdetails">
+                    <div className='product-details-title'>
+                      <h2>{ItemName}</h2> {/* アイテム名 */}
+                      <p>{Description}</p> {/* アイテムの説明 */}
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              <div className='product-actions'>
-                <button onClick={() => alert('非表示にしました')}>非表示</button>
-                <button onClick={() => alert('取引が完了しました')}>取引完了</button>
-                <button onClick={() => alert('警告しました')}>警告する</button>
-              </div>
+                <div className='product-actions'>
+                  <button onClick={() => alert('非表示にしました')}>非表示</button>
+                  <button onClick={() => alert('取引が完了しました')}>取引完了</button>
+                  <button onClick={() => alert('警告しました')}>警告する</button>
+                </div>
+              </div>          
+              
             </div>
           </div>
         </div>

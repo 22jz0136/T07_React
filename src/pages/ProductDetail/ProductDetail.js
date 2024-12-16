@@ -78,52 +78,55 @@ const ProductDetail = () => {
         <div className='mainbody'>
           <div className='productmanager'>
             <SearchBar />
-            <div key={ItemID} className="productitem">
-              <div className="product-header">
-                {user?.Icon ? (
-                  <img
-                    src={`https://loopplus.mydns.jp/${user.Icon}`}
-                    alt="User Icon"
-                    className="avatar-icon"
-                    style={{ width: '40px', height: '40px' , borderRadius: '50%'}}
-                  />
-                ) : (
-                  <AccountCircleIcon style={{ fontSize: 40 }} />
-                )}
-                <span className="username">{user?.Username ?? 'ユーザー名が取得できません'}</span>
-                <span className="date">
-                  {UpdatedAt
-                    ? new Date(UpdatedAt).toLocaleString('ja-JP', {
-                        year: 'numeric',
-                        month: '2-digit',
-                        day: '2-digit',
-                        hour: '2-digit',
-                        minute: '2-digit',
-                      })
-                    : '日付情報なし'}
-                </span>
-                <br />
-              </div>
+            <div className='productitem-scroll'>
+                <div key={ItemID} className="productitem">
+                <div className="product-header">
+                  {user?.Icon ? (
+                    <img
+                      src={`https://loopplus.mydns.jp/${user.Icon}`}
+                      alt="User Icon"
+                      className="avatar-icon"
+                      style={{ width: '40px', height: '40px' , borderRadius: '50%'}}
+                    />
+                  ) : (
+                    <AccountCircleIcon style={{ fontSize: 40 }} />
+                  )}
+                  <span className="username">{user?.Username ?? 'ユーザー名が取得できません'}</span>
+                  <span className="date">
+                    {UpdatedAt
+                      ? new Date(UpdatedAt).toLocaleString('ja-JP', {
+                          year: 'numeric',
+                          month: '2-digit',
+                          day: '2-digit',
+                          hour: '2-digit',
+                          minute: '2-digit',
+                        })
+                      : '日付情報なし'}
+                  </span>
+                  <br />
+                </div>
 
-              <div className='productdetails-flex'>
-                <div className='imagedetail-flex'>
-                  <img src={`https://loopplus.mydns.jp/${ItemImage}`} alt={ItemName} className="productimage"  />
-                  <div className="productdetails">
-                    <div className='product-details-title'>
-                      <h2>{ItemName}</h2> {/* アイテム名 */}
-                      <p>{Description}</p> {/* アイテムの説明 */}
+                <div className='productdetails-flex'>
+                  <div className='imagedetail-flex'>
+                    <img src={`https://loopplus.mydns.jp/${ItemImage}`} alt={ItemName} className="productimage"  />
+                    <div className="productdetails">
+                      <div className='product-details-title'>
+                        <h2>{ItemName}</h2> {/* アイテム名 */}
+                        <p>{Description}</p> {/* アイテムの説明 */}
+                      </div>
                     </div>
                   </div>
-                </div>
 
-                <div className='product-actions'>
-                  <button onClick={() => alert('非表示にしました')}>非表示</button>
-                  <button onClick={() => alert('取引が完了しました')}>取引完了</button>
-                  <button onClick={() => alert('警告しました')}>警告する</button>
-                </div>
-              </div>          
-              
+                  <div className='product-actions'>
+                    <button onClick={() => alert('非表示にしました')}>非表示</button>
+                    <button onClick={() => alert('取引が完了しました')}>取引完了</button>
+                    <button onClick={() => alert('警告しました')}>警告する</button>
+                  </div>
+                </div>          
+                
+              </div>
             </div>
+            
           </div>
         </div>
       </div>

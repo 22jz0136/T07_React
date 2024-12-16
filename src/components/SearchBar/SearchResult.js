@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom';
 import Navbar from '../Navbar/Navbar';
 import Sidebar from '../../components/Sidebar/Sidebar';
 import SearchBar from '../../components/SearchBar/SearchBar';
-import '../../pages/ProductDetail/ProductDetail.css';
+import './SearchResult.css';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 export default function SearchResult() {
@@ -52,16 +52,16 @@ export default function SearchResult() {
       <div className='columnBrake'>
         <Sidebar />
         <div className='mainbody'>
-          <div className='productmanager'>
+          <div className='product-manager'>
             <SearchBar />
             <h2>検索結果画面</h2>
-
-            <div className='productdetails-flex'>
+            
+              <div className='productitems'>
               {results && results.length > 0 ? (
                 <ul>
                   {results.map((item, index) => (
                     <li key={index}>
-                      <div className="productitem">
+                      <div className="">
                         <div className="product-header">
                           {user?.Icon ? (
                             <img
@@ -101,8 +101,8 @@ export default function SearchResult() {
                             />
                             <div className="productdetails">
                               <div className='product-details-title'>
-                                <h2>{item.ItemName || 'アイテム名なし'}</h2> {/* アイテム名 */}
-                                <p>{item.Description || '説明がありません'}</p> {/* アイテムの説明 */}
+                                <h2>{item.ItemName || 'アイテム名なし'}</h2>
+                                <p>{item.Description || '説明がありません'}</p> 
                               </div>
                             </div>
                           </div>
@@ -120,7 +120,9 @@ export default function SearchResult() {
               ) : (
                 <p>検索結果がありません。</p>
               )}
-            </div>
+              </div>
+      
+            
           </div>
         </div>
       </div>

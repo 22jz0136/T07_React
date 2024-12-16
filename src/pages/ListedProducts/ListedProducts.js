@@ -1,4 +1,3 @@
-// ListedProducts.js
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navbar from '../../components/Navbar/Navbar';
@@ -58,10 +57,14 @@ const ListedProducts = () => {
         <div className='image-detail-flex'>
           <img src={imageSrc || tvimage} alt={title} className="product-image" />
           <div className="product-details">
-            <div className='product-details-title'>
-              <p>{title}</p>
+            <div className='product-title'>
+              <strong>{title}</strong>
             </div>
-            <p>{description}</p>
+
+            <div className='product-description'>
+              <p >{description}</p>
+            </div>
+            
           </div>
         </div>
       </div>
@@ -74,7 +77,7 @@ const ListedProducts = () => {
       <div className='columnBrake'>
         <Sidebar />
         <div className='mainbody'>
-          <div className='product-manager'>
+          <div className='.product-manager-listedproducts'>
             <h1>出品した商品一覧</h1>
             <SearchBar />
             <div className="filter-buttons">

@@ -1,10 +1,10 @@
-.product-manager {
+.product-manager-listedproducts {
   padding: 20px;
   
 }
 
 .filter-buttons {
-  margin: 20px 0;
+  margin: 20px 0 5px 5px;
 }
 
 .filter-buttons button {
@@ -78,15 +78,10 @@
   overflow-wrap: break-word;
 }
 
-p {
-  font-size: small;
+.product-description p {
+  font-size: 10px;
   line-height: normal;
-}
-
-.product-details-title p{
-  font-size: 16px; 
-  font-weight: bold; 
-  white-space: normal;
+  text-overflow: ellipsis;
 }
 
 .loading {
@@ -96,4 +91,8 @@ p {
 .loading img {
   max-width: 80%;
   max-height: 100px;
+}
+
+strong {
+  font-size: 15px;
 }

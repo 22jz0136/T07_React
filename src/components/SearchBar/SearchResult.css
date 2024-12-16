@@ -1,14 +1,21 @@
-.productitem {
-    width: 100%;
-    border: 1px solid #d6d6d6;
-    padding: 15px;
-    align-items: center;
+.productitems {
+    width: 181vh;
     border-radius: 5px;
+    overflow-y: scroll;
+    height: 80vh;
+}
+
+.productitems li {
+    list-style: none;
+    padding: 10px;
+    margin: 5px;
+    border-radius: 5px;
+    border: 1px solid #d6d6d6;
 }
 
 .productimage {
-    width: 150px;
-    height: 150px;
+    width: 100px;
+    height: 100px;
     border-radius: 5px;
     border: 1px solid gray;
 }
@@ -28,7 +35,7 @@ p {
 }
 
 .product-details-title {
-    margin-bottom: 10px; /* 他の要素と余白を設ける */
+    margin-bottom: 10px; 
 }
 
 .product-details-title p {
@@ -57,11 +64,10 @@ p {
     border-radius: 5px;
 }
 
-.productmanager {
-    margin: 80px 20px 20px 20px;
+.product-manager {
+    margin: 80px 0px 0px 0px;
     padding: 5px;
-    border-radius: 5px;
-} 
+}
 
 .location-text {
     color: rgb(1, 128, 179);
@@ -81,3 +87,6 @@ p {
     justify-content: space-between;
 }
 
+.productitem-scroll {
+    overflow-y: scroll;
+}

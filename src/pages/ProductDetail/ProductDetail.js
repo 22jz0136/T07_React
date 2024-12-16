@@ -3,7 +3,6 @@ import { useLocation } from 'react-router-dom';
 import './ProductDetail.css'; // スタイルシートのインポート
 import Navbar from '../../components/Navbar/Navbar';
 import Sidebar from '../../components/Sidebar/Sidebar';
-import SearchBar from '../../components/SearchBar/SearchBar';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 const ProductDetail = () => {
@@ -75,7 +74,6 @@ const ProductDetail = () => {
         <Sidebar />
         <div className='mainbody'>
           <div className='productmanager'>
-            <SearchBar />
             <div className='productitem-scroll'>
               <div key={ItemID} className="productitem">
                 <div className="product-header">
@@ -93,12 +91,12 @@ const ProductDetail = () => {
                   <span className="date">
                     {UpdatedAt
                       ? new Date(UpdatedAt).toLocaleString('ja-JP', {
-                        year: 'numeric',
-                        month: '2-digit',
-                        day: '2-digit',
-                        hour: '2-digit',
-                        minute: '2-digit',
-                      })
+                          year: 'numeric',
+                          month: '2-digit',
+                          day: '2-digit',
+                          hour: '2-digit',
+                          minute: '2-digit',
+                        })
                       : '日付情報なし'}
                   </span>
                   <br />
@@ -106,22 +104,17 @@ const ProductDetail = () => {
 
                 <div className='productdetails-flex'>
                   <div className='imagedetail-flex'>
-                    <img
-                      src={`https://loopplus.mydns.jp/${ItemImage}`}
-                      alt={ItemName || 'アイテム名なし'}
-                      className="productimage"
-                    />
+                    <img src={`https://loopplus.mydns.jp/${ItemImage}`} alt={ItemName} className="productimage" />
                     <div className="productdetails">
                       <div className='product-details-title'>
-                        <h2>{ItemName || 'アイテム名なし'}</h2>
-                        <p>{Description || '説明がありません'}</p>
+                        <h2>{ItemName}</h2>
+                        <p>{Description}</p>
                       </div>
                     </div>
                   </div>
 
                   <div className='product-actions'>
-                    <button on
-                      Click={() => alert('非表示にしました')}>非表示</button>
+                    <button onClick={() => alert('非表示にしました')}>非表示</button>
                     <button onClick={() => alert('取引が完了しました')}>取引完了</button>
                     <button onClick={() => alert('警告しました')}>警告する</button>
                   </div>

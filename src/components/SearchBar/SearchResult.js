@@ -39,10 +39,10 @@ export default function SearchResult() {
             <SearchBar />
             <h2>検索結果画面</h2>
             <div className='productitems'>
-              {results && results.length > 0 ? (
+              {results.length > 0 ? (
                 <ul>
-                  {results.map((item, index) => (
-                    <li key={index} onClick={() => handleItemClick(item.ItemID)}> {/* クリック時に詳細ページへ遷移 */}
+                  {results.map((item) => (
+                    <li key={item.ItemID} onClick={() => handleItemClick(item.ItemID)}> {/* クリック時に詳細ページへ遷移 */}
                       <div className="">
                         <div className="product-header">
                           {item.User ? (

@@ -22,6 +22,10 @@ function QAList() {
           answer: q.AnswerContent,
           displayFlag: q.DisplayFlag // DisplayFlagを保存
         }));
+
+        // Sort questions by QuestionID in descending order (newest first)
+        formattedQuestions.sort((a, b) => b.id - a.id);
+
         setQuestions(formattedQuestions);
       } catch (error) {
         console.error('Error fetching questions:', error);
@@ -42,15 +46,14 @@ function QAList() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ DisplayFlag: 0 }), // Updating DisplayFlag to 0
+        body: JSON.stringify({ DisplayFlag: 0 }), 
       });
 
       if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(errorData.message || '削削除に失敗しました');
+        throw new Error(errorData.message || '削除に失敗しました');
       }
 
-      // Update state to reflect that the question is now hidden
       setQuestions(prevQuestions =>
         prevQuestions.map(q =>
           q.id === id ? { ...q, displayFlag: 0 } : q
@@ -80,19 +83,17 @@ function QAList() {
               {questions.length > 0 ? (
                 questions.filter(q => q.displayFlag === 1).map(q => (
                   <li key={q.id} className="question-item">
-                    <div className="qa-content" onClick={() => navigate(`/qalist/${q.id}`)}>
+                    <div className="qa-content">
                       <p><strong>{q.question}</strong></p>
                       <p>{q.answer}</p>
                     </div>
                     <button className="delete-button" onClick={() => handleHide(q.id)}>削除</button>
-                    <button className="edit-button" onClick={() => navigate(`/qalist/${q.id}`)}>編集</button>
                   </li>
                 ))
               ) : (
                 <li>質問がありません。</li>
               )}
             </ul>
-
           </div>
         </div>
       </div>

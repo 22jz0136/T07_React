@@ -12,6 +12,25 @@ const ListedProducts = () => {
   const [filter, setFilter] = useState(null);
   const [products, setProducts] = useState([]); // 商品リストの状態
   const [loading, setLoading] = useState(true); // ローディング状態
+  const [user, setUser] = useState(null); // ユーザー情報の状態
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const response = await fetch('https://loopplus.mydns.jp/api/user/');
+        if (response.ok) {
+          const data = await response.json();
+          setUser(data); // ユーザー情報を設定
+        } else {
+          console.error('ユーザー情報の取得に失敗しました');
+        }
+      } catch (error) {
+        console.error('エラーが発生しました', error);
+      }
+    };
+
+    fetchUserData(); // ユーザー情報を取得
+  }, []);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -41,30 +60,28 @@ const ListedProducts = () => {
   const handleProductClick = (product) => {
     navigate(`/product/${product.ItemID}`, { state: { itemId: product.ItemID } }); // itemIdをstateに渡す
   };
-  
 
   if (loading) return <div className="loading"><img src="/Loading.gif" alt="Loading" /></div>;
 
-
   // Itemコンポーネントの定義
   const Item = ({ itemId, name, userIcon, title, imageSrc, description, onClick }) => {
+    const iconSrc = userIcon && userIcon.startsWith('storage/images/')
+      ? `https://loopplus.mydns.jp/${userIcon}`
+      : userIcon || avatar1; // デフォルトアイコンを使用
+
     return (
       <div className="product-item" onClick={onClick}>
         <div className="product-header">
-          <img src={userIcon || avatar1} alt="Profile" className="profile-image" />
+          <img src={iconSrc} alt="Profile" className="profile-image" />
           <span className="username">{name}</span>
         </div>
         <div className='image-detail-flex'>
           <img src={imageSrc || tvimage} alt={title} className="product-image" />
           <div className="product-details">
-            <div className='product-title'>
-              <strong>{title}</strong>
+            <div className='product-details-title'>
+              <p>{title}</p>
             </div>
-
-            <div className='product-description'>
-              <p >{description}</p>
-            </div>
-            
+            <p>{description}</p>
           </div>
         </div>
       </div>
@@ -77,7 +94,7 @@ const ListedProducts = () => {
       <div className='columnBrake'>
         <Sidebar />
         <div className='mainbody'>
-          <div className='.product-manager-listedproducts'>
+          <div className='product-manager'>
             <h1>出品した商品一覧</h1>
             <SearchBar />
             <div className="filter-buttons">
@@ -93,8 +110,8 @@ const ListedProducts = () => {
                 filteredProducts.map((item) => (
                   <Item
                     key={item.ItemID}
-                    name={item.User ? item.User.UserName : '不明'} // ユーザー名を渡す
-                    userIcon={item.User && item.User.Icon ? item.User.Icon : avatar1} // デフォルトアイコンを使用
+                    name={item.User ? item.User.UserName : '不明'}
+                    userIcon={item.User ? item.User.Icon : avatar1} // アイコンを渡す
                     itemId={item.ItemID}
                     title={item.ItemName}
                     imageSrc={`https://loopplus.mydns.jp/${item.ItemImage}`} // 画像のURL

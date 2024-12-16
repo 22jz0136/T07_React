@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom'; // useNavigateをインポート
 import Navbar from '../Navbar/Navbar';
 import Sidebar from '../../components/Sidebar/Sidebar';
 import SearchBar from '../../components/SearchBar/SearchBar';
@@ -9,42 +9,25 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 export default function SearchResult() {
   const [results, setResults] = useState([]);
   const location = useLocation();
-  const [user, setUser] = useState(null);  // ユーザー情報を保持する状態
-  const [loading, setLoading] = useState(true);  // ローディング状態
+  const navigate = useNavigate(); // navigateを取得
+  const [loading, setLoading] = useState(true); // ローディング状態
 
   useEffect(() => {
-    // ユーザー情報を取得するAPIリクエスト
-    const fetchUserData = async () => {
-      try {
-        const response = await fetch('https://loopplus.mydns.jp/api/user/'); 
-        if (response.ok) {
-          const data = await response.json();
-          setUser(data); // 取得したユーザー情報を状態にセット
-          setLoading(false); // ローディングを終了
-        } else {
-          console.error('ユーザー情報の取得に失敗しました');
-          setLoading(false);
-        }
-      } catch (error) {
-        console.error('エラーが発生しました', error);
-        setLoading(false);
-      }
-    };
-
-    fetchUserData(); // ユーザー情報を取得
-  }, []); // 初回マウント時にのみ実行
-
-  useEffect(() => {
-    // location.state と location.state.results が存在するか確認
     if (location.state && Array.isArray(location.state.results)) {
       setResults(location.state.results);
       console.log("検索結果:", location.state.results); // デバッグ用
     } else {
       console.log("検索結果がありません");
     }
+    setLoading(false); // データの取得が終わったらローディングを終了
   }, [location.state]);
 
   if (loading) return <div className="loading"><img src="/Loading.gif" alt="Loading" /></div>;
+
+  // 商品詳細画面に遷移する関数
+  const handleItemClick = (itemId) => {
+    navigate('/product-detail', { state: { itemId } }); // 商品IDを渡して遷移
+  };
 
   return (
     <div>
@@ -55,17 +38,16 @@ export default function SearchResult() {
           <div className='product-manager'>
             <SearchBar />
             <h2>検索結果画面</h2>
-            
-              <div className='productitems'>
+            <div className='productitems'>
               {results && results.length > 0 ? (
                 <ul>
                   {results.map((item, index) => (
-                    <li key={index}>
+                    <li key={index} onClick={() => handleItemClick(item.ItemID)}> {/* クリック時に詳細ページへ遷移 */}
                       <div className="">
                         <div className="product-header">
-                          {user?.Icon ? (
+                          {item.User ? (
                             <img
-                              src={`https://loopplus.mydns.jp/${user.Icon}`}
+                              src={`https://loopplus.mydns.jp/${item.User.Icon}`}
                               alt="User Icon"
                               className="avatar-icon"
                               style={{ width: '40px', height: '40px', borderRadius: '50%' }}
@@ -74,7 +56,7 @@ export default function SearchResult() {
                             <AccountCircleIcon style={{ fontSize: 40 }} />
                           )}
                           <span className="username">
-                            {user?.Username ?? 'ユーザー名が取得できません'}
+                            {item.User ? item.User.UserName : 'ユーザー名が取得できません'}
                           </span>
                           <span className="date">
                             {item.UpdatedAt ? (
@@ -120,9 +102,7 @@ export default function SearchResult() {
               ) : (
                 <p>検索結果がありません。</p>
               )}
-              </div>
-      
-            
+            </div>
           </div>
         </div>
       </div>

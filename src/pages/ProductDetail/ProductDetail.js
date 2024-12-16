@@ -1,4 +1,3 @@
-// ProductDetail.js
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import './ProductDetail.css'; // スタイルシートのインポート
@@ -56,7 +55,6 @@ const ProductDetail = () => {
 
   if (loading) return <div className="loading"><img src="/Loading.gif" alt="Loading" /></div>;
 
-
   if (!product) {
     return <p>商品情報が見つかりません。</p>; // 商品情報がない場合の表示
   }
@@ -79,14 +77,14 @@ const ProductDetail = () => {
           <div className='productmanager'>
             <SearchBar />
             <div className='productitem-scroll'>
-                <div key={ItemID} className="productitem">
+              <div key={ItemID} className="productitem">
                 <div className="product-header">
                   {user?.Icon ? (
                     <img
                       src={`https://loopplus.mydns.jp/${user.Icon}`}
                       alt="User Icon"
                       className="avatar-icon"
-                      style={{ width: '40px', height: '40px' , borderRadius: '50%'}}
+                      style={{ width: '40px', height: '40px', borderRadius: '50%' }}
                     />
                   ) : (
                     <AccountCircleIcon style={{ fontSize: 40 }} />
@@ -95,12 +93,12 @@ const ProductDetail = () => {
                   <span className="date">
                     {UpdatedAt
                       ? new Date(UpdatedAt).toLocaleString('ja-JP', {
-                          year: 'numeric',
-                          month: '2-digit',
-                          day: '2-digit',
-                          hour: '2-digit',
-                          minute: '2-digit',
-                        })
+                        year: 'numeric',
+                        month: '2-digit',
+                        day: '2-digit',
+                        hour: '2-digit',
+                        minute: '2-digit',
+                      })
                       : '日付情報なし'}
                   </span>
                   <br />
@@ -108,25 +106,28 @@ const ProductDetail = () => {
 
                 <div className='productdetails-flex'>
                   <div className='imagedetail-flex'>
-                    <img src={`https://loopplus.mydns.jp/${ItemImage}`} alt={ItemName} className="productimage"  />
+                    <img
+                      src={`https://loopplus.mydns.jp/${ItemImage}`}
+                      alt={ItemName || 'アイテム名なし'}
+                      className="productimage"
+                    />
                     <div className="productdetails">
                       <div className='product-details-title'>
-                        <h2>{ItemName}</h2> {/* アイテム名 */}
-                        <p>{Description}</p> {/* アイテムの説明 */}
+                        <h2>{ItemName || 'アイテム名なし'}</h2>
+                        <p>{Description || '説明がありません'}</p>
                       </div>
                     </div>
                   </div>
 
                   <div className='product-actions'>
-                    <button onClick={() => alert('非表示にしました')}>非表示</button>
+                    <button on
+                      Click={() => alert('非表示にしました')}>非表示</button>
                     <button onClick={() => alert('取引が完了しました')}>取引完了</button>
                     <button onClick={() => alert('警告しました')}>警告する</button>
                   </div>
-                </div>          
-                
+                </div>
               </div>
             </div>
-            
           </div>
         </div>
       </div>

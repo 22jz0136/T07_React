@@ -15,6 +15,7 @@ const UserTable = () => {
         throw new Error('Network response was not ok');
       }
       const data = await response.json();
+      console.log('data', data);
       setUsers(data);
     };
     fetchData();

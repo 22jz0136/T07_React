@@ -39,7 +39,7 @@ export default function SearchBar() {
         <div className="searchBar">
             <input
                 type="text"
-                placeholder="利用者IDまたは商品名を入力してください..."
+                placeholder="商品名を入力してください..."
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && handleSearch()}

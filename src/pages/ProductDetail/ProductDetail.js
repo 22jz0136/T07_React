@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import './ProductDetail.css'; // スタイルシートのインポート
 import Navbar from '../../components/Navbar/Navbar';
 import Sidebar from '../../components/Sidebar/Sidebar';
@@ -7,6 +7,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 const ProductDetail = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const [product, setProduct] = useState(null); // 商品情報の状態
   const [user, setUser] = useState(null); // ユーザー情報の状態
   const [loading, setLoading] = useState(true); // ローディング状態
@@ -65,7 +66,112 @@ const ProductDetail = () => {
     Description,
     ItemImage,
     UpdatedAt,
+    TradeFlag // 追加: TradeFlagを取得
   } = product;
+
+  // 非表示処理
+  const handleHide = async () => {
+    const confirmed = window.confirm('本当にこの商品を非表示にしますか？');
+    if (!confirmed) return;
+
+    try {
+      const response = await fetch(`https://loopplus.mydns.jp/api/item/${ItemID}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ TradeFlag: 3 }), // TradeFlagを3に設定
+        credentials: 'include',
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        console.error('Error response:', errorData);
+        throw new Error('非表示に失敗しました');
+      }
+
+      alert('商品が非表示になりました');
+      navigate('/ListedProducts');
+    } catch (error) {
+      console.error('Error hiding product:', error);
+      alert(error.message);
+    }
+  };
+
+  // 取引完了処理
+  const handleComplete = async () => {
+    const confirmed = window.confirm('本当に取引を完了しますか？');
+    if (!confirmed) return;
+
+    try {
+      const response = await fetch(`https://loopplus.mydns.jp/api/item/${ItemID}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ TradeFlag: 2 }), // TradeFlagを2に設定
+        credentials: 'include',
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        console.error('Error response:', errorData);
+        throw new Error('取引完了に失敗しました');
+      }
+
+      alert('取引が完了しました');
+      navigate('/ListedProducts');
+    } catch (error) {
+      console.error('Error completing trade:', error);
+      alert(error.message);
+    }
+  };
+
+  // 警告処理
+  const handleWarning = () => {
+    navigate('/ProductWarning', { 
+      state: {
+        itemId: ItemID,
+        username: user?.Username,
+        productName: ItemName,
+        productDetails: Description,
+        productLocation: '',
+        productImage: ItemImage,
+        profileImage: user?.Icon,
+        date: UpdatedAt,
+        status: '',
+      } 
+    });
+  };
+
+  // 再表示処理
+  const handleReShow = async () => {
+    const confirmed = window.confirm('本当にこの商品を再表示しますか？');
+    if (!confirmed) return;
+
+    try {
+      const response = await fetch(`https://loopplus.mydns.jp/api/item/${ItemID}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ TradeFlag: 0 }), // TradeFlagを0に設定
+        credentials: 'include',
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        console.error('Error response:', errorData);
+        throw new Error('再表示に失敗しました');
+      }
+
+      alert('商品が再表示されました');
+      navigate('/ListedProducts');
+    } catch (error) {
+      console.error('Error re-showing product:', error);
+      alert(error.message);
+    }
+  };
 
   return (
     <div>
@@ -114,9 +220,33 @@ const ProductDetail = () => {
                   </div>
 
                   <div className='product-actions'>
-                    <button onClick={() => alert('非表示にしました')}>非表示</button>
-                    <button onClick={() => alert('取引が完了しました')}>取引完了</button>
-                    <button onClick={() => alert('警告しました')}>警告する</button>
+                    {TradeFlag === 0 && (
+                      <>
+                        <p className='TradeFlag-p'>出品中</p>
+                        <button onClick={handleHide}>非表示</button>
+                        <button onClick={handleComplete}>取引完了</button>
+                        <button onClick={handleWarning}>警告する</button>
+                      </>
+                    )}
+                    {TradeFlag === 1 && (
+                      <>
+                        <p className='TradeFlag-p'>取引中</p>
+                        <button onClick={handleComplete}>取引完了</button>
+                      </>
+                    )}
+                    {TradeFlag === 2 && (
+                        <>
+                          <p className='TradeFlag-p'>取引完了</p>
+                          <button onClick={handleReShow}>再表示</button>
+                        </>
+                        
+                        )}
+                    {TradeFlag === 3 && (
+                      <>
+                        <p className='TradeFlag-p'>非表示中</p>
+                        <button onClick={handleReShow}>再表示</button>
+                      </>
+                    )}
                   </div>
                 </div>
               </div>

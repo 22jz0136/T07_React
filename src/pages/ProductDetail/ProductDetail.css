@@ -81,3 +81,13 @@ p {
     justify-content: space-between;
 }
 
+.TradeFlag-p {
+    text-align: right;
+    margin-right: 35px;
+    
+}
+ 
+
+.product-actions {
+    text-align: center;
+}

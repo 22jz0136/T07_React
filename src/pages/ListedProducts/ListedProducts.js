@@ -9,7 +9,7 @@ import avatar1 from '../../img/avatar1.png';
 
 const ListedProducts = () => {
   const navigate = useNavigate();
-  const [filter, setFilter] = useState(null);
+  const [filter, setFilter] = useState(0); // 初期状態で出品中のフィルタを設定
   const [products, setProducts] = useState([]); // 商品リストの状態
   const [loading, setLoading] = useState(true); // ローディング状態
   const [user, setUser] = useState(null); // ユーザー情報の状態
@@ -51,11 +51,16 @@ const ListedProducts = () => {
     fetchProducts();
   }, []);
 
-  const toggleFilter = (type) => {
-    setFilter((prevFilter) => (prevFilter === type ? null : type));
+  const handleFilterChange = (event) => {
+    const selectedValue = event.target.value;
+    setFilter(selectedValue === 'all' ? null : parseInt(selectedValue)); // "all"を選択した場合はnullに設定
   };
 
-  const filteredProducts = filter ? products.filter((product) => product.type === filter) : products;
+  // フィルタリングロジック
+  const filteredProducts = products.filter((product) => {
+    if (filter === null) return true; // フィルタが設定されていない場合はすべて表示
+    return product.TradeFlag === filter; // TradeFlagでフィルタリング
+  });
 
   const handleProductClick = (product) => {
     navigate(`/product/${product.ItemID}`, { state: { itemId: product.ItemID } }); // itemIdをstateに渡す
@@ -97,11 +102,14 @@ const ListedProducts = () => {
           <div className='product-manager'>
             <h1>出品した商品一覧</h1>
             <SearchBar />
-            <div className="filter-buttons">
-              <button onClick={() => toggleFilter('ongoing')}>取引中</button>
-              <button onClick={() => toggleFilter('completed')}>取引完了</button>
-              <button onClick={() => toggleFilter('hidden')}>非表示</button>
-              <button onClick={() => toggleFilter('warning')}>警告済商品</button>
+            <div className="filter-dropdown">
+              <label htmlFor="filter-select">ステータス :</label>
+              <select id="filter-select" onChange={handleFilterChange} value={filter}>
+                <option value="0">出品中</option>
+                <option value="1">取引中</option>
+                <option value="2">取引完了</option>
+                <option value="3">非表示</option>
+              </select>
             </div>
             <div className="products-list">
               {filteredProducts.length === 0 ? (

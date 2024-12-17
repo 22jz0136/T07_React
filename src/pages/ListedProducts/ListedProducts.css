@@ -17,7 +17,6 @@
 .products-list {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
   height: 70vh;
   width: 100%;
   overflow-y: scroll;
@@ -95,4 +94,28 @@
 
 strong {
   font-size: 15px;
+}
+
+.filter-dropdown {
+  margin: 10px; /* 上下のマージン */
+  display: flex;
+  align-items: center; /* ラベルとセレクトボックスを中央揃え */
+}
+
+.filter-dropdown label {
+  margin-right: 10px; /* ラベルとセレクトボックスの間にスペース */
+}
+
+.filter-dropdown select {
+  padding: 10px; /* 内側のスペース */
+  border: 1px solid #ccc; /* ボーダーの色 */
+  border-radius: 4px; /* 角を丸くする */
+  font-size: 16px; /* フォントサイズ */
+  cursor: pointer; /* カーソルをポインターに */
+  transition: border-color 0.3s; /* ボーダーカラーのトランジション */
+}
+
+.filter-dropdown select:focus {
+  border-color: #007bff; /* フォーカス時のボーダー色 */
+  outline: none; /* デフォルトのアウトラインを非表示 */
 }

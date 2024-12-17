@@ -25,6 +25,7 @@ const UserTable = () => {
     e.stopPropagation(); // クリックイベントの伝播を防止
     navigate(`/user-warning/${userId}`); // 警告ページにユーザーIDを渡して遷移
   };
+  
 
   const banUser = (e, userId) => {
     e.stopPropagation(); // クリックイベントの伝播を防止
@@ -35,6 +36,8 @@ const UserTable = () => {
     // ユーザーのプロフィールページに遷移し、ユーザーIDを渡す
     navigate(`/user-profile/${userId}`);
   };
+
+  
 
   return (
     <div>

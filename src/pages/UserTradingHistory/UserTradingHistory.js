@@ -57,7 +57,6 @@ function UserTradingHistory() {
         <Sidebar />
         <div className='mainbody'>
           <h1>取引履歴一覧</h1>
-          <SearchBar />
           <Profile />
           <div className='trading-list'>
             <ul className="list">

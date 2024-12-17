@@ -9,3 +9,11 @@ h1 {
     margin: 20px;
 }
 
+.user-div {
+    display: flex;
+    align-items: center
+}
+
+.user-div2{
+    padding-left: 10px;
+}

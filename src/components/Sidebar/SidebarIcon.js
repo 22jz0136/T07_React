@@ -1,22 +1,22 @@
-import React from 'react'
-import avatar1 from '../../img/avatar1.png';
+import React from 'react';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
-function SidebarIcon( {userImage, userName} ) {
+function SidebarIcon({ userImage, userName }) {
   return (
     <div className='SidebarIcon'>
       {userImage ? (
         <img
-          src={userImage}
-          alt="プロフィールアイコン"
-          style={{ width: '30px', height: '30px', borderRadius: '50%' }}
+          src={`https://loopplus.mydns.jp/${userImage}`} // userImageを使用
+          alt="User Icon"
+          className="avatar-icon"
+          style={{ width: '40px', height: '40px', borderRadius: '50%' }}
         />
       ) : (
-        <AccountCircleIcon style={{ fontSize: '50px' }} />
+        <AccountCircleIcon style={{ fontSize: 40 }} />
       )}
       <span>{userName}</span>
     </div>
-  )
+  );
 }
 
-export default SidebarIcon
+export default SidebarIcon;

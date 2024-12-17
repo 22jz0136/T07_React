@@ -45,7 +45,6 @@ function UserRequestList() {
           <Sidebar/>
           <div className='mainbody'>
             <h1>リクエスト一覧</h1>
-            <SearchBar/>
             <Profile/>
             <div>
               <ul className="item-list">

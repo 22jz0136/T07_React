@@ -2,12 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Navbar from '../../components/Navbar/Navbar';
 import Sidebar from '../../components/Sidebar/Sidebar';
-import SearchBar from '../../components/SearchBar/SearchBar';
 import './UserProfile.css';
 import Profile from '../../components/Profile/Profile';
-import avatar1 from '../../img/avatar1.png';
-import { data } from 'autoprefixer';
-
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 function UserProfile() {
   const { id } = useParams(); // URLパラメータからユーザーIDを取得
@@ -24,37 +21,48 @@ function UserProfile() {
         }
         const data = await response.json();
         console.log('data', data);
-        setUserData(data); 
+        setUserData(data);
       } catch (error) {
         console.error('Error fetching user data:', error);
       } finally {
-        setLoading(false); 
+        setLoading(false);
       }
     };
 
     fetchUserData();
-  }, []);
+  }, [id]); // idを依存関係に追加
 
   return (
     <div>
       <Navbar />
       <div className='columnBrake'>
-        <Sidebar/>
+        <Sidebar />
         <div className='mainbody'>
-          <h1>User Profile1</h1>
-          <SearchBar />
+          <h1>ユーザー情報</h1>
           {loading ? (
-            <p>Loading...</p> 
-          ) : data ? (
+            <p>Loading...</p>
+          ) : data && data.length > 0 ? (
             <div>
-              <img src={`https://loopplus.mydns.jp/${data[0].Icon}`} alt="User Icon" />
+            <div className='user-div'>
+              {data[0].Icon ? (
+                <img
+                  src={`https://loopplus.mydns.jp/${data[0].Icon}`} // data[0].Iconを使用
+                  alt="User Icon"
+                  className="avatar-icon"
+                  style={{ width: '80px', height: '80px', borderRadius: '50%' }}
+                />
+              ) : (
+                <AccountCircleIcon style={{ fontSize: 40 }} />
+              )}
+              <div className='user-div2'>
               <h2>{data[0].Username}</h2>
               <p>{data[0].Email}</p>
-              <Profile/> 
+              </div>
+              </div>
+              <Profile />
             </div>
-            
           ) : (
-            <p>User data not found.</p> 
+            <p>User data not found.</p>
           )}
         </div>
       </div>

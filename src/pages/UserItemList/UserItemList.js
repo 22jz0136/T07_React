@@ -64,7 +64,6 @@ function UserItemList({ userId }) {
         <Sidebar />
         <div className='mainbody'>
           <h1>出品した商品一覧</h1>
-          <SearchBar />
           <Profile />
 
           <div>

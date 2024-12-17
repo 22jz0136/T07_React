@@ -7,7 +7,7 @@ export function Profile({ userImage, userName }) {
   return (
     <div className='Profile'>
         <div className='ProfileIcon'>
-            <SidebarIcon userName={userName} userImage={userImage}/>
+            {/* <SidebarIcon userName={userName} userImage={userImage}/> */}
         </div>
         
         <ul className='ProfileList'>

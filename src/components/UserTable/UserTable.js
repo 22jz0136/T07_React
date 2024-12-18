@@ -15,7 +15,6 @@ const UserTable = () => {
         throw new Error('Network response was not ok');
       }
       const data = await response.json();
-      console.log('data', data);
       setUsers(data);
     };
     fetchData();
@@ -27,10 +26,43 @@ const UserTable = () => {
   };
   
 
-  const banUser = (e, userId) => {
-    e.stopPropagation(); // クリックイベントの伝播を防止
-    alert('ユーザーがBanされました。');
-  };
+
+
+  const banUser = async (e, userId) => {
+    e.stopPropagation(); 
+
+    if (window.confirm("このユーザーをBANしますか？")) {
+        try {
+            const response = await fetch(`https://loopplus.mydns.jp/api/user/${userId}`, {
+                method: 'PUT',
+                credentials: 'include',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ BanFlag: 1 }), 
+            });
+
+            if (!response.ok) {
+                throw new Error(`HTTPエラー: ${response.status}`);
+            }
+
+            const data = await response.json();
+            console.log('data', data.status);
+
+            if (data.status == 'success') {
+                alert('ユーザーがBANされました。');
+                // ユーザーリストを再取得する場合:
+                setUsers((prevUsers) => prevUsers.filter((user) => user.UserID !== userId));
+            } else {
+                alert(`BANに失敗しました: ${data.message}`);
+            }
+        } catch (error) {
+            console.error('BAN中にエラーが発生しました:', error);
+            alert('BAN中にエラーが発生しました。');
+        }
+    }
+};
+
 
   const handleRowClick = (userId) => {
     // ユーザーのプロフィールページに遷移し、ユーザーIDを渡す

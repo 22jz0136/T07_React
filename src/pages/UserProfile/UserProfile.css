@@ -17,3 +17,45 @@ h1 {
 .user-div2{
     padding-left: 10px;
 }
+
+.product-item {
+    display: inline-block;
+}
+
+
+.request-item {
+    border: 1px solid #ccc;        /* 薄いグレーのボーダー */
+    border-radius: 8px;           /* 角を丸くする */
+    padding: 16px;                /* 内側の余白 */
+    margin: 10px 0;               /* 上下のマージン */
+    background-color: #f9f9f9;    /* 背景色 */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 軽い影 */
+}
+
+.profile {
+    display: flex;                 /* フレックスボックスを使用 */
+    align-items: center;           /* 中央揃え */
+    margin-bottom: 8px;           /* 下のマージン */
+}
+
+.name {
+    font-weight: bold;             /* 名前を太字に */
+    font-size: 1.1em;              /* フォントサイズを大きく */
+    margin-right: 10px;            /* 名前と時間の間にスペース */
+}
+
+.time {
+    font-size: 0.9em;              /* フォントサイズを小さく */
+    color: #888;                   /* 薄いグレーの色 */
+}
+
+.content {
+    margin-top: 10px;              /* 上のマージン */
+}
+
+.request-image {
+    max-width: 100%;               /* 画像の最大幅を親要素に合わせる */
+    height: auto;                  /* 高さを自動調整 */
+    border-radius: 5px;           /* 画像の角を丸くする */
+    margin-top: 8px;              /* 上のマージン */
+}

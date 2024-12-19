@@ -2,7 +2,6 @@ import React from 'react'
 import Navbar from '../../components/Navbar/Navbar';
 import Sidebar from '../../components/Sidebar/Sidebar';
 import './UserManagement.css';
-import SearchBar from '../../components/SearchBar/SearchBar';
 import UserTable from '../../components/UserTable/UserTable';
 
 function UserManagement() {
@@ -19,7 +18,6 @@ function UserManagement() {
           <div className='mainbody'>
             
             <div className='usertable'>
-              <SearchBar/>
               <div className='usertable-y'>
                 <UserTable/> 
               </div>

@@ -71,7 +71,7 @@ const ProductDetail = () => {
 
   // 非表示処理
   const handleHide = async () => {
-    const confirmed = window.confirm('本当にこの商品を非表示にしますか？');
+    const confirmed = window.confirm('本当にこの商品を削除しますか？');
     if (!confirmed) return;
 
     try {
@@ -87,10 +87,10 @@ const ProductDetail = () => {
       if (!response.ok) {
         const errorData = await response.json();
         console.error('Error response:', errorData);
-        throw new Error('非表示に失敗しました');
+        throw new Error('削除に失敗しました');
       }
 
-      alert('商品が非表示になりました');
+      alert('商品が削除されました');
       navigate('/ListedProducts');
     } catch (error) {
       console.error('Error hiding product:', error);
@@ -180,6 +180,12 @@ const ProductDetail = () => {
         <Sidebar />
         <div className='mainbody'>
           <div className='productmanager'>
+          <div className='trade-status'>
+              {TradeFlag === 0 && <p className='TradeFlag-p'>出品中</p>}
+              {TradeFlag === 1 && <p className='TradeFlag-p'>取引中</p>}
+              {TradeFlag === 2 && <p className='TradeFlag-p'>取引完了</p>}
+              {TradeFlag === 3 && <p className='TradeFlag-p'>削除済み</p>}
+            </div>
             <div className='productitem-scroll'>
               <div key={ItemID} className="productitem">
                 <div className="product-header">
@@ -222,28 +228,24 @@ const ProductDetail = () => {
                   <div className='product-actions'>
                     {TradeFlag === 0 && (
                       <>
-                        <p className='TradeFlag-p'>出品中</p>
-                        <button onClick={handleHide}>非表示</button>
+                        <button onClick={handleHide}>削除</button>
                         <button onClick={handleComplete}>取引完了</button>
                         <button onClick={handleWarning}>警告する</button>
                       </>
                     )}
                     {TradeFlag === 1 && (
                       <>
-                        <p className='TradeFlag-p'>取引中</p>
                         <button onClick={handleComplete}>取引完了</button>
                       </>
                     )}
                     {TradeFlag === 2 && (
                         <>
-                          <p className='TradeFlag-p'>取引完了</p>
                           <button onClick={handleReShow}>再表示</button>
                         </>
                         
                         )}
                     {TradeFlag === 3 && (
                       <>
-                        <p className='TradeFlag-p'>非表示中</p>
                         <button onClick={handleReShow}>再表示</button>
                       </>
                     )}

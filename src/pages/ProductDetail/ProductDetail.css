@@ -58,7 +58,7 @@ p {
 }
 
 .productmanager {
-    margin: 80px 20px 20px 20px;
+    margin: 20px 20px 20px 20px;
     padding: 5px;
     border-radius: 5px;
 } 
@@ -82,12 +82,33 @@ p {
 }
 
 .TradeFlag-p {
-    text-align: right;
-    margin-right: 35px;
-    
+    font-size: 1.2em; /* フォントサイズを少し大きく */
+    margin-bottom: 10px; /* 下のマージンを追加 */
+    padding: 5px; /* 内側の余白を追加 */
+    border-radius: 5px; /* 角を丸める */
+    color: aliceblue;
 }
- 
 
-.product-actions {
-    text-align: center;
+.trade-status {
+    width: fit-content;
+    padding: 5px;
 }
+
+/* ステータスに応じた色分け */
+.TradeFlag-p:nth-child(1) { /* 出品中 */
+    background-color: #4CAF50; /* 緑 */
+}
+
+.TradeFlag-p:nth-child(2) { /* 取引中 */
+    background-color: #FF9800; /* オレンジ */
+}
+
+.TradeFlag-p:nth-child(3) { /* 取引完了 */
+    background-color: #2196F3; /* 青 */
+}
+
+.TradeFlag-p:nth-child(4) { /* 非表示中 */
+    background-color: #F44336; /* 赤 */
+}
+
+

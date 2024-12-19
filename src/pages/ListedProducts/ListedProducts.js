@@ -69,7 +69,7 @@ const ListedProducts = () => {
   if (loading) return <div className="loading"><img src="/Loading.gif" alt="Loading" /></div>;
 
   // Itemコンポーネントの定義
-  const Item = ({ itemId, name, userIcon, title, imageSrc, description, onClick }) => {
+  const Item = ({ itemId, name, userIcon, title, imageSrc, description, createdAt, onClick }) => {
     const iconSrc = userIcon && userIcon.startsWith('storage/images/')
       ? `https://loopplus.mydns.jp/${userIcon}`
       : userIcon || avatar1; // デフォルトアイコンを使用
@@ -79,6 +79,15 @@ const ListedProducts = () => {
         <div className="product-header">
           <img src={iconSrc} alt="Profile" className="profile-image" />
           <span className="username">{name}</span>
+          <span className="created-at">
+           {new Date(createdAt).toLocaleString('ja-JP', {
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit',
+                hour: '2-digit',
+                minute: '2-digit',
+              })}
+            </span>
         </div>
         <div className='image-detail-flex'>
           <img src={imageSrc || tvimage} alt={title} className="product-image" />
@@ -93,6 +102,8 @@ const ListedProducts = () => {
     );
   };
 
+
+
   return (
     <div>
       <Navbar />
@@ -100,8 +111,10 @@ const ListedProducts = () => {
         <Sidebar />
         <div className='mainbody'>
           <div className='product-manager'>
-            <h1>出品した商品一覧</h1>
-            <SearchBar />
+            <div className='product-div'>
+              <div><h1 className='product-h1'>物品管理</h1></div>
+              <div><SearchBar /></div>
+            </div>
             <div className="filter-dropdown">
               <label htmlFor="filter-select">ステータス :</label>
               <select id="filter-select" onChange={handleFilterChange} value={filter}>
@@ -124,6 +137,7 @@ const ListedProducts = () => {
                     title={item.ItemName}
                     imageSrc={`https://loopplus.mydns.jp/${item.ItemImage}`} // 画像のURL
                     description={item.Description}
+                    createdAt={item.CreatedAt} // CreatedAtを渡す
                     onClick={() => handleProductClick(item)} // 商品クリック時の処理
                   />
                 ))

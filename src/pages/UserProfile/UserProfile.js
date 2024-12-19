@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import Navbar from '../../components/Navbar/Navbar';
 import Sidebar from '../../components/Sidebar/Sidebar';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
@@ -7,11 +7,13 @@ import './UserProfile.css';
 
 function UserProfile() {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState({ user: true, items: true, requests: true });
   const [activeTab, setActiveTab] = useState('items');
   const [items, setItems] = useState([]);
   const [requests, setRequests] = useState([]);
+  const [filter, setFilter] = useState(0); // フィルタの状態を追加
 
   const fetchData = async () => {
     try {
@@ -32,14 +34,22 @@ function UserProfile() {
     fetchData();
   }, [id]);
 
-  // Filter items by current user's ID and TradeFlag
-  const userItems = items.filter(item => item.UserID === parseInt(id) && item.TradeFlag === 0);
+  // フィルタリングロジック
+  const userItems = items.filter(item => {
+    if (filter === null) return true; // フィルタが設定されていない場合はすべて表示
+    return item.TradeFlag === filter; // TradeFlagでフィルタリング
+  });
 
-  const handleProductClick = (item) => {
-    console.log('Product clicked:', item);
+  const handleFilterChange = (event) => {
+    const selectedValue = event.target.value;
+    setFilter(selectedValue === 'all' ? null : parseInt(selectedValue)); // "all"を選択した場合はnullに設定
   };
 
-  const Item = ({ itemId, name, userIcon, title, imageSrc, description, onClick }) => {
+  const handleProductClick = (item) => {
+    navigate(`/product/${item.ItemID}`, { state: { itemId: item.ItemID } }); // itemIdをstateに渡す
+  };
+
+  const Item = ({ itemId, name, userIcon, title, imageSrc, description, createdAt, onClick }) => {
     const iconSrc = userIcon && userIcon.startsWith('storage/images/')
       ? `https://loopplus.mydns.jp/${userIcon}`
       : userIcon;
@@ -49,24 +59,39 @@ function UserProfile() {
         <div className="product-header">
           <img src={iconSrc || 'default-icon-url'} alt="Profile" className="profile-image" />
           <span className="username">{name}</span>
+          <span className="created-at">
+              {new Date(createdAt).toLocaleString('ja-JP', {
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit',
+                hour: '2-digit',
+                minute: '2-digit',
+              })}
+            </span>
         </div>
         <div className='image-detail-flex'>
-          <img src={imageSrc} alt={title} className="product-image" />
+          <img src={imageSrc || 'default-image-url'} alt={title} className="product-image" />
           <div className="product-details">
             <div className='product-details-title'>
               <p>{title}</p>
             </div>
             <p>{description}</p>
-          </div>
+            </div>
         </div>
       </div>
     );
   };
 
-  const RequestItem = ({ id, name, time, content, imageSrc }) => {
+
+  const RequestItem = ({ id, name, userIcon, time, content, imageSrc }) => {
+    const iconSrc = userIcon && userIcon.startsWith('storage/images/')
+      ? `https://loopplus.mydns.jp/${userIcon}`
+      : userIcon;
+
     return (
       <div className="request-item">
         <div className="profile">
+          <img src={iconSrc || 'default-icon-url'} alt="User Icon" className="request-user-icon" />
           <span className="name">{name}</span>
           <span className="time">{new Date(time).toLocaleString()}</span>
         </div>
@@ -77,6 +102,7 @@ function UserProfile() {
       </div>
     );
   };
+
 
   return (
     <div>
@@ -111,14 +137,14 @@ function UserProfile() {
 
           <div className='Profile'>
             <ul className='ProfileList'>
-              {['items', 'requests', 'transactions'].map(tab => (
+              {['items', 'requests'].map(tab => (
                 <li
                   key={tab}
                   className='Profilerow'
                   onClick={() => setActiveTab(tab)}
                   style={{ fontWeight: activeTab === tab ? 'bold' : 'normal' }}
                 >
-                  {tab === 'items' ? '出品した商品' : tab === 'requests' ? 'リクエスト' : '取引履歴'}
+                  {tab === 'items' ? '物品情報' : 'リクエスト'}
                 </li>
               ))}
             </ul>
@@ -126,7 +152,15 @@ function UserProfile() {
 
           {activeTab === 'items' && (
             <div>
-              <h1>出品一覧</h1>
+              <div className="filter-dropdown">
+                <label htmlFor="filter-select">ステータス :</label>
+                <select id="filter-select" onChange={handleFilterChange} value={filter}>
+                  <option value="0">出品中</option>
+                  <option value="1">取引中</option>
+                  <option value="2">取引完了</option>
+                  <option value="3">削除済</option>
+                </select>
+              </div>
               {loading.items ? (
                 <p>Loading items...</p>
               ) : userItems.length > 0 ? (
@@ -135,22 +169,26 @@ function UserProfile() {
                     key={item.ItemID}
                     name={userData.Username}
                     userIcon={userData.Icon}
+                    createdAt={item.CreatedAt} // CreatedAtを渡す
                     itemId={item.ItemID}
                     title={item.ItemName}
                     imageSrc={`https://loopplus.mydns.jp/${item.ItemImage}`}
                     description={item.Description}
-                    onClick={() => handleProductClick(item)}
+                    onClick={() => handleProductClick(item)} // 物品クリック時の処理
                   />
                 ))
               ) : (
-                <p>出品はありません。</p>
+                filter === 0 ? <p>出品中の物品はありません。</p> :
+                  filter === 1 ? <p>取引中の物品はありません。</p> :
+                    filter === 2 ? <p>取引完了の物品はありません。</p> :
+                      filter === 3 ? <p>削除した物品はありません。</p> :
+                        <p>出品はありません。</p>
               )}
             </div>
           )}
 
           {activeTab === 'requests' && (
             <div>
-              <h1>リクエスト一覧</h1>
               {loading.requests ? (
                 <p>Loading requests...</p>
               ) : requests.length > 0 ? (
@@ -159,6 +197,7 @@ function UserProfile() {
                     key={request.RequestID}
                     id={request.RequestID}
                     name={userData.Username}
+                    userIcon={userData.Icon}
                     time={request.CreatedAt}
                     content={request.RequestContent}
                     imageSrc={request.RequestImage ? `https://loopplus.mydns.jp/${request.RequestImage}` : null}
@@ -169,8 +208,6 @@ function UserProfile() {
               )}
             </div>
           )}
-
-          {/* 取引履歴のタブのコンテンツをここに追加できます */}
         </div>
       </div>
     </div>

@@ -121,7 +121,7 @@ const ListedProducts = () => {
                 <option value="0">出品中</option>
                 <option value="1">取引中</option>
                 <option value="2">取引完了</option>
-                <option value="3">非表示</option>
+                <option value="3">削除済</option>
               </select>
             </div>
             <div className="products-list">

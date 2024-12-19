@@ -33,7 +33,7 @@ function App() {
           <Route path="/listedproducts" element={<ListedProducts />} />
           <Route path="/product/:id" element={<ProductDetail />} />
           <Route path="/product-warning/:productId" element={<ProductWarning />} />
-          <Route path="/" element={<SearchResult />} />
+          <Route path="/searchresult" element={<SearchResult />} />
           <Route path="/product-detail" element={<ProductDetail />} /></Routes>
       </BrowserRouter>
     </div>

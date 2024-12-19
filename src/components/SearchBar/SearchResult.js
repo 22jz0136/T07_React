@@ -36,8 +36,7 @@ export default function SearchResult() {
         <Sidebar />
         <div className='mainbody'>
           <div className='product-manager'>
-            <SearchBar />
-            <h2>検索結果画面</h2>
+            <h1>検索結果</h1>
             <div className='productitems'>
               {results.length > 0 ? (
                 <ul>

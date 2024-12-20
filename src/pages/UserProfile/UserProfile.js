@@ -255,8 +255,8 @@ function UserProfile() {
               <div className="filter-dropdown">
                 <label htmlFor="request-filter-select">ステータス :</label>
                 <select id="request-filter-select" onChange={handleRequestFilterChange} value={requestFilter}>
-                  <option value="0">削除済</option>
                   <option value="1">表示中</option>
+                  <option value="0">削除済</option>
                 </select>
               </div>
               {loading.requests ? (

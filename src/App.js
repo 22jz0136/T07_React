@@ -1,5 +1,5 @@
 // App.js
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import UserManagement from './pages/UserManagement/UserManagement';
@@ -17,11 +17,18 @@ import ProductDetail from './pages/ProductDetail/ProductDetail';
 import SearchResult from './components/SearchBar/SearchResult';
 
 function App() {
+  const [requests, setRequests] = useState([]);
+  const [isFooterVisible, setIsFooterVisible] = useState(true);
+
+  const handleRequestAdded = (newRequest) => {
+    setRequests((prevRequests) => [...prevRequests, newRequest]);
+  };
+
   return (
     <div>
       <BrowserRouter>
         <Routes>
-          <Route path="/login" element={<Login />} />
+        <Route path="/adminlogin" element={<Login setIsFooterVisible={setIsFooterVisible} />} />
           <Route path="/" element={<UserManagement />} />
           <Route path="/user-profile/:id" element={<UserProfile />} />
           <Route path="/useritemlist" element={<UserItemList />} />

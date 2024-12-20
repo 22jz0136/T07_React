@@ -78,9 +78,10 @@ const ListedProducts = () => {
       <div className="product-item" onClick={onClick}>
         <div className="product-header">
           <img src={iconSrc} alt="Profile" className="profile-image" />
-          <span className="username">{name}</span>
-          <span className="created-at">
-           {new Date(createdAt).toLocaleString('ja-JP', {
+          <div className='usertime-div'>
+            <span className="username">{name}</span>
+            <span className="created-at">
+              {new Date(createdAt).toLocaleString('ja-JP', {
                 year: 'numeric',
                 month: '2-digit',
                 day: '2-digit',
@@ -88,6 +89,7 @@ const ListedProducts = () => {
                 minute: '2-digit',
               })}
             </span>
+          </div>
         </div>
         <div className='image-detail-flex'>
           <img src={imageSrc || tvimage} alt={title} className="product-image" />

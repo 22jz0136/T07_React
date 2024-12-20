@@ -14,6 +14,7 @@ function UserProfile() {
   const [items, setItems] = useState([]);
   const [requests, setRequests] = useState([]);
   const [filter, setFilter] = useState(0); // フィルタの状態を追加
+  const [requestFilter, setRequestFilter] = useState(1); // リクエストフィルタの初期値を1（表示中）に設定
 
   const fetchData = async () => {
     try {
@@ -40,13 +41,69 @@ function UserProfile() {
     return item.TradeFlag === filter; // TradeFlagでフィルタリング
   });
 
+  const filteredRequests = requests.filter(request => {
+    return requestFilter === 0 ? request.DisplayFlag === 0 : request.DisplayFlag === 1; // ステータスに基づいてフィルタリング
+  });
+
   const handleFilterChange = (event) => {
     const selectedValue = event.target.value;
     setFilter(selectedValue === 'all' ? null : parseInt(selectedValue)); // "all"を選択した場合はnullに設定
   };
 
+  const handleRequestFilterChange = (event) => {
+    setRequestFilter(parseInt(event.target.value)); // 選択された値を状態にセット
+  };
+
   const handleProductClick = (item) => {
     navigate(`/product/${item.ItemID}`, { state: { itemId: item.ItemID } }); // itemIdをstateに渡す
+  };
+
+  const handleDeleteRequest = async (id) => {
+    try {
+      const response = await fetch(`https://loopplus.mydns.jp/api/request/${id}`, {
+        method: 'PUT', // PUTメソッドを使用
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ DisplayFlag: 0 }), // DisplayFlagを0に設定
+      });
+
+      if (!response.ok) {
+        const errorMessage = await response.text(); // エラーメッセージを取得
+        throw new Error(`Failed to delete request: ${errorMessage}`);
+      }
+
+      // リクエストをローカル状態から削除
+      setRequests(prevRequests => prevRequests.filter(request => request.RequestID !== id));
+    } catch (error) {
+      console.error('Error deleting request:', error);
+    }
+  };
+
+  const handleReShowRequest = async (id) => {
+    try {
+      const response = await fetch(`https://loopplus.mydns.jp/api/request/${id}`, {
+        method: 'PUT', // PUTメソッドを使用
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ DisplayFlag: 1 }), // DisplayFlagを1に設定
+      });
+
+      if (!response.ok) {
+        const errorMessage = await response.text(); // エラーメッセージを取得
+        throw new Error(`Failed to re-show request: ${errorMessage}`);
+      }
+
+      // リクエストをローカル状態から更新
+      setRequests(prevRequests =>
+        prevRequests.map(request =>
+          request.RequestID === id ? { ...request, DisplayFlag: 1 } : request
+        )
+      );
+    } catch (error) {
+      console.error('Error re-showing request:', error);
+    }
   };
 
   const Item = ({ itemId, name, userIcon, title, imageSrc, description, createdAt, onClick }) => {
@@ -60,14 +117,14 @@ function UserProfile() {
           <img src={iconSrc || 'default-icon-url'} alt="Profile" className="profile-image" />
           <span className="username">{name}</span>
           <span className="created-at">
-              {new Date(createdAt).toLocaleString('ja-JP', {
-                year: 'numeric',
-                month: '2-digit',
-                day: '2-digit',
-                hour: '2-digit',
-                minute: '2-digit',
-              })}
-            </span>
+            {new Date(createdAt).toLocaleString('ja-JP', {
+              year: 'numeric',
+              month: '2-digit',
+              day: '2-digit',
+              hour: '2-digit',
+              minute: '2-digit',
+            })}
+          </span>
         </div>
         <div className='image-detail-flex'>
           <img src={imageSrc || 'default-image-url'} alt={title} className="product-image" />
@@ -76,14 +133,13 @@ function UserProfile() {
               <p>{title}</p>
             </div>
             <p>{description}</p>
-            </div>
+          </div>
         </div>
       </div>
     );
   };
 
-
-  const RequestItem = ({ id, name, userIcon, time, content, imageSrc }) => {
+  const RequestItem = ({ id, name, userIcon, time, content, imageSrc, displayFlag, onDelete, onReShow }) => {
     const iconSrc = userIcon && userIcon.startsWith('storage/images/')
       ? `https://loopplus.mydns.jp/${userIcon}`
       : userIcon;
@@ -96,13 +152,18 @@ function UserProfile() {
           <span className="time">{new Date(time).toLocaleString()}</span>
         </div>
         <div className="content">
-          <p>{content}</p>
+          <div className='title-button-div'>
+            <p>{content}</p>
+            {displayFlag === 1 && <button onClick={onDelete} className="delete-button">削除</button>}
+            {displayFlag === 0 && <button onClick={onReShow} className="re-show-button">再表示</button>}
+          </div>
           {imageSrc && <img src={imageSrc} alt="Request" className="request-image" />}
+          <div className='title-button-div'>
+          </div>
         </div>
       </div>
     );
   };
-
 
   return (
     <div>
@@ -161,38 +222,47 @@ function UserProfile() {
                   <option value="3">削除済</option>
                 </select>
               </div>
-              {loading.items ? (
-                <p>Loading items...</p>
-              ) : userItems.length > 0 ? (
-                userItems.map(item => (
-                  <Item
-                    key={item.ItemID}
-                    name={userData.Username}
-                    userIcon={userData.Icon}
-                    createdAt={item.CreatedAt} // CreatedAtを渡す
-                    itemId={item.ItemID}
-                    title={item.ItemName}
-                    imageSrc={`https://loopplus.mydns.jp/${item.ItemImage}`}
-                    description={item.Description}
-                    onClick={() => handleProductClick(item)} // 物品クリック時の処理
-                  />
-                ))
-              ) : (
-                filter === 0 ? <p>出品中の物品はありません。</p> :
-                  filter === 1 ? <p>取引中の物品はありません。</p> :
-                    filter === 2 ? <p>取引完了の物品はありません。</p> :
-                      filter === 3 ? <p>削除した物品はありません。</p> :
-                        <p>出品はありません。</p>
-              )}
+              <div className="products-list">
+                {loading.items ? (
+                  <p>Loading items...</p>
+                ) : userItems.length > 0 ? (
+                  userItems.map(item => (
+                    <Item
+                      key={item.ItemID}
+                      name={userData.Username}
+                      userIcon={userData.Icon}
+                      createdAt={item.CreatedAt} // CreatedAtを渡す
+                      itemId={item.ItemID}
+                      title={item.ItemName}
+                      imageSrc={`https://loopplus.mydns.jp/${item.ItemImage}`}
+                      description={item.Description}
+                      onClick={() => handleProductClick(item)} // 物品クリック時の処理
+                    />
+                  ))
+                ) : (
+                  filter === 0 ? <p>出品中の物品はありません。</p> :
+                    filter === 1 ? <p>取引中の物品はありません。</p> :
+                      filter === 2 ? <p>取引完了の物品はありません。</p> :
+                        filter === 3 ? <p>削除した物品はありません。</p> :
+                          <p>出品はありません。</p>
+                )}
+              </div>
             </div>
           )}
 
           {activeTab === 'requests' && (
             <div>
+              <div className="filter-dropdown">
+                <label htmlFor="request-filter-select">ステータス :</label>
+                <select id="request-filter-select" onChange={handleRequestFilterChange} value={requestFilter}>
+                  <option value="0">削除済</option>
+                  <option value="1">表示中</option>
+                </select>
+              </div>
               {loading.requests ? (
                 <p>Loading requests...</p>
-              ) : requests.length > 0 ? (
-                requests.map(request => (
+              ) : filteredRequests.length > 0 ? (
+                filteredRequests.map(request => (
                   <RequestItem
                     key={request.RequestID}
                     id={request.RequestID}
@@ -201,6 +271,9 @@ function UserProfile() {
                     time={request.CreatedAt}
                     content={request.RequestContent}
                     imageSrc={request.RequestImage ? `https://loopplus.mydns.jp/${request.RequestImage}` : null}
+                    onDelete={() => handleDeleteRequest(request.RequestID)} // 削除処理を渡す
+                    onReShow={() => handleReShowRequest(request.RequestID)} // 再表示処理を渡す
+                    displayFlag={request.DisplayFlag} // DisplayFlagを渡す
                   />
                 ))
               ) : (
@@ -215,3 +288,4 @@ function UserProfile() {
 }
 
 export default UserProfile;
+

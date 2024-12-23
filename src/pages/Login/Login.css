@@ -28,7 +28,8 @@ body, html {
     padding: 10px;
     font-size: 40px;
     font-weight: 900;
-  }
+    margin-left: 40px;
+}
   
   .login-button {
     margin-top: 1rem;

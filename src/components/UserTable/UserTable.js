@@ -6,6 +6,7 @@ import WarningIcon from '@mui/icons-material/Warning';
 
 const UserTable = () => {
   const [users, setUsers] = useState([]);
+  const [viewAdmins, setViewAdmins] = useState(false); // 管理者表示かユーザー表示かを切り替える状態
   const navigate = useNavigate(); // ナビゲート用のフック
 
   useEffect(() => {
@@ -24,9 +25,6 @@ const UserTable = () => {
     e.stopPropagation(); // クリックイベントの伝播を防止
     navigate(`/user-warning/${userId}`); // 警告ページにユーザーIDを渡して遷移
   };
-  
-
-
 
   const banUser = async (e, userId) => {
     e.stopPropagation(); 
@@ -49,7 +47,7 @@ const UserTable = () => {
             const data = await response.json();
             console.log('data', data.status);
 
-            if (data.status == 'success') {
+            if (data.status === 'success') {
                 alert('ユーザーがBANされました。');
                 // ユーザーリストを再取得する場合:
                 setUsers((prevUsers) => prevUsers.filter((user) => user.UserID !== userId));
@@ -61,19 +59,26 @@ const UserTable = () => {
             alert('BAN中にエラーが発生しました。');
         }
     }
-};
-
+  };
 
   const handleRowClick = (userId) => {
     // ユーザーのプロフィールページに遷移し、ユーザーIDを渡す
     navigate(`/user-profile/${userId}`);
   };
 
-  
+  // 管理者だけ表示するか、ユーザーだけ表示するかでフィルタリング
+  const filteredUsers = users.filter(user => viewAdmins ? user.AdminFlag === 1 : user.AdminFlag === 0);
 
   return (
     <div>
-      
+      <div className='user-type-selector'>
+        <p>表示切り替え：</p>
+        <select onChange={(e) => setViewAdmins(e.target.value === 'admins')}>
+          <option value="users">ユーザー一覧を表示</option>
+          <option value="admins">管理者一覧を表示</option>
+        </select>
+      </div>
+
       <table className='fixed-tbody'>
         <thead>
           <tr>
@@ -86,12 +91,12 @@ const UserTable = () => {
           </tr>
         </thead>
         <tbody>
-          {users.length === 0 ? (
+          {filteredUsers.length === 0 ? (
             <tr>
               <td colSpan="6" style={{ textAlign: 'center' }}>読み込み中です。しばらくお待ちください。</td>
             </tr>
           ) : (
-            users.map(user => (
+            filteredUsers.map(user => (
               <tr key={user.UserID} onClick={() => handleRowClick(user.UserID)} style={{ cursor: 'pointer' }}>
                 <td>{user.UserID}</td>
                 <td>{user.Username}</td>

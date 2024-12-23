@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import './Login.css';
 
 const Login = ({ setIsFooterVisible }) => {
+  
   useEffect(() => {
     // フッターを非表示にする
     setIsFooterVisible(false);

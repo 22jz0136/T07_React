@@ -27,3 +27,9 @@ body {
 li {
   list-style: none;
 }
+
+.user-name {
+  color: white;
+  margin: 10px;
+  font-size: small;
+} 

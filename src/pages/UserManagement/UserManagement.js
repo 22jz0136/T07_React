@@ -1,14 +1,15 @@
-import React from 'react'
+import React, { useEffect, useState } from "react";
 import Navbar from '../../components/Navbar/Navbar';
 import Sidebar from '../../components/Sidebar/Sidebar';
 import './UserManagement.css';
 import UserTable from '../../components/UserTable/UserTable';
 
 function UserManagement() {
+
   return (
       <div>
         <div className="navbar">
-           <Navbar />
+           <Navbar  />
         </div>
 
         <div className='columnBrake'>

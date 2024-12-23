@@ -16,7 +16,9 @@ import Login from './pages/Login/Login';
 import ProductDetail from './pages/ProductDetail/ProductDetail';
 import SearchResult from './components/SearchBar/SearchResult';
 
+
 function App() {
+  
   const [requests, setRequests] = useState([]);
   const [isFooterVisible, setIsFooterVisible] = useState(true);
 
@@ -41,7 +43,8 @@ function App() {
           <Route path="/product/:id" element={<ProductDetail />} />
           <Route path="/product-warning/:productId" element={<ProductWarning />} />
           <Route path="/searchresult" element={<SearchResult />} />
-          <Route path="/product-detail" element={<ProductDetail />} /></Routes>
+          <Route path="/product-detail" element={<ProductDetail />} />
+        </Routes>
       </BrowserRouter>
     </div>
   );

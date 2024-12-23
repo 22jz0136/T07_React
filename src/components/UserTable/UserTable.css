@@ -63,3 +63,18 @@ button:hover {
   border: 1px solid #ccc;
 } 
 
+.user-type-selector {
+  display: flex;
+  margin: 12px 0px 0px 23px;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.user-type-selector p {
+  font-size: 15px;
+}
+
+.user-type-selector select {
+  height: 25px;
+  border-radius: 5px;
+}

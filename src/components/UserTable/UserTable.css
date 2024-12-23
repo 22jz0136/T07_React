@@ -78,3 +78,15 @@ button:hover {
   height: 25px;
   border-radius: 5px;
 }
+
+.even-row {
+  background-color: #cecece;
+}
+
+tr {
+  cursor: pointer;
+}
+
+.fixed-tbody  {
+  overflow-y: scroll;
+}

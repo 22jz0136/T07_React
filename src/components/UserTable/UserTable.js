@@ -5,11 +5,12 @@ import NotInterestedIcon from '@mui/icons-material/NotInterested';
 import WarningIcon from '@mui/icons-material/Warning';
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
-
+import SearchIcon from '@mui/icons-material/Search'; // 追加
 
 const UserTable = () => {
   const [users, setUsers] = useState([]);
   const [viewAdmins, setViewAdmins] = useState('all');
+  const [searchQuery, setSearchQuery] = useState(''); // 検索クエリ用のstate
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -90,19 +91,32 @@ const UserTable = () => {
     if (viewAdmins === 'admins') return user.AdminFlag === 1;
     if (viewAdmins === 'users') return user.AdminFlag === 0;
     return true; // 'all'の場合は全ユーザー
-  });
+  }).filter((user) => user.Email.toLowerCase().includes(searchQuery.toLowerCase())); // メールアドレスで検索
 
   return (
     <div>
-      <div className='user-type-selector'>
-        <p>表示切り替え：</p>
-        <select onChange={(e) => setViewAdmins(e.target.value)}>
-          <option value="all">全ユーザー表示</option>
-          <option value="users">ユーザー一覧表示</option>
-          <option value="admins">管理者一覧表示</option>
-        </select>
-        
+
+      <div className="search-container" >
+        <div className='user-type-selector'>
+          <p>表示切り替え：</p>
+          <select onChange={(e) => setViewAdmins(e.target.value)}>
+            <option value="all">全ユーザー表示</option>
+            <option value="users">ユーザー一覧表示</option>
+            <option value="admins">管理者一覧表示</option>
+          </select>
+        </div>
+        <div className='search-move-right'>
+          <input
+            type="text"
+            placeholder="メールアドレスで検索"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            style={{ padding: '5px', marginRight: '10px', width: '200px' }}
+          />
+          <SearchIcon style={{ color: '#757575', cursor: 'pointer' }} />
+        </div>
       </div>
+
       <table className='fixed-tbody'>
         <thead>
           <tr>
@@ -124,8 +138,7 @@ const UserTable = () => {
               <tr
                 key={user.UserID}
                 onClick={() => handleRowClick(user.UserID)}
-                className={index % 2 === 0 ? 'even-row' : ''}
-              >
+                className={index % 2 === 0 ? 'even-row' : ''}>
                 <td>{user.UserID}</td>
                 <td>{user.Username}</td>
                 <td>{user.Email}</td>

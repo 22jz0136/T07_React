@@ -3,10 +3,13 @@ import { useNavigate } from 'react-router-dom';
 import './UserTable.css';
 import NotInterestedIcon from '@mui/icons-material/NotInterested';
 import WarningIcon from '@mui/icons-material/Warning';
+import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
+import PersonAddIcon from '@mui/icons-material/PersonAdd';
+
 
 const UserTable = () => {
   const [users, setUsers] = useState([]);
-  const [viewAdmins, setViewAdmins] = useState('all'); // 'all', 'admins', 'users'
+  const [viewAdmins, setViewAdmins] = useState('all');
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -16,6 +19,7 @@ const UserTable = () => {
         throw new Error('Network response was not ok');
       }
       const data = await response.json();
+      console.log('User Data', data);
       setUsers(data);
     };
     fetchData();
@@ -54,6 +58,34 @@ const UserTable = () => {
     navigate(`/user-profile/${userId}`);
   };
 
+  const toggleAdminStatus = async (e, userId, currentAdminFlag) => {
+    e.stopPropagation();
+    if (window.confirm(`このユーザーを${currentAdminFlag === 1 ? '一般ユーザー' : '管理者'}に変更しますか？`)) {
+      try {
+        const response = await fetch(`https://loopplus.mydns.jp/api/user/${userId}`, {
+          method: 'PUT',
+          credentials: 'include',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ AdminFlag: currentAdminFlag === 1 ? 0 : 1 }),
+        });
+        if (!response.ok) throw new Error(`HTTPエラー: ${response.status}`);
+        const data = await response.json();
+        if (data.status === 'success') {
+          alert('ユーザーの管理者状態が変更されました。');
+          setUsers((prev) =>
+            prev.map((user) =>
+              user.UserID === userId ? { ...user, AdminFlag: currentAdminFlag === 1 ? 0 : 1 } : user
+            )
+          );
+        } else {
+          alert(`管理者変更に失敗しました: ${data.message}`);
+        }
+      } catch (error) {
+        alert('管理者状態変更中にエラーが発生しました。');
+      }
+    }
+  };
+
   const filteredUsers = users.filter((user) => {
     if (viewAdmins === 'admins') return user.AdminFlag === 1;
     if (viewAdmins === 'users') return user.AdminFlag === 0;
@@ -69,6 +101,7 @@ const UserTable = () => {
           <option value="users">ユーザー一覧表示</option>
           <option value="admins">管理者一覧表示</option>
         </select>
+        
       </div>
       <table className='fixed-tbody'>
         <thead>
@@ -76,7 +109,7 @@ const UserTable = () => {
             <th className='fixed-th'>ユーザーID</th>
             <th className='fixed-th'>ユーザー名</th>
             <th className='fixed-th'>メールアドレス</th>
-            <th className='fixed-th'>ログイン日時</th>
+            <th className='fixed-th'>管理者変更</th>
             <th className='fixed-th'>警告</th>
             <th className='fixed-th'>BAN</th>
           </tr>
@@ -96,7 +129,15 @@ const UserTable = () => {
                 <td>{user.UserID}</td>
                 <td>{user.Username}</td>
                 <td>{user.Email}</td>
-                <td>{user.login_at}</td>
+                <td>
+                  <button onClick={(e) => toggleAdminStatus(e, user.UserID, user.AdminFlag)}>
+                    {user.AdminFlag === 1 ? (
+                      <AdminPanelSettingsIcon style={{ color: '#01ff01' }} />
+                    ) : (
+                      <PersonAddIcon style={{ color: 'white' }} />
+                    )}
+                  </button>
+                </td>
                 <td>
                   <button onClick={(e) => sendWarning(e, user.UserID)}>
                     <WarningIcon />

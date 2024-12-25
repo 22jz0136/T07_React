@@ -171,15 +171,15 @@ function UserProfile() {
   
   // ユーザーアイテムのフィルタリングロジック
   const filteredUserItems = items.filter(item => {
-    const matchesTradeFlag = filter == null ? true : item.TradeFlag == filter; // TradeFlagでフィルタリング
-    const isMyItem = item.UserID == userData.UserID; // 自分の商品か判定
-    const isNotMyItem = item.UserID !== userData.UserID; // 自分の商品でないか判定
+    const matchesTradeFlag = filter == null ? true : item.TradeFlag == filter; 
+    const isMyItem = item.UserID == userData.UserID;
+    const isNotMyItem = item.UserID !== userData.UserID; 
   
     const matchesUserFilter =
-      (showMyItems && isMyItem) || // 自分の商品を表示する場合
-      (showOthersItems && isNotMyItem); // 他人の商品を表示する場合
+      (showMyItems && isMyItem) || 
+      (showOthersItems && isNotMyItem);
   
-    return matchesTradeFlag && matchesUserFilter; // すべてのフィルタを結合
+    return matchesTradeFlag && matchesUserFilter; 
   });
   
 

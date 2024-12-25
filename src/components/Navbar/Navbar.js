@@ -17,12 +17,12 @@ export default function Navbar() {
                     },
                 });
                 const data = await response.json();
-                // console.log('ユーザー情報:', data);  // レスポンスの構造を確認
+                console.log('ユーザー情報:', data);  // レスポンスの構造を確認
 
                 // Username フィールドを使用して userName を設定
                 if (data && data.Username) {
                     setUserName(data.Username);  // ユーザー名を状態に設定
-                    // console.log('ユーザー名:', data.Username);  // ここで値が取得できるか確認
+                    console.log('ユーザー名:', data.Username);  // ここで値が取得できるか確認
                 } else {
                     console.log('Usernameが取得できませんでした');
                 }
@@ -39,10 +39,12 @@ export default function Navbar() {
             <h1 className="Navbar-logo">Loop+</h1>
             {userName ? (
                 <div className="user-name">
-                    ようこそ {userName} さん 
+                    <p>ようこそ {userName} さん </p>
                 </div>
             ) : (
-                <div>ユーザー情報の取得中...</div>
+                <div className="user-name">
+                    <p>ユーザー情報の取得中...</p>                 
+                </div>
             )}
         </Nav>
     );

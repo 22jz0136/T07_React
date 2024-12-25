@@ -15,12 +15,16 @@ function UserProfile() {
   const [requests, setRequests] = useState([]);
   const [filter, setFilter] = useState(0); // フィルタの状態を追加
   const [requestFilter, setRequestFilter] = useState(1); // リクエストフィルタの初期値を1（表示中）に設定
+  const [showMyItems, setShowMyItems] = useState(true); // 自分の商品を常に表示
+  const [showOthersItems, setShowOthersItems] = useState(false); // 他人の商品は初期状態で非表示
+
 
   const fetchData = async () => {
     try {
       const response = await fetch(`https://loopplus.mydns.jp/user/${id}`);
       if (!response.ok) throw new Error('Network response was not ok');
       const data = await response.json();
+      console.log('Data', data);
       setUserData(data);
       setItems(data.Items);
       setRequests(data.Requests);
@@ -164,6 +168,20 @@ function UserProfile() {
       </div>
     );
   };
+  
+  // ユーザーアイテムのフィルタリングロジック
+  const filteredUserItems = items.filter(item => {
+    const matchesTradeFlag = filter == null ? true : item.TradeFlag == filter; // TradeFlagでフィルタリング
+    const isMyItem = item.UserID == userData.UserID; // 自分の商品か判定
+    const isNotMyItem = item.UserID !== userData.UserID; // 自分の商品でないか判定
+  
+    const matchesUserFilter =
+      (showMyItems && isMyItem) || // 自分の商品を表示する場合
+      (showOthersItems && isNotMyItem); // 他人の商品を表示する場合
+  
+    return matchesTradeFlag && matchesUserFilter; // すべてのフィルタを結合
+  });
+  
 
   return (
     <div>
@@ -212,40 +230,71 @@ function UserProfile() {
           </div>
 
           {activeTab === 'items' && (
-            <div>
+            <div className='filter-flex'>
               <div className="filter-dropdown">
-                <label htmlFor="filter-select">ステータス :</label>
-                <select id="filter-select" onChange={handleFilterChange} value={filter}>
-                  <option value="0">出品中</option>
-                  <option value="1">取引中</option>
-                  <option value="2">取引完了</option>
-                  <option value="3">削除済</option>
-                </select>
+                <div className="filter-select-flex">
+                  <label htmlFor="filter-select">ステータス :</label>
+                  <select className="filter-select" onChange={handleFilterChange} value={filter}>
+                    <option value="0">出品中</option>
+                    <option value="1">取引中</option>
+                    <option value="2">取引完了</option>
+                    <option value="3">削除済</option>
+                  </select>
+                </div>
+                
+                <div className="">
+                  <label className="filter-checkbox-flex">
+                    <input
+                      type="checkbox"
+                      checked={showOthersItems}
+                      onChange={() => {
+                        setShowOthersItems(true);
+                        setShowMyItems(false); // 他人の商品が選択されたら自分の商品は非選択にする
+                      }}
+                    />
+                    自分が出品した商品
+                  </label>
+                </div>
+
+                <div className="">
+                  <label className="filter-checkbox-flex">
+                    <input
+                      type="checkbox"
+                      checked={showMyItems}
+                      onChange={() => {
+                        setShowMyItems(true);
+                        setShowOthersItems(false); // 自分の商品が選択されたら他人の商品は非選択にする
+                      }}
+                    />
+                    他人が出品した商品
+                  </label>
+                </div>
+                
               </div>
               <div className="products-list">
-                {loading.items ? (
-                  <p>Loading items...</p>
-                ) : userItems.length > 0 ? (
-                  userItems.map(item => (
-                    <Item
-                      key={item.ItemID}
-                      name={userData.Username}
-                      userIcon={userData.Icon}
-                      createdAt={item.CreatedAt} // CreatedAtを渡す
-                      itemId={item.ItemID}
-                      title={item.ItemName}
-                      imageSrc={`https://loopplus.mydns.jp/${item.ItemImage}`}
-                      description={item.Description}
-                      onClick={() => handleProductClick(item)} // 物品クリック時の処理
-                    />
-                  ))
-                ) : (
-                  filter === 0 ? <p>出品中の物品はありません。</p> :
-                    filter === 1 ? <p>取引中の物品はありません。</p> :
-                      filter === 2 ? <p>取引完了の物品はありません。</p> :
-                        filter === 3 ? <p>削除した物品はありません。</p> :
-                          <p>出品はありません。</p>
-                )}
+              {loading.items ? (
+                <p>Loading items...</p>
+              ) : filteredUserItems.length > 0 ? (
+                filteredUserItems.map(item => (
+                  <Item
+                    key={item.ItemID}
+                    name={userData.Username}
+                    userIcon={userData.Icon}
+                    createdAt={item.CreatedAt}
+                    itemId={item.ItemID}
+                    title={item.ItemName}
+                    imageSrc={`https://loopplus.mydns.jp/${item.ItemImage}`}
+                    description={item.Description}
+                    onClick={() => handleProductClick(item)} // 物品クリック時の処理
+                  />
+                ))
+              ) : (
+                filter === 0 ? <p>出品中の物品はありません。</p> :
+                filter === 1 ? <p>取引中の物品はありません。</p> :
+                filter === 2 ? <p>取引完了の物品はありません。</p> :
+                filter === 3 ? <p>削除した物品はありません。</p> :
+                <p>出品はありません。</p>
+              )}
               </div>
             </div>
           )}

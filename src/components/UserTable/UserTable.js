@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './UserTable.css';
 import { Tooltip } from '@mui/material';
-import GppGoodIcon from '@mui/icons-material/GppGood'; // BANされてないアイコン
-import BlockIcon from '@mui/icons-material/Block'; // BAN済みアイコン
+import GppGoodIcon from '@mui/icons-material/GppGood';
+import BlockIcon from '@mui/icons-material/Block'; 
 import WarningIcon from '@mui/icons-material/Warning';
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';

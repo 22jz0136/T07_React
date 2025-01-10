@@ -169,18 +169,18 @@ function UserProfile() {
     );
   };
   
-  // ユーザーアイテムのフィルタリングロジック
   const filteredUserItems = items.filter(item => {
-    const matchesTradeFlag = filter == null ? true : item.TradeFlag == filter; 
-    const isMyItem = item.UserID == userData.UserID;
+    const matchesTradeFlag = filter == null ? true : item.TradeFlag === filter; 
+    const isMyItem = item.UserID === userData.UserID;
     const isNotMyItem = item.UserID !== userData.UserID; 
   
     const matchesUserFilter =
       (showMyItems && isMyItem) || 
-      (showOthersItems && isNotMyItem);
+      (showOthersItems && isNotMyItem );
   
     return matchesTradeFlag && matchesUserFilter; 
   });
+  
   
 
   return (
@@ -232,44 +232,49 @@ function UserProfile() {
           {activeTab === 'items' && (
             <div className='filter-flex'>
               <div className="filter-dropdown">
-                <div className="filter-select-flex">
-                  <label htmlFor="filter-select">ステータス :</label>
-                  <select className="filter-select" onChange={handleFilterChange} value={filter}>
-                    <option value="0">出品中</option>
-                    <option value="1">取引中</option>
-                    <option value="2">取引完了</option>
-                    <option value="3">削除済</option>
-                  </select>
-                </div>
-                
-                <div className="">
-                  <label className="filter-checkbox-flex">
-                    <input
-                      type="checkbox"
-                      checked={showOthersItems}
-                      onChange={() => {
-                        setShowOthersItems(true);
-                        setShowMyItems(false); // 他人の商品が選択されたら自分の商品は非選択にする
-                      }}
-                    />
-                    自分が出品した商品
-                  </label>
-                </div>
+                  <div className="filter-select-flex">
+                    <label htmlFor="filter-select">ステータス :</label>
+                    <select className="filter-select" onChange={handleFilterChange} value={filter}>
+                      <option value="0">出品中</option>
+                      <option value="1">取引中</option>
+                      <option value="2">取引完了</option>
+                      <option value="3">削除済</option>
+                    </select>
+                  </div>
 
-                <div className="">
-                  <label className="filter-checkbox-flex">
-                    <input
-                      type="checkbox"
-                      checked={showMyItems}
-                      onChange={() => {
-                        setShowMyItems(true);
-                        setShowOthersItems(false); // 自分の商品が選択されたら他人の商品は非選択にする
-                      }}
-                    />
-                    他人が出品した商品
-                  </label>
-                </div>
-                
+                  {/* 自分が出品した商品チェックボックス */}
+                  {(filter >= 0 && filter <= 3) && (
+                    <div className="">
+                      <label className="filter-checkbox-flex">
+                        <input
+                          type="checkbox"
+                          checked={showMyItems}
+                          onChange={() => {
+                            setShowMyItems(true); // 自分の商品を表示する
+                            setShowOthersItems(false); // 他人の商品は非表示にする
+                          }}
+                        />
+                        自分が出品した商品
+                      </label>
+                    </div>
+                  )}
+
+                  {/* 他人が出品した商品チェックボックス */}
+                  {(filter !== 0 && filter !== 3) && (
+                    <div className="">
+                      <label className="filter-checkbox-flex">
+                        <input
+                          type="checkbox"
+                          checked={showOthersItems}
+                          onChange={() => {
+                            setShowOthersItems(true); // 他人の商品を表示する
+                            setShowMyItems(false); // 自分の商品は非表示にする
+                          }}
+                        />
+                        他人が出品した商品
+                      </label>
+                    </div>
+                  )}
               </div>
               <div className="products-list">
               {loading.items ? (

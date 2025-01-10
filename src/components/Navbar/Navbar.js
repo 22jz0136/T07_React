@@ -17,12 +17,12 @@ export default function Navbar() {
                     },
                 });
                 const data = await response.json();
-                console.log('ユーザー情報:', data);  // レスポンスの構造を確認
+                // console.log('ユーザー情報:', data);  // レスポンスの構造を確認
 
                 // Username フィールドを使用して userName を設定
                 if (data && data.Username) {
                     setUserName(data.Username);  // ユーザー名を状態に設定
-                    console.log('ユーザー名:', data.Username);  // ここで値が取得できるか確認
+                    // console.log('ユーザー名:', data.Username);  // ここで値が取得できるか確認
                 } else {
                     console.log('Usernameが取得できませんでした');
                 }

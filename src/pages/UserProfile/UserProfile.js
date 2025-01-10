@@ -242,23 +242,6 @@ function UserProfile() {
                     </select>
                   </div>
 
-                  {/* 自分が出品した商品チェックボックス */}
-                  {(filter >= 0 && filter <= 3) && (
-                    <div className="">
-                      <label className="filter-checkbox-flex">
-                        <input
-                          type="checkbox"
-                          checked={showMyItems}
-                          onChange={() => {
-                            setShowMyItems(true); // 自分の商品を表示する
-                            setShowOthersItems(false); // 他人の商品は非表示にする
-                          }}
-                        />
-                        自分が出品した商品
-                      </label>
-                    </div>
-                  )}
-
                   {/* 他人が出品した商品チェックボックス */}
                   {(filter !== 0 && filter !== 3) && (
                     <div className="">
@@ -271,10 +254,28 @@ function UserProfile() {
                             setShowMyItems(false); // 自分の商品は非表示にする
                           }}
                         />
-                        他人が出品した商品
+                        自分の商品
                       </label>
                     </div>
                   )}
+
+                  {/* 自分が出品した商品チェックボックス */}
+                  {(filter >= 0 && filter <= 3) && (
+                    <div className="">
+                      <label className="filter-checkbox-flex">
+                        <input
+                          type="checkbox"
+                          checked={showMyItems}
+                          onChange={() => {
+                            setShowMyItems(true); // 自分の商品を表示する
+                            setShowOthersItems(false); // 他人の商品は非表示にする
+                          }}
+                        />
+                        他人の商品
+                      </label>
+                    </div>
+                  )}
+                  
               </div>
               <div className="products-list">
               {loading.items ? (

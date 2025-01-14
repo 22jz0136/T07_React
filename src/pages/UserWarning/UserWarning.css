@@ -11,14 +11,14 @@
     margin: 20px;
 }
 
+.userInfo p {
+    font-size: 12px;
+}
+
 .userWarningBody {
     margin: 10px;
     padding: 10px;
 
-}
-
-.userWarningBody .userInfo p {
-    line-height: 300%;
 }
 
 .userWarningBody .userWarningForm {
@@ -34,6 +34,9 @@
 
 .userWarningContent {
     flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .form button {
@@ -42,4 +45,45 @@
     border-radius: 5px; 
     cursor: pointer; 
     margin-left: 12%;
+}
+
+.userwarning-container {
+    display: flex;
+    background-color: white;
+    height: 80vh;
+    flex-direction: column;
+    align-items: center;
+    border: 2px solid rgb(175, 175, 175);
+    border-radius: 5px;
+    margin: 10px;
+}
+
+.title-warning {
+    display: flex;
+    align-items: center;
+    background-color: #ff3636;
+    width: 100%;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+
+}
+
+.title-warning p{
+    font-size: 2rem;
+    margin-left: 15px;
+    
+}
+
+.form-userwarning {
+    display: flex;
+}
+
+.form-userwarning {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.userwarning-button button {
+    background-color: rgb(251, 61, 61);
 }

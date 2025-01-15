@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./Navbar.css";
 import { Nav } from "react-bootstrap";
+import logo from '../../img/logo.png';
 
 export default function Navbar() {
     const [userName, setUserName] = useState("");  // userNameの状態を管理
@@ -37,7 +38,7 @@ export default function Navbar() {
     return (
         <Nav className="NavbarItems">
             <h1 className="Navbar-logo">
-                 <img src="logo.png" alt="Logo" />
+                <img src={logo} alt="Logo" />
              </h1>
             {userName ? (
                 <div className="user-name">

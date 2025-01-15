@@ -52,7 +52,13 @@ const UserWarning = () => {
         },
         body: JSON.stringify({
           UserID: userId, // 修正済み
-          Content: warningContent, // 修正済み
+          Content : (
+            <>
+              <div style={{ fontWeight: 'bold', fontSize: '20px',  color: 'red' }}>あなたは警告されました！</div>
+              <br />
+              <div style={{ color: 'red' }}>理由：{warningContent}</div>
+            </>
+          )
         }),
       });
   
@@ -93,17 +99,19 @@ const UserWarning = () => {
                   <label style={{ marginLeft: '10px' }}>警告内容 </label>
                   <textarea
                     value={warningContent}
-                    onChange={(e) => setWarningContent(e.target.value)}
+                    onChange={(e) => setWarningContent(e.target.value)} 
                     placeholder="警告内容を入力してください"
                     required
                   /><br />
+                  
                 </div>
                 
                 <div className='userwarning-button'>
                   <button type="submit">警告する</button>
                 </div>
-                
+              
               </form>
+              
             </div>
           </div>
         </div>

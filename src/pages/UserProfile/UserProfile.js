@@ -15,8 +15,6 @@ function UserProfile() {
   const [requests, setRequests] = useState([]);
   const [filter, setFilter] = useState(0); // フィルタの状態を追加
   const [requestFilter, setRequestFilter] = useState(1); // リクエストフィルタの初期値を1（表示中）に設定
-  const [showMyItems, setShowMyItems] = useState(true); // 自分の商品を常に表示
-  const [showOthersItems, setShowOthersItems] = useState(false); // 他人の商品は初期状態で非表示
 
 
   const fetchData = async () => {
@@ -186,11 +184,13 @@ function UserProfile() {
 
   return (
     <div>
-      <Navbar />
+      <div className="navbar">
+          <Navbar />
+      </div>
       <div className='columnBrake'>
         <Sidebar />
         <div className='mainbody'>
-          <h1>ユーザー情報</h1>
+          {/* <h1>ユーザー情報</h1> */}
           {loading.user ? (
             <p>Loading user data...</p>
           ) : userData ? (

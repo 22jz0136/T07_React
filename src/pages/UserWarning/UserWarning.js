@@ -51,14 +51,9 @@ const UserWarning = () => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          UserID: userId, // 修正済み
-          Content : (
-            <>
-              <div style={{ fontWeight: 'bold', fontSize: '20px',  color: 'red' }}>あなたは警告されました！</div>
-              <br />
-              <div style={{ color: 'red' }}>理由：{warningContent}</div>
-            </>
-          )
+          UserID: userId, 
+          Content: `あなたは警告されました!\n理由：${warningContent}`,
+          WarnFlag: 1,
         }),
       });
   

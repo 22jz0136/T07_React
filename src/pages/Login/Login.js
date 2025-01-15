@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import './Login.css';
 
 const Login = ({ setIsFooterVisible }) => {
-  
+
   useEffect(() => {
     // フッターを非表示にする
     setIsFooterVisible(false);
@@ -19,7 +19,9 @@ const Login = ({ setIsFooterVisible }) => {
   return (
     <div style={{ textAlign: 'center', marginTop: '20vh' }}>
       <div className='login-form'>
-        <h1>Loop+</h1>
+        <img
+          src='/logo.png' alt="Logo" width="100" id="logo"
+        />
         <div className='login-button'>
           <button onClick={handleButtonClick} >
             <img

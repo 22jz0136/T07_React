@@ -36,7 +36,9 @@ export default function Navbar() {
 
     return (
         <Nav className="NavbarItems">
-            <h1 className="Navbar-logo">Loop+</h1>
+            <h1 className="Navbar-logo">
+                 <img src="logo.png" alt="Logo" />
+             </h1>
             {userName ? (
                 <div className="user-name">
                     <p>ようこそ {userName} さん </p>

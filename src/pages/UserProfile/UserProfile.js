@@ -170,15 +170,16 @@ function UserProfile() {
   };
   
   const filteredUserItems = items.filter(item => {
-    const matchesTradeFlag = filter == null ? true : item.TradeFlag === filter; 
-    const isMyItem = item.UserID === userData.UserID;
-    const isNotMyItem = item.UserID !== userData.UserID; 
+    const matchesTradeFlag = filter == null ? true : item.TradeFlag == filter; 
+    // const isMyItem = item.UserID == userData.UserID;
+    // const isNotMyItem = item.UserID !== userData.UserID; 
   
-    const matchesUserFilter =
-      (showMyItems && isMyItem) || 
-      (showOthersItems && isNotMyItem );
+    // const matchesUserFilter =
+    //   (showMyItems && isMyItem) || 
+    //   (showOthersItems && isNotMyItem );
   
-    return matchesTradeFlag && matchesUserFilter; 
+    // return matchesTradeFlag && matchesUserFilte
+    return matchesTradeFlag ; 
   });
   
   
@@ -233,7 +234,7 @@ function UserProfile() {
             <div className='filter-flex'>
               <div className="filter-dropdown">
                   <div className="filter-select-flex">
-                    <label htmlFor="filter-select">ステータス :</label>
+                    <label htmlFor="filter-select">商品状態 :</label>
                     <select className="filter-select" onChange={handleFilterChange} value={filter}>
                       <option value="0">出品中</option>
                       <option value="1">取引中</option>
@@ -242,8 +243,7 @@ function UserProfile() {
                     </select>
                   </div>
 
-                  {/* 他人が出品した商品チェックボックス */}
-                  {(filter !== 0 && filter !== 3) && (
+                  {/* {(filter <= 3) && (
                     <div className="">
                       <label className="filter-checkbox-flex">
                         <input
@@ -257,10 +257,9 @@ function UserProfile() {
                         自分の商品
                       </label>
                     </div>
-                  )}
+                  )} */}
 
-                  {/* 自分が出品した商品チェックボックス */}
-                  {(filter >= 0 && filter <= 3) && (
+                  {/* {(filter >= 0 && filter <= 3) && (
                     <div className="">
                       <label className="filter-checkbox-flex">
                         <input
@@ -274,7 +273,7 @@ function UserProfile() {
                         他人の商品
                       </label>
                     </div>
-                  )}
+                  )} */}
                   
               </div>
               <div className="products-list">

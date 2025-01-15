@@ -33,3 +33,9 @@ li {
   margin: 10px;
   font-size: small;
 } 
+
+.Navbar-logo img {
+  width: 18vh;
+  height: 7vh;
+  margin-top: 28px;
+}

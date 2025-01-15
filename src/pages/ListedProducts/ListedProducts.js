@@ -117,8 +117,8 @@ const ListedProducts = () => {
               <div><h1 className='product-h1'>物品管理</h1></div>
               <div><SearchBar /></div>
             </div>
-            <div className="filter-dropdown">
-              <label htmlFor="filter-select">ステータス :</label>
+            <div className="filter-select-flex">
+              <label classNahtmlFor="filter-select">商品状態 :</label>
               <select id="filter-select" onChange={handleFilterChange} value={filter}>
                 <option value="0">出品中</option>
                 <option value="1">取引中</option>

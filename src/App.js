@@ -31,19 +31,19 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/adminlogin" element={<Login setIsFooterVisible={setIsFooterVisible} />} />
-          <Route path="/" element={<UserManagement />} />
-          <Route path="/user-profile/:id" element={<UserProfile />} />
-          <Route path="/useritemlist" element={<UserItemList />} />
-          <Route path="/userrequestlist" element={<UserRequestList />} />
-          <Route path="/usertradinghistorylist" element={<UserTradingHistory />} />
-          <Route path="/qalist" element={<QAList />} />
-          <Route path="/qaadd" element={<QAadd />} />
-          <Route path="/user-warning/:userId" element={<UserWarning />} />
-          <Route path="/listedproducts" element={<ListedProducts />} />
-          <Route path="/product/:id" element={<ProductDetail />} />
-          <Route path="/product-warning/:productId" element={<ProductWarning />} />
-          <Route path="/searchresult" element={<SearchResult />} />
-          <Route path="/product-detail" element={<ProductDetail />} />
+          <Route path="/admin/" element={<UserManagement />} />
+          <Route path="/admin/user-profile/:id" element={<UserProfile />} />
+          <Route path="/admin/useritemlist" element={<UserItemList />} />
+          <Route path="/admin/userrequestlist" element={<UserRequestList />} />
+          <Route path="/admin/usertradinghistorylist" element={<UserTradingHistory />} />
+          <Route path="/admin/qalist" element={<QAList />} />
+          <Route path="/admin/qaadd" element={<QAadd />} />
+          <Route path="/admin/user-warning/:userId" element={<UserWarning />} />
+          <Route path="/admin/listedproducts" element={<ListedProducts />} />
+          <Route path="/admin/product/:id" element={<ProductDetail />} />
+          <Route path="/admin/product-warning/:productId" element={<ProductWarning />} />
+          <Route path="/admin/searchresult" element={<SearchResult />} />
+          <Route path="/admin/product-detail" element={<ProductDetail />} />
         </Routes>
       </BrowserRouter>
     </div>

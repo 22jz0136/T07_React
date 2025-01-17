@@ -25,7 +25,7 @@ export default function SearchBar() {
             if (!response.ok) throw new Error(data.message || '検索に失敗しました。'); // エラーの場合、メッセージを取得
 
             console.log("APIからのデータ:", data); // デバッグ用
-            navigate('/searchresult', {
+            navigate('/admin/searchresult', {
               state: { results: data }, // APIからの結果を渡す
             });
         } catch (error) {

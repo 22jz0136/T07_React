@@ -8,21 +8,21 @@ export const SidebarData = [
     {
         title: "利用者を管理する",
         icon: <PersonAddAltIcon />,
-        link: "/",
+        link: "/admin",
     },
     {
         title: "物品を管理する",
         icon: <InventoryIcon />,
-        link: "/listedproducts",
+        link: "/admin/listedproducts",
     },
     {
         title: "Q&Aを管理する",
         icon: <QuestionAnswerIcon />,
-        link: "/qalist",
+        link: "/admin/qalist",
     },
     {
         title: "ログアウト",
         icon: <LogoutIcon />,
-        link: "/logout", 
+        link: "/admin/logout", 
     },
 ];

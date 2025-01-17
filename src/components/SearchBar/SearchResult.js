@@ -26,7 +26,7 @@ export default function SearchResult() {
 
   // 商品詳細画面に遷移する関数
   const handleItemClick = (itemId) => {
-    navigate('/product-detail', { state: { itemId } }); // 商品IDを渡して遷移
+    navigate('/admin/product-detail', { state: { itemId } }); // 商品IDを渡して遷移
   };
 
   return (

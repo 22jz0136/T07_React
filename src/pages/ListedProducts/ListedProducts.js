@@ -63,7 +63,7 @@ const ListedProducts = () => {
   });
 
   const handleProductClick = (product) => {
-    navigate(`/product/${product.ItemID}`, { state: { itemId: product.ItemID } }); // itemIdをstateに渡す
+    navigate(`/admin/product/${product.ItemID}`, { state: { itemId: product.ItemID } }); // itemIdをstateに渡す
   };
 
   if (loading) return <div className="loading"><img src="/Loading.gif" alt="Loading" /></div>;

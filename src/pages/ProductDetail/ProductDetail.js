@@ -91,7 +91,7 @@ const ProductDetail = () => {
       }
 
       alert('商品が削除されました');
-      navigate('/ListedProducts');
+      navigate('/admin/ListedProducts');
     } catch (error) {
       console.error('Error hiding product:', error);
       alert(error.message);
@@ -120,7 +120,7 @@ const ProductDetail = () => {
       }
 
       alert('取引が完了しました');
-      navigate('/ListedProducts');
+      navigate('/admin/ListedProducts');
     } catch (error) {
       console.error('Error completing trade:', error);
       alert(error.message);
@@ -129,7 +129,7 @@ const ProductDetail = () => {
 
   // 警告処理
   const handleWarning = () => {
-    navigate('/ProductWarning', { 
+    navigate('/admin/ProductWarning', { 
       state: {
         itemId: ItemID,
         username: user?.Username,
@@ -166,7 +166,7 @@ const ProductDetail = () => {
       }
 
       alert('商品が再表示されました');
-      navigate('/ListedProducts');
+      navigate('/admin/ListedProducts');
     } catch (error) {
       console.error('Error re-showing product:', error);
       alert(error.message);

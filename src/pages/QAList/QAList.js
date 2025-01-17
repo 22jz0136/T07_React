@@ -75,7 +75,7 @@ function QAList() {
           <h1>Q&A管理</h1>
           <div className="qa-list">
             <div className='add-delete-button'>
-              <button className="add-button" onClick={() => navigate('/qaadd')}>
+              <button className="add-button" onClick={() => navigate('/admin/qaadd')}>
                 ＋ 質問を追加
               </button>
             </div>

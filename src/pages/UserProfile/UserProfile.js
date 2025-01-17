@@ -57,7 +57,7 @@ function UserProfile() {
   };
 
   const handleProductClick = (item) => {
-    navigate(`/product/${item.ItemID}`, { state: { itemId: item.ItemID } }); // itemIdをstateに渡す
+    navigate(`/admin/product/${item.ItemID}`, { state: { itemId: item.ItemID } }); // itemIdをstateに渡す
   };
 
   const handleDeleteRequest = async (id) => {

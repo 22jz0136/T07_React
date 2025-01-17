@@ -7,8 +7,8 @@ import QAadd from './QAadd';
 function QAManager() {
   return (
     <Routes>
-      <Route path="/qalist" element={<QAList />} />
-      <Route path="/qaadd" element={<QAadd />} />
+      <Route path="/admin/qalist" element={<QAList />} />
+      <Route path="/admin/qaadd" element={<QAadd />} />
     </Routes>
   );
 }

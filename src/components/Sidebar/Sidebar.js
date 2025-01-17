@@ -22,7 +22,7 @@ function Sidebar({ userImage, userName }) {
         });
 
         if (response.ok) {
-          navigate('/adminlogin');  
+          window.location.href = "https://loopplus.mydns.jp/login";
         } else {
           const errorData = await response.json();
           console.error("ログアウトエラー:", errorData.message);

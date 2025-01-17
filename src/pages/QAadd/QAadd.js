@@ -49,7 +49,7 @@ function QAadd({ addQuestion }) {
         addQuestion(newQuestion);
       }
 
-      navigate('/qalist');
+      navigate('/admin/qalist');
     } catch (error) {
       console.error('Error adding Q&A:', error);
       alert(`質問の追加に失敗しました: ${error.message}`);

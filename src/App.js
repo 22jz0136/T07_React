@@ -15,6 +15,8 @@ import ListedProducts from './pages/ListedProducts/ListedProducts';
 import Login from './pages/Login/Login';
 import ProductDetail from './pages/ProductDetail/ProductDetail';
 import SearchResult from './components/SearchBar/SearchResult';
+import PrivateRoute from './components/PrivateRoute';
+import GoogleCallback from './components/Callback/GoogleCallback';
 
 
 function App() {
@@ -30,20 +32,21 @@ function App() {
     <div>
       <BrowserRouter>
         <Routes>
-          <Route path="/adminlogin" element={<Login setIsFooterVisible={setIsFooterVisible} />} />
-          <Route path="/admin/" element={<UserManagement />} />
-          <Route path="/admin/user-profile/:id" element={<UserProfile />} />
-          <Route path="/admin/useritemlist" element={<UserItemList />} />
-          <Route path="/admin/userrequestlist" element={<UserRequestList />} />
-          <Route path="/admin/usertradinghistorylist" element={<UserTradingHistory />} />
-          <Route path="/admin/qalist" element={<QAList />} />
-          <Route path="/admin/qaadd" element={<QAadd />} />
-          <Route path="/admin/user-warning/:userId" element={<UserWarning />} />
-          <Route path="/admin/listedproducts" element={<ListedProducts />} />
-          <Route path="/admin/product/:id" element={<ProductDetail />} />
-          <Route path="/admin/product-warning/:productId" element={<ProductWarning />} />
-          <Route path="/admin/searchresult" element={<SearchResult />} />
-          <Route path="/admin/product-detail" element={<ProductDetail />} />
+        <Route path="/adminlogin" element={<Login setIsFooterVisible={setIsFooterVisible} />} />
+          <Route path="/admin/" element={<PrivateRoute><UserManagement /></PrivateRoute>} />
+          <Route path="/admin/user-profile/:id" element={<PrivateRoute><UserProfile /></PrivateRoute>} />
+          <Route path="/admin/useritemlist" element={<PrivateRoute><UserItemList /></PrivateRoute>} />
+          <Route path="/admin/userrequestlist" element={<PrivateRoute><UserRequestList /></PrivateRoute>} />
+          <Route path="/admin/usertradinghistorylist" element={<PrivateRoute><UserTradingHistory /></PrivateRoute>} />
+          <Route path="/admin/qalist" element={<PrivateRoute><QAList /></PrivateRoute>} />
+          <Route path="/admin/qaadd" element={<PrivateRoute><QAadd /></PrivateRoute>} />
+          <Route path="/admin/user-warning/:userId" element={<PrivateRoute><UserWarning /></PrivateRoute>} />
+          <Route path="/admin/listedproducts" element={<PrivateRoute><ListedProducts /></PrivateRoute>} />
+          <Route path="/admin/product/:id" element={<PrivateRoute><ProductDetail /></PrivateRoute>} />
+          <Route path="/admin/product-warning/:productId" element={<PrivateRoute><ProductWarning /></PrivateRoute>} />
+          <Route path="/admin/searchresult" element={<PrivateRoute><SearchResult /></PrivateRoute>} />
+          <Route path="/admin/product-detail" element={<PrivateRoute><ProductDetail /></PrivateRoute>} />
+          <Route path="/admin/callback" element={<GoogleCallback />} />
         </Routes>
       </BrowserRouter>
     </div>

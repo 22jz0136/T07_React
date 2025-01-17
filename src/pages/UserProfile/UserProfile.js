@@ -234,7 +234,7 @@ function UserProfile() {
             <div className='filter-flex'>
               <div className="filter-dropdown">
                   <div className="filter-select-flex">
-                    <label htmlFor="filter-select">商品状態 :</label>
+                    {/* <label htmlFor="filter-select">商品状態 :</label> */}
                     <select className="filter-select" onChange={handleFilterChange} value={filter}>
                       <option value="0">出品中</option>
                       <option value="1">取引中</option>

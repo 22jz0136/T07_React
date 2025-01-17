@@ -79,7 +79,7 @@ const ListedProducts = () => {
         <div className="product-header">
           <img src={iconSrc} alt="Profile" className="profile-image" />
           <div className='usertime-div'>
-            <span className="username">{name}</span>
+            <span className="username">{name}</span><br/>
             <span className="created-at">
               {new Date(createdAt).toLocaleString('ja-JP', {
                 year: 'numeric',
@@ -113,18 +113,24 @@ const ListedProducts = () => {
         <Sidebar />
         <div className='mainbody'>
           <div className='product-manager'>
-            <div className='product-div'>
-              <div><h1 className='product-h1'>物品管理</h1></div>
-              <div><SearchBar /></div>
+          <div className="product-searchbar">
+            <h1>物品管理</h1>
+            <div className="searchbar-wrapper">
+              <SearchBar />
             </div>
+          </div>
+
             <div className="filter-select-flex">
-              <label classNahtmlFor="filter-select">商品状態 :</label>
-              <select id="filter-select" onChange={handleFilterChange} value={filter}>
-                <option value="0">出品中</option>
-                <option value="1">取引中</option>
-                <option value="2">取引完了</option>
-                <option value="3">削除済</option>
-              </select>
+              {/* <label classNahtmlFor="filter-select">商品状態 :</label> */}
+              <div>
+                <select id="filter-select" onChange={handleFilterChange} value={filter}>
+                  <option value="0">出品中</option>
+                  <option value="1">取引中</option>
+                  <option value="2">取引完了</option>
+                  <option value="3">削除済</option>
+                </select>
+              </div>
+              
             </div>
             <div className="products-list">
               {filteredProducts.length === 0 ? (

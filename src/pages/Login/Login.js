@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import './Login.css';
+import logo from "../../img/logo.png";
 
 const Login = ({ setIsFooterVisible }) => {
 
@@ -20,7 +21,7 @@ const Login = ({ setIsFooterVisible }) => {
     <div style={{ textAlign: 'center', marginTop: '20vh' }}>
       <div className='login-form'>
         <img
-          src='/logo.png' alt="Logo" width="100" id="logo"
+          src={logo} alt="Logo" width="100" id="logo"
         />
         <div className='login-button'>
           <button onClick={handleButtonClick} >

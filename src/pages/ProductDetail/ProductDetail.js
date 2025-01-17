@@ -188,7 +188,7 @@ const ProductDetail = () => {
             </div>
             <div className='productitem-scroll'>
               <div key={ItemID} className="productitem">
-                <div className="product-header">
+                <div className="product-detail-header">
                   {user?.Icon ? (
                     <img
                       src={`https://loopplus.mydns.jp/${user.Icon}`}

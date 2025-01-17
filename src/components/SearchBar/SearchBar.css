@@ -1,6 +1,6 @@
 .searchBar {
-    position: absolute;
-    top: 60px;  /* 上からの距離 */
+    position: relative;
+    /* top: 60px;  */
     right: 10px;  /* 右からの距離 */
     display: flex;  /* アイコンと入力フィールドを横並びにする */
     align-items: center;  /* アイコンと入力フィールドを縦中央揃え */

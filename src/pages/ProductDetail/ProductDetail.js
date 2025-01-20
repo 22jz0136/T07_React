@@ -230,7 +230,7 @@ const ProductDetail = () => {
                       <>
                         <button onClick={handleHide}>削除</button>
                         <button onClick={handleComplete}>取引完了</button>
-                        <button onClick={handleWarning}>警告する</button>
+                        {/* <button onClick={handleWarning}>警告する</button> */}
                       </>
                     )}
                     {TradeFlag === 1 && (

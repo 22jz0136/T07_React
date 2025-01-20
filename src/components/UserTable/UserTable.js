@@ -27,7 +27,7 @@ const UserTable = () => {
 
   const sendWarning = (e, userId) => {
     e.stopPropagation();
-    navigate(`/user-warning/${userId}`);
+    navigate(`/admin/user-warning/${userId}`);
   };
 
   const banUser = async (e, userId, isBanned) => {
@@ -65,7 +65,7 @@ const UserTable = () => {
   };
 
   const handleRowClick = (userId) => {
-    navigate(`/user-profile/${userId}`);
+    navigate(`/admin/user-profile/${userId}`);
   };
 
   const toggleAdminStatus = async (e, userId, currentAdminFlag) => {

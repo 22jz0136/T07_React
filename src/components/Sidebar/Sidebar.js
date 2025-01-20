@@ -7,27 +7,30 @@ function Sidebar({ userImage, userName }) {
   const navigate = useNavigate(); 
 
   // ログアウト処理をSidebar.js内で行う
-  const handleLogout = async () => {
+  const handleLogout = () => {
     // 確認ポップアップを表示
     const confirmLogout = window.confirm("ログアウトしてもよろしいですか？");
 
     if (confirmLogout) {
       try {
-        const response = await fetch('https://loopplus.mydns.jp/api/logout', {
-          method: 'GET',
-          credentials: 'include', 
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        });
-
-        if (response.ok) {
-          window.location.href = "https://loopplus.mydns.jp/login";
-        } else {
-          const errorData = await response.json();
-          console.error("ログアウトエラー:", errorData.message);
-          alert("ログアウトに失敗しました。再試行してください。");
-        }
+        fetch('https://loopplus.mydns.jp/api/logout', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            credentials: 'include'
+        })
+        .then(response => {
+            if (response.ok) {
+                sessionStorage.clear(); // Clear all session storage
+                window.location.href = "https://loopplus.mydns.jp/login";
+            } else {
+                const errorData = response.json();
+                console.error("ログアウトエラー:", errorData.message);
+                alert("ログアウトに失敗しました。再試行してください。");
+            }
+        })
+        .catch(error => console.error('エラー:', error));
       } catch (error) {
         alert("ネットワークエラーが発生しました。再試行してください。");
       }

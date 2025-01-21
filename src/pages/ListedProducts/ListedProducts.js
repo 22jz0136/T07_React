@@ -132,7 +132,7 @@ const ListedProducts = () => {
               </div>
               
             </div>
-            <div className="products-list">
+            <div className="admin-products-list">
               {filteredProducts.length === 0 ? (
                 <p>表示する商品がありません。</p>
               ) : (

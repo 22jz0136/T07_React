@@ -19,7 +19,7 @@ const Login = ({ setIsFooterVisible }) => {
 
   return (
     <div style={{ textAlign: 'center', marginTop: '20vh' }}>
-      <div className='login-form'>
+      <div className='admin-login-form'>
         <img
           src={logo} alt="Logo" width="100" id="logo"
         />

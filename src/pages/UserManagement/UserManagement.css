@@ -14,10 +14,10 @@
 }
 
 .usertable-y {
-    margin: 0;
-    padding: 0;
-    height: 83vh;
-    width: 99%;
-    overflow-y: scroll;
+    height: 90vh;
     list-style-type: none;
+    margin: 0;
+    overflow-y: scroll;
+    padding: 0;
+    width: 99%;
 }

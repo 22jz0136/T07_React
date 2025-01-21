@@ -8,7 +8,7 @@ body, html {
 
   }
   
-  .login-form {
+  .admin-login-form {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -23,7 +23,7 @@ body, html {
     text-align: center;
   }
   
-  .login-form h1 {
+  .admin-login-form h1 {
     color: rgb(0, 255, 0);
     padding: 10px;
     font-size: 40px;

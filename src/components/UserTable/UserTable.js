@@ -10,11 +10,15 @@ import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import SearchIcon from '@mui/icons-material/Search';
 
 const UserTable = () => {
+  // ユーザー情報の状態
   const [users, setUsers] = useState([]);
+  // 管理者表示フィルターの状態
   const [viewAdmins, setViewAdmins] = useState('all');
+  // 検索クエリの状態
   const [searchQuery, setSearchQuery] = useState('');
   const navigate = useNavigate();
 
+  // 初回レンダリング時にユーザー情報を取得
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch('https://loopplus.mydns.jp/api/user');
@@ -25,11 +29,13 @@ const UserTable = () => {
     fetchData();
   }, []);
 
+  // 警告送信の処理
   const sendWarning = (e, userId) => {
     e.stopPropagation();
     navigate(`/admin/user-warning/${userId}`);
   };
 
+  // BAN処理
   const banUser = async (e, userId, isBanned) => {
     e.stopPropagation();
     const confirmMessage = isBanned
@@ -64,10 +70,12 @@ const UserTable = () => {
     }
   };
 
+  // ユーザー情報をクリックして詳細ページに遷移
   const handleRowClick = (userId) => {
     navigate(`/admin/user-profile/${userId}`);
   };
 
+  // 管理者権限の変更処理
   const toggleAdminStatus = async (e, userId, currentAdminFlag) => {
     e.stopPropagation();
     if (window.confirm(`このユーザーを${currentAdminFlag === 1 ? '一般ユーザー' : '管理者'}に変更しますか？`)) {
@@ -98,6 +106,7 @@ const UserTable = () => {
     }
   };
 
+  // ユーザーのフィルタリング（表示切り替えと検索）
   const filteredUsers = users
     .filter((user) => {
       if (viewAdmins === 'admins') return user.AdminFlag === 1;
@@ -108,6 +117,7 @@ const UserTable = () => {
 
   return (
     <div>
+      {/* 検索機能と表示切り替え */}
       <div className="search-container">
         <div className="user-type-selector">
           <p>表示切り替え：</p>
@@ -129,6 +139,7 @@ const UserTable = () => {
         </div>
       </div>
 
+      {/* ユーザー情報を表示するテーブル */}
       <table className="fixed-tbody">
         <thead>
           <tr>
@@ -141,6 +152,7 @@ const UserTable = () => {
           </tr>
         </thead>
         <tbody>
+          {/* ユーザーがいない場合のローディング表示 */}
           {filteredUsers.length === 0 ? (
             <tr>
               <td colSpan="6" style={{ textAlign: 'center' }}>
@@ -152,12 +164,13 @@ const UserTable = () => {
               <tr
                 key={user.UserID}
                 onClick={() => handleRowClick(user.UserID)}
-                className={index % 2 === 0 ? 'even-row' : ''}
+                className={index % 2 === 0 ? 'even-row' : ''} // 偶数行と奇数行でスタイル変更
               >
                 <td>{user.UserID}</td>
                 <td>{user.Username}</td>
                 <td>{user.Email}</td>
                 <td>
+                  {/* 管理者変更ボタン */}
                   <button onClick={(e) => toggleAdminStatus(e, user.UserID, user.AdminFlag)}>
                     {user.AdminFlag === 1 ? (
                       <AdminPanelSettingsIcon style={{ color: '#01ff01' }} />
@@ -167,11 +180,13 @@ const UserTable = () => {
                   </button>
                 </td>
                 <td>
+                  {/* 警告送信ボタン */}
                   <button onClick={(e) => sendWarning(e, user.UserID)}>
                     <WarningIcon />
                   </button>
                 </td>
                 <td>
+                  {/* BANボタン */}
                   <button onClick={(e) => banUser(e, user.UserID, user.BanFlag)}>
                     <Tooltip title={user.BanFlag === 1 ? 'BAN解除' : 'BANする'}>
                       {user.BanFlag === 1 ? (

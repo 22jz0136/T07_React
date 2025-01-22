@@ -74,6 +74,10 @@ const ListedProducts = () => {
       ? `https://loopplus.mydns.jp/${userIcon}`
       : userIcon || avatar1; // デフォルトアイコンを使用
 
+    const truncatedDescription = description.length > 36 
+      ? description.slice(0, 35) + '…' 
+      : description;
+
     return (
       <div className="product-item" onClick={onClick}>
         <div className="product-header">
@@ -97,14 +101,12 @@ const ListedProducts = () => {
             <div className='product-details-title'>
               <p>{title}</p>
             </div>
-            <p>{description}</p>
+            <p>{truncatedDescription}</p>
           </div>
         </div>
       </div>
     );
   };
-
-
 
   return (
     <div>
@@ -121,7 +123,6 @@ const ListedProducts = () => {
           </div>
 
             <div className="filter-select-flex">
-              {/* <label classNahtmlFor="filter-select">商品状態 :</label> */}
               <div>
                 <select id="filter-select" onChange={handleFilterChange} value={filter}>
                   <option value="0">出品中</option>
@@ -130,23 +131,22 @@ const ListedProducts = () => {
                   <option value="3">削除済</option>
                 </select>
               </div>
-              
             </div>
             <div className="admin-products-list">
               {filteredProducts.length === 0 ? (
                 <p>表示する商品がありません。</p>
               ) : (
-                filteredProducts.map((item) => (
+                filteredProducts.map((product) => (
                   <Item
-                    key={item.ItemID}
-                    name={item.User ? item.User.UserName : '不明'}
-                    userIcon={item.User ? item.User.Icon : avatar1} // アイコンを渡す
-                    itemId={item.ItemID}
-                    title={item.ItemName}
-                    imageSrc={`https://loopplus.mydns.jp/${item.ItemImage}`} // 画像のURL
-                    description={item.Description}
-                    createdAt={item.CreatedAt} // CreatedAtを渡す
-                    onClick={() => handleProductClick(item)} // 商品クリック時の処理
+                    key={product.ItemID}
+                    itemId={product.ItemID}
+                    name={product.UserName}
+                    userIcon={product.UserIcon}
+                    title={product.Title}
+                    imageSrc={product.ImageSrc}
+                    description={product.Description}
+                    createdAt={product.CreatedAt}
+                    onClick={() => handleProductClick(product)}
                   />
                 ))
               )}

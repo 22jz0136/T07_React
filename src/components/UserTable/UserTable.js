@@ -153,7 +153,14 @@ const UserTable = () => {
         </thead>
         <tbody>
           {/* ユーザーがいない場合のローディング表示 */}
-          {filteredUsers.length === 0 ? (
+          {filteredUsers === null ? (
+            <tr>
+              <td colSpan="6" style={{ textAlign: 'center', color: 'red' }}>
+                データの取得中にエラーが発生しました。
+              </td>
+            </tr>
+          ) :
+          filteredUsers.length === 0 ? (
             <tr>
               <td colSpan="6" style={{ textAlign: 'center' }}>
                 読み込み中です。しばらくお待ちください。

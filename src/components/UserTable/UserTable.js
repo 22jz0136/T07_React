@@ -17,7 +17,7 @@ const UserTable = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch('https://loopplus.mydns.jp/user');
+      const response = await fetch('https://loopplus.mydns.jp/api/user');
       if (!response.ok) throw new Error('Network response was not ok');
       const data = await response.json();
       setUsers(data);
@@ -102,7 +102,7 @@ const UserTable = () => {
     .filter((user) => {
       if (viewAdmins === 'admins') return user.AdminFlag === 1;
       if (viewAdmins === 'users') return user.AdminFlag === 0;
-      return true; // 'all'の場合は全ユーザー
+      return true;
     })
     .filter((user) => user.Email.toLowerCase().includes(searchQuery.toLowerCase()));
 

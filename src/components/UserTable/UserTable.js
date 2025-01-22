@@ -18,6 +18,10 @@ const UserTable = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const navigate = useNavigate();
 
+  // 管理者変更禁止ユーザーIDリスト
+  const restrictedAdminIds = [11];  // 管理者変更不可
+
+
   // 初回レンダリング時にユーザー情報を取得
   useEffect(() => {
     const fetchData = async () => {
@@ -78,6 +82,13 @@ const UserTable = () => {
   // 管理者権限の変更処理
   const toggleAdminStatus = async (e, userId, currentAdminFlag) => {
     e.stopPropagation();
+
+    // 変更禁止のユーザーかどうかをチェック
+    if (restrictedAdminIds.includes(userId)) {
+      alert('このユーザーには管理者変更できません。');
+      return;
+    }
+
     if (window.confirm(`このユーザーを${currentAdminFlag === 1 ? '一般ユーザー' : '管理者'}に変更しますか？`)) {
       try {
         const response = await fetch(`https://loopplus.mydns.jp/api/user/${userId}`, {
@@ -178,7 +189,11 @@ const UserTable = () => {
                 <td>{user.Email}</td>
                 <td>
                   {/* 管理者変更ボタン */}
-                  <button onClick={(e) => toggleAdminStatus(e, user.UserID, user.AdminFlag)}>
+                  <button
+                    onClick={(e) => toggleAdminStatus(e, user.UserID, user.AdminFlag)}
+                    disabled={restrictedAdminIds.includes(user.UserID)}  // 管理者変更禁止ユーザーはボタン無効
+                    className={restrictedAdminIds.includes(user.UserID) ? 'disabled-btn' : ''}  // 無効化時のスタイル追加
+                  >
                     {user.AdminFlag === 1 ? (
                       <AdminPanelSettingsIcon style={{ color: '#01ff01' }} />
                     ) : (

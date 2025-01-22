@@ -54,6 +54,10 @@ button:hover {
   background-color: #444; /* ホバー時のボタンの背景色 */
 }
 
+button:disabled {
+  cursor: not-allowed;  /* カーソルを無効に変更 */
+}
+
 
 .fixed-th{
   position: sticky;

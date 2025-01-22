@@ -19,7 +19,7 @@ function UserProfile() {
 
   const fetchData = async () => {
     try {
-      const response = await fetch(`https://loopplus.mydns.jp/user/${id}`);
+      const response = await fetch(`https://loopplus.mydns.jp/api/user/${id}`);
       if (!response.ok) throw new Error('Network response was not ok');
       const data = await response.json();
       console.log('Data', data);

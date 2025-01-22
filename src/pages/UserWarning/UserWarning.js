@@ -14,7 +14,7 @@ const UserWarning = () => {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const response = await fetch(`https://loopplus.mydns.jp/user/${userId}`);
+        const response = await fetch(`https://loopplus.mydns.jp/api/user/${userId}`);
         if (!response.ok) {
           throw new Error('ユーザー情報の取得に失敗しました');
         }

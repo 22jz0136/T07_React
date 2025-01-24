@@ -123,3 +123,17 @@ h1 {
     align-items: center;
     padding: 5px 10px 5px 5px;
 }
+
+.filter-flex .admin-products-list {
+    display: flex;
+    flex-wrap: wrap;
+    height: 80vh;
+    list-style-type: none;
+    overflow-y: scroll;
+    width: 100%;
+}
+
+.overflow-request {
+    overflow-y: scroll;
+    height: 77vh;
+}

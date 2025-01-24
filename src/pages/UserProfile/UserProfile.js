@@ -108,10 +108,15 @@ function UserProfile() {
     }
   };
 
+
+
   const Item = ({ itemId, name, userIcon, title, imageSrc, description, createdAt, onClick }) => {
     const iconSrc = userIcon && userIcon.startsWith('storage/images/')
       ? `https://loopplus.mydns.jp/${userIcon}`
       : userIcon;
+    const truncatedDescription = description.length > 36 
+    ? description.slice(0, 10) + '…' 
+    : description;
 
     return (
       <div className="product-item" onClick={onClick}>
@@ -134,7 +139,7 @@ function UserProfile() {
             <div className='product-details-title'>
               <p>{title}</p>
             </div>
-            <p>{description}</p>
+            <p>{truncatedDescription}</p>
           </div>
         </div>
       </div>
@@ -243,40 +248,8 @@ function UserProfile() {
                     </select>
                   </div>
 
-                  {/* {(filter <= 3) && (
-                    <div className="">
-                      <label className="filter-checkbox-flex">
-                        <input
-                          type="checkbox"
-                          checked={showOthersItems}
-                          onChange={() => {
-                            setShowOthersItems(true); // 他人の商品を表示する
-                            setShowMyItems(false); // 自分の商品は非表示にする
-                          }}
-                        />
-                        自分の商品
-                      </label>
-                    </div>
-                  )} */}
-
-                  {/* {(filter >= 0 && filter <= 3) && (
-                    <div className="">
-                      <label className="filter-checkbox-flex">
-                        <input
-                          type="checkbox"
-                          checked={showMyItems}
-                          onChange={() => {
-                            setShowMyItems(true); // 自分の商品を表示する
-                            setShowOthersItems(false); // 他人の商品は非表示にする
-                          }}
-                        />
-                        他人の商品
-                      </label>
-                    </div>
-                  )} */}
-                  
               </div>
-              <div className="products-list">
+              <div className="admin-products-list">
               {loading.items ? (
                 <p>Loading items...</p>
               ) : filteredUserItems.length > 0 ? (

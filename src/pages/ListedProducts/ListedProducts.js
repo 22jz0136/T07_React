@@ -73,14 +73,15 @@ const ListedProducts = () => {
     const iconSrc = userIcon && userIcon.startsWith('storage/images/')
       ? `https://loopplus.mydns.jp/${userIcon}`
       : userIcon || avatar1; // デフォルトアイコンを使用
+      
+    const truncatedTitle = title.length > 36 
+      ? title.slice(0, 14) + '…' 
+      : title;
 
     const truncatedDescription = description.length > 36 
-      ? description.slice(0, 10) + '…' 
+      ? description.slice(0, 20) + '…' 
       : description;
 
-    const truncatedTitle = title.length > 36 
-      ? title.slice(0, 10) + '…' 
-      : title;
 
     return (
       <div className="product-item" onClick={onClick}>

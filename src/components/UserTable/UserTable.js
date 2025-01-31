@@ -151,7 +151,7 @@ const filteredUsers = users
             placeholder="ユーザー名やメールアドレスで検索できます"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            style={{ padding: '5px', marginRight: '10px', width: '200px' }}
+            style={{ padding: '5px', marginRight: '10px' }}
           />
           <SearchIcon style={{ color: '#757575', cursor: 'pointer' }} />
         </div>

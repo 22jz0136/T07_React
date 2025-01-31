@@ -90,3 +90,11 @@ p {
 .productitem-scroll {
     overflow-y: scroll;
 }
+
+.productitem .product-header {
+    align-items: center;
+    display: flex;
+    font: caption;
+    justify-content: flex-start;
+    margin-bottom: 10px;
+}

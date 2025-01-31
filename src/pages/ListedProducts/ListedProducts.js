@@ -78,6 +78,10 @@ const ListedProducts = () => {
       ? description.slice(0, 10) + '…' 
       : description;
 
+    const truncatedTitle = title.length > 36 
+      ? title.slice(0, 10) + '…' 
+      : title;
+
     return (
       <div className="product-item" onClick={onClick}>
         <div className="product-header">
@@ -99,7 +103,7 @@ const ListedProducts = () => {
           <img src={imageSrc || tvimage} alt={title} className="product-image" />
           <div className="product-details">
             <div className='product-details-title'>
-              <p>{title}</p>
+              <p>{truncatedTitle}</p>
             </div>
             <p>{truncatedDescription}</p>
           </div>

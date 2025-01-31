@@ -46,7 +46,6 @@ export default function SearchBar() {
                 className="searchInput"
             />
             <SearchIcon className="searchIcon" onClick={handleSearch} />
-            {loading && <div className="loading">検索中...</div>}
             {error && <div className="error">{error}</div>}
         </div>
     );

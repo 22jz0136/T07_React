@@ -37,12 +37,12 @@ export default function SearchResult() {
         <div className='mainbody'>
           <div className='product-manager'>
             <h1>検索結果</h1>
-            <div className='productitems'>
+            <div className="admin-products-list">
               {results.length > 0 ? (
                 <ul>
                   {results.map((item) => (
                     <li key={item.ItemID} onClick={() => handleItemClick(item.ItemID)}> {/* クリック時に詳細ページへ遷移 */}
-                      <div className="">
+                      <div className="productitem">
                         <div className="product-header">
                           {item.User ? (
                             <img
@@ -91,7 +91,6 @@ export default function SearchResult() {
                           <div className='product-actions'>
                             <button onClick={() => alert('非表示にしました')}>非表示</button>
                             <button onClick={() => alert('取引が完了しました')}>取引完了</button>
-                            <button onClick={() => alert('警告しました')}>警告する</button>
                           </div>
                         </div>
                       </div>

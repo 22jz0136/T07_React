@@ -148,7 +148,7 @@ const filteredUsers = users
         <div className="search-move-right">
           <input
             type="text"
-            placeholder="メールアドレスで検索"
+            placeholder="ユーザー名やメールアドレスで検索できます"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             style={{ padding: '5px', marginRight: '10px', width: '200px' }}

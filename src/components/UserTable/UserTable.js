@@ -10,25 +10,28 @@ import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import SearchIcon from '@mui/icons-material/Search';
 
 const UserTable = () => {
-  // ユーザー情報の状態
   const [users, setUsers] = useState([]);
-  // 管理者表示フィルターの状態
   const [viewAdmins, setViewAdmins] = useState('all');
-  // 検索クエリの状態
   const [searchQuery, setSearchQuery] = useState('');
+  const [loading, setLoading] = useState(true); // Loading state for data fetching
   const navigate = useNavigate();
 
-  // 管理者変更禁止ユーザーIDリスト
   const restrictedAdminIds = [11];  // 管理者変更不可
 
 
-  // 初回レンダリング時にユーザー情報を取得
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch('https://loopplus.mydns.jp/api/user');
-      if (!response.ok) throw new Error('Network response was not ok');
-      const data = await response.json();
-      setUsers(data);
+      setLoading(true); // Set loading to true when fetch starts
+      try {
+        const response = await fetch('https://loopplus.mydns.jp/api/user');
+        if (!response.ok) throw new Error('Network response was not ok');
+        const data = await response.json();
+        setUsers(data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      } finally {
+        setLoading(false); // Set loading to false after fetch completes
+      }
     };
     fetchData();
   }, []);
@@ -117,47 +120,50 @@ const UserTable = () => {
     }
   };
 
-  // ユーザーのフィルタリング（表示切り替えと検索）
-const filteredUsers = users
-.filter((user) => {
-  if (viewAdmins === 'admins') return user.AdminFlag === 1;
-  if (viewAdmins === 'users') return user.AdminFlag === 0;
-  return true;
-})
-.filter((user) => {
-  const query = searchQuery.toLowerCase();
-  return (
-    user.Email.toLowerCase().includes(query) || 
-    user.Username.toLowerCase().includes(query)  // ユーザー名にも検索適用
-  );
-});
+  const filteredUsers = users
+  .filter((user) => {
+    if (viewAdmins === 'admins') return user.AdminFlag === 1;
+    if (viewAdmins === 'users') return user.AdminFlag === 0;
+    return true;
+  })
+  .filter((user) => {
+    const query = searchQuery.toLowerCase();
+    return (
+      user.Email.toLowerCase().includes(query) || 
+      user.Username.toLowerCase().includes(query)
+    );
+  });
 
-
-  return (
-    <div>
-      {/* 検索機能と表示切り替え */}
-      <div className="search-container">
-        <div className="user-type-selector">
-          <p>表示切り替え：</p>
-          <select onChange={(e) => setViewAdmins(e.target.value)}>
-            <option value="all">全ユーザー表示</option>
-            <option value="users">ユーザー一覧表示</option>
-            <option value="admins">管理者一覧表示</option>
-          </select>
-        </div>
-        <div className="search-move-right">
-          <input
-            type="text"
-            placeholder="ユーザー名やメールアドレスで検索できます"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            style={{ padding: '5px', marginRight: '10px' }}
-          />
-          <SearchIcon style={{ color: '#757575', cursor: 'pointer' }} />
-        </div>
+return (
+  <div>
+    {/* 検索機能と表示切り替え */}
+    <div className="search-container">
+      <div className="user-type-selector">
+        <p>表示切り替え：</p>
+        <select onChange={(e) => setViewAdmins(e.target.value)}>
+          <option value="all">全ユーザー表示</option>
+          <option value="users">ユーザー一覧表示</option>
+          <option value="admins">管理者一覧表示</option>
+        </select>
       </div>
+      <div className="search-move-right">
+        <input
+          type="text"
+          placeholder="ユーザー名やメールアドレスで検索できます"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          style={{ padding: '5px', marginRight: '10px' }}
+        />
+        <SearchIcon style={{ color: '#757575', cursor: 'pointer' }} />
+      </div>
+    </div>
 
-      {/* ユーザー情報を表示するテーブル */}
+    {/* ユーザー情報を表示するテーブル */}
+    {loading ? ( // Conditional rendering based on loading state
+      <div style={{ textAlign: 'center', color: 'blue' }}>
+        データを取得しています、少々お待ちください...
+      </div>
+    ) : (
       <table className="fixed-tbody">
         <thead>
           <tr>
@@ -170,63 +176,59 @@ const filteredUsers = users
           </tr>
         </thead>
         <tbody>
-          {/* ユーザーがいない場合のローディング表示 */}
           {filteredUsers.length === 0 ? (
-  <tr>
-    <td colSpan="6" style={{ textAlign: 'center' , color: 'red'}}>
-      検索結果はありません。
-    </td>
-  </tr>
-) : (
-  filteredUsers.map((user, index) => (
-    <tr
-      key={user.UserID}
-      onClick={() => handleRowClick(user.UserID)}
-      className={index % 2 === 0 ? 'even-row' : ''} // 偶数行と奇数行でスタイル変更
-    >
-      <td>{user.UserID}</td>
-      <td>{user.Username}</td>
-      <td>{user.Email}</td>
-      <td>
-        {/* 管理者変更ボタン */}
-        <button
-          onClick={(e) => toggleAdminStatus(e, user.UserID, user.AdminFlag)}
-          disabled={restrictedAdminIds.includes(user.UserID)}  // 管理者変更禁止ユーザーはボタン無効
-          className={restrictedAdminIds.includes(user.UserID) ? 'disabled-btn' : ''}  // 無効化時のスタイル追加
-        >
-          {user.AdminFlag === 1 ? (
-            <AdminPanelSettingsIcon style={{ color: '#01ff01' }} />
+            <tr>
+              <td colSpan="6" style={{ textAlign: 'center', color: 'red' }}>
+                検索結果はありません。
+              </td>
+            </tr>
           ) : (
-            <PersonAddIcon style={{ color: 'white' }} />
+            filteredUsers.map((user, index) => (
+              <tr
+                key={user.UserID}
+                onClick={() => handleRowClick(user.UserID)}
+                className={index % 2 === 0 ? 'even-row' : ''}
+              >
+                <td>{user.UserID}</td>
+                <td>{user.Username}</td>
+                <td>{user.Email}</td>
+                <td>
+                  <button
+                    onClick={(e) => toggleAdminStatus(e, user.UserID, user.AdminFlag)}
+                    disabled={restrictedAdminIds.includes(user.UserID)}
+                    className={restrictedAdminIds.includes(user.UserID) ? 'disabled-btn' : ''}
+                  >
+                    {user.AdminFlag === 1 ? (
+                      <AdminPanelSettingsIcon style={{ color: '#01ff01' }} />
+                    ) : (
+                      <PersonAddIcon style={{ color: 'white' }} />
+                    )}
+                  </button>
+                </td>
+                <td>
+                  <button onClick={(e) => sendWarning(e, user.UserID)}>
+                    <WarningIcon />
+                  </button>
+                </td>
+                <td>
+                  <button onClick={(e) => banUser(e, user.UserID, user.BanFlag)}>
+                    <Tooltip title={user.BanFlag === 1 ? 'BAN解除' : 'BANする'}>
+                      {user.BanFlag === 1 ? (
+                        <BlockIcon style={{ color: 'red' }} />
+                      ) : (
+                        <GppGoodIcon style={{ color: 'white' }} />
+                      )}
+                    </Tooltip>
+                  </button>
+                </td>
+              </tr>
+            ))
           )}
-        </button>
-      </td>
-      <td>
-        {/* 警告送信ボタン */}
-        <button onClick={(e) => sendWarning(e, user.UserID)}>
-          <WarningIcon />
-        </button>
-      </td>
-      <td>
-        {/* BANボタン */}
-        <button onClick={(e) => banUser(e, user.UserID, user.BanFlag)}>
-          <Tooltip title={user.BanFlag === 1 ? 'BAN解除' : 'BANする'}>
-            {user.BanFlag === 1 ? (
-              <BlockIcon style={{ color: 'red' }} />
-            ) : (
-              <GppGoodIcon style={{ color: 'white' }} />
-            )}
-          </Tooltip>
-        </button>
-      </td>
-    </tr>
-  ))
-)}
-
         </tbody>
       </table>
-    </div>
-  );
+    )}
+  </div>
+);
 };
 
 export default UserTable;

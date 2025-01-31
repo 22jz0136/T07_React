@@ -89,8 +89,8 @@ export default function SearchResult() {
                           </div>
 
                           <div className='product-actions'>
-                            <button onClick={() => alert('非表示にしました')}>非表示</button>
-                            <button onClick={() => alert('取引が完了しました')}>取引完了</button>
+                            {/* <button onClick={() => alert('非表示にしました')}>非表示</button>
+                            <button onClick={() => alert('取引が完了しました')}>取引完了</button> */}
                           </div>
                         </div>
                       </div>

@@ -98,3 +98,7 @@ p {
     justify-content: flex-start;
     margin-bottom: 10px;
 }
+
+.admin-products-list ul {
+    flex-grow: 1;
+}

@@ -160,7 +160,7 @@ return (
 
     {/* ユーザー情報を表示するテーブル */}
     {loading ? ( // Conditional rendering based on loading state
-      <div style={{ textAlign: 'center', color: 'blue' }}>
+      <div style={{ textAlign: 'center', color: 'gray' }}>
         データを取得しています、少々お待ちください...
       </div>
     ) : (

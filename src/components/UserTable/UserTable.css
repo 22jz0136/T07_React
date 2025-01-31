@@ -116,4 +116,5 @@ tr {
 .search-move-right input {
   border-style: none;
   outline: none;
+  width: 290px;
 }

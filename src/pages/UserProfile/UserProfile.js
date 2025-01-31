@@ -152,7 +152,8 @@ function UserProfile() {
       : userIcon;
 
     return (
-      <div className="request-item">
+      <div >
+        <div className="request-item">
         <div className="profile">
           <img src={iconSrc || 'default-icon-url'} alt="User Icon" className="request-user-icon" />
           <span className="name">{name}</span>
@@ -169,6 +170,8 @@ function UserProfile() {
           </div>
         </div>
       </div>
+      </div>
+      
     );
   };
   
@@ -278,7 +281,7 @@ function UserProfile() {
           )}
 
           {activeTab === 'requests' && (
-            <div>
+            <div className='overflow-request'>
               <div className="filter-dropdown">
                 <label htmlFor="request-filter-select">ステータス :</label>
                 <select id="request-filter-select" onChange={handleRequestFilterChange} value={requestFilter}>

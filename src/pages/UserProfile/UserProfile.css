@@ -127,7 +127,7 @@ h1 {
 .filter-flex .admin-products-list {
     display: flex;
     flex-wrap: wrap;
-    height: 80vh;
+    height: 70vh;
     list-style-type: none;
     overflow-y: scroll;
     width: 100%;

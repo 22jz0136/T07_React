@@ -118,13 +118,20 @@ const UserTable = () => {
   };
 
   // ユーザーのフィルタリング（表示切り替えと検索）
-  const filteredUsers = users
-    .filter((user) => {
-      if (viewAdmins === 'admins') return user.AdminFlag === 1;
-      if (viewAdmins === 'users') return user.AdminFlag === 0;
-      return true;
-    })
-    .filter((user) => user.Email.toLowerCase().includes(searchQuery.toLowerCase()));
+const filteredUsers = users
+.filter((user) => {
+  if (viewAdmins === 'admins') return user.AdminFlag === 1;
+  if (viewAdmins === 'users') return user.AdminFlag === 0;
+  return true;
+})
+.filter((user) => {
+  const query = searchQuery.toLowerCase();
+  return (
+    user.Email.toLowerCase().includes(query) || 
+    user.Username.toLowerCase().includes(query)  // ユーザー名にも検索適用
+  );
+});
+
 
   return (
     <div>
@@ -164,64 +171,58 @@ const UserTable = () => {
         </thead>
         <tbody>
           {/* ユーザーがいない場合のローディング表示 */}
-          {filteredUsers === null ? (
-            <tr>
-              <td colSpan="6" style={{ textAlign: 'center', color: 'red' }}>
-                データの取得中にエラーが発生しました。
-              </td>
-            </tr>
-          ) :
-          filteredUsers.length === 0 ? (
-            <tr>
-              <td colSpan="6" style={{ textAlign: 'center' }}>
-                読み込み中です。しばらくお待ちください。
-              </td>
-            </tr>
+          {filteredUsers.length === 0 ? (
+  <tr>
+    <td colSpan="6" style={{ textAlign: 'center' , color: 'red'}}>
+      検索結果はありません。
+    </td>
+  </tr>
+) : (
+  filteredUsers.map((user, index) => (
+    <tr
+      key={user.UserID}
+      onClick={() => handleRowClick(user.UserID)}
+      className={index % 2 === 0 ? 'even-row' : ''} // 偶数行と奇数行でスタイル変更
+    >
+      <td>{user.UserID}</td>
+      <td>{user.Username}</td>
+      <td>{user.Email}</td>
+      <td>
+        {/* 管理者変更ボタン */}
+        <button
+          onClick={(e) => toggleAdminStatus(e, user.UserID, user.AdminFlag)}
+          disabled={restrictedAdminIds.includes(user.UserID)}  // 管理者変更禁止ユーザーはボタン無効
+          className={restrictedAdminIds.includes(user.UserID) ? 'disabled-btn' : ''}  // 無効化時のスタイル追加
+        >
+          {user.AdminFlag === 1 ? (
+            <AdminPanelSettingsIcon style={{ color: '#01ff01' }} />
           ) : (
-            filteredUsers.map((user, index) => (
-              <tr
-                key={user.UserID}
-                onClick={() => handleRowClick(user.UserID)}
-                className={index % 2 === 0 ? 'even-row' : ''} // 偶数行と奇数行でスタイル変更
-              >
-                <td>{user.UserID}</td>
-                <td>{user.Username}</td>
-                <td>{user.Email}</td>
-                <td>
-                  {/* 管理者変更ボタン */}
-                  <button
-                    onClick={(e) => toggleAdminStatus(e, user.UserID, user.AdminFlag)}
-                    disabled={restrictedAdminIds.includes(user.UserID)}  // 管理者変更禁止ユーザーはボタン無効
-                    className={restrictedAdminIds.includes(user.UserID) ? 'disabled-btn' : ''}  // 無効化時のスタイル追加
-                  >
-                    {user.AdminFlag === 1 ? (
-                      <AdminPanelSettingsIcon style={{ color: '#01ff01' }} />
-                    ) : (
-                      <PersonAddIcon style={{ color: 'white' }} />
-                    )}
-                  </button>
-                </td>
-                <td>
-                  {/* 警告送信ボタン */}
-                  <button onClick={(e) => sendWarning(e, user.UserID)}>
-                    <WarningIcon />
-                  </button>
-                </td>
-                <td>
-                  {/* BANボタン */}
-                  <button onClick={(e) => banUser(e, user.UserID, user.BanFlag)}>
-                    <Tooltip title={user.BanFlag === 1 ? 'BAN解除' : 'BANする'}>
-                      {user.BanFlag === 1 ? (
-                        <BlockIcon style={{ color: 'red' }} />
-                      ) : (
-                        <GppGoodIcon style={{ color: 'white' }} />
-                      )}
-                    </Tooltip>
-                  </button>
-                </td>
-              </tr>
-            ))
+            <PersonAddIcon style={{ color: 'white' }} />
           )}
+        </button>
+      </td>
+      <td>
+        {/* 警告送信ボタン */}
+        <button onClick={(e) => sendWarning(e, user.UserID)}>
+          <WarningIcon />
+        </button>
+      </td>
+      <td>
+        {/* BANボタン */}
+        <button onClick={(e) => banUser(e, user.UserID, user.BanFlag)}>
+          <Tooltip title={user.BanFlag === 1 ? 'BAN解除' : 'BANする'}>
+            {user.BanFlag === 1 ? (
+              <BlockIcon style={{ color: 'red' }} />
+            ) : (
+              <GppGoodIcon style={{ color: 'white' }} />
+            )}
+          </Tooltip>
+        </button>
+      </td>
+    </tr>
+  ))
+)}
+
         </tbody>
       </table>
     </div>

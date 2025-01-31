@@ -118,3 +118,7 @@ tr {
   outline: none;
   width: 290px;
 }
+
+.loading-state {
+  display: flex;
+}

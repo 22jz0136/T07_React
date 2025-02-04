@@ -30,6 +30,28 @@ const UserBan = () => {
     fetchUser();
   }, [userId]);
 
+  const handleBan = async() => {
+    try {
+      const response = await fetch(`https://loopplus.mydns.jp/api/user/${userId}`, {
+        method: 'PUT',
+        credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(1),
+      });
+
+      if (!response.ok) throw new Error(`HTTPエラー: ${response.status}`);
+
+      const data = await response.json();
+      if (data.status === 'success') {
+        alert('ユーザーがBANされました。');
+      } else {
+        alert(`処理に失敗しました: ${data.message}`);
+      }
+    } catch (error) {
+      alert('処理中にエラーが発生しました。');
+    }
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault();
   
@@ -43,6 +65,8 @@ const UserBan = () => {
     if (!confirmSend) {
       return; // ユーザーがキャンセルした場合は処理を中断
     }
+
+    await handleBan();
   
     try {
       const response = await fetch('https://loopplus.mydns.jp/api/announcements', {

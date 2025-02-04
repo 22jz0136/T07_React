@@ -14,19 +14,11 @@ const AdminDirectMessages = () => {
     const fetchData = async () => {
       setLoading(true);
       try {
+        // チャット情報を取得
         const response = await fetch('https://loopplus.mydns.jp/api/chat');
         if (!response.ok) throw new Error('Network response was not ok');
         const Chatsdata = await response.json();
         setChats(Chatsdata);
-
-        // UserIDとUserID2をそれぞれ取得
-        const userPromises = Chatsdata.flatMap(chat => [
-          fetch(`https://loopplus.mydns.jp/api/user/${chat.UserID}`).then(res => res.json()),
-          fetch(`https://loopplus.mydns.jp/api/user/${chat.UserID2}`).then(res => res.json())
-        ]);
-
-        // ユーザー情報を取得
-        const usersData = await Promise.all(userPromises);
 
         // ユーザー情報をオブジェクトとして保存
         const usersMap = {};
@@ -86,10 +78,10 @@ const AdminDirectMessages = () => {
               chats.map((chat, index) => (
                 <tr key={chat.ChatID} className={index % 2 === 0 ? 'even-row' : ''}>
                   <td>{chat.ChatID}</td>
-                  <td>{users[chat.UserID]?.Username || '不明'}</td>
-                  <td>{users[chat.UserID]?.Email || '不明'}</td>
-                  <td>{users[chat.UserID2]?.Username || '不明'}</td>
-                  <td>{users[chat.UserID2]?.Email || '不明'}</td>
+                  <td>{[chat.user1]?.Username || '不明'}</td>
+                  <td>{[chat.user1]?.Email || '不明'}</td>
+                  <td>{[chat.user2]?.Username || '不明'}</td>
+                  <td>{[chat.user2]?.Email || '不明'}</td>
                 </tr>
               ))
             )}

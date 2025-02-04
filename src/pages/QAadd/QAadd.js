@@ -33,7 +33,7 @@ function QAadd({ addQuestion }) {
 
       if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(errorData.message || 'Q&Aの追加に失敗しました');
+        throw new Error(errorData.message || '質問の追加に失敗しました');
       }
 
       const responseData = await response.json();

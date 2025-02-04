@@ -116,7 +116,7 @@ const ProductDetail = () => {
       if (!response.ok) {
         const errorData = await response.json();
         console.error('Error response:', errorData);
-        throw new Error('取引完了に失敗しました');
+        throw new Error('取引完了できませんでした');
       }
 
       alert('取引が完了しました');

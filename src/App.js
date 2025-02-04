@@ -10,6 +10,7 @@ import UserTradingHistory from './pages/UserTradingHistory/UserTradingHistory';
 import QAList from './pages/QAList/QAList';
 import QAadd from './pages/QAadd/QAadd';
 import UserWarning from './pages/UserWarning/UserWarning';
+import UserBan from './pages/UserBAN/UserBan';
 import ProductWarning from './pages/ProductWarning/ProductWarning';
 import ListedProducts from './pages/ListedProducts/ListedProducts';
 import Login from './pages/Login/Login';
@@ -41,6 +42,7 @@ function App() {
           <Route path="/admin/qalist" element={<PrivateRoute><QAList /></PrivateRoute>} />
           <Route path="/admin/qaadd" element={<PrivateRoute><QAadd /></PrivateRoute>} />
           <Route path="/admin/user-warning/:userId" element={<PrivateRoute><UserWarning /></PrivateRoute>} />
+          <Route path="/admin/user-judgment/:userId" element={<PrivateRoute><UserBan /></PrivateRoute>} />
           <Route path="/admin/listedproducts" element={<PrivateRoute><ListedProducts /></PrivateRoute>} />
           <Route path="/admin/product/:id" element={<PrivateRoute><ProductDetail /></PrivateRoute>} />
           <Route path="/admin/product-warning/:productId" element={<PrivateRoute><ProductWarning /></PrivateRoute>} />

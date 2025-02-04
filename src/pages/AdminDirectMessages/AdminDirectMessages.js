@@ -73,7 +73,15 @@ return (
           </tr>
         </thead>
         <tbody>
-          {filteredUsers.length === 0 ? (
+            <tr>
+                <td>{chats.ChatsID}</td>
+                <td>
+                    {user.Username}<br />
+                    {user.Username2}
+                </td>
+                <td>{chats.Email}</td>
+            </tr>
+          {/* {filteredUsers.length === 0 ? (
             <tr>
               <td colSpan="6" style={{ textAlign: 'center', color: 'red' }}>
                 検索結果はありません。
@@ -94,7 +102,7 @@ return (
                 <td>{chats.Email}</td>
               </tr>
             ))
-          )}
+          )} */}
         </tbody>
       </table>
     )}

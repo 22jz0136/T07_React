@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import Navbar from '../../components/Navbar/Navbar';
 import Sidebar from '../../components/Sidebar/Sidebar';
 import './UserBan.css';
@@ -9,6 +9,7 @@ const UserBan = () => {
   const { userId } = useParams(); 
   const [user, setUser] = useState(null);
   const [warningContent, setWarningContent] = useState('');
+  const navigate = useNavigate();
 
   // ユーザー情報を取得する
   useEffect(() => {
@@ -86,6 +87,7 @@ const UserBan = () => {
       }
       alert(`ユーザーをBANしました!`);
       setWarningContent('');
+      navigate(`/admin/`);
     } catch (error) {
       console.error(error);
       alert('BANに失敗しました。');
@@ -103,7 +105,7 @@ const UserBan = () => {
           <div className='userwarning-container'>
             <div className='title-warning'>
               <WarningAmberOutlinedIcon fontSize="large" style={{ marginLeft: '10px' }}/> 
-              <p>ユーザー警告</p>
+              <p>ユーザーBAN</p>
             </div>
             <div>
               {user && (
@@ -115,18 +117,18 @@ const UserBan = () => {
 
               <form className='form-userwarning' onSubmit={handleSubmit}>
                 <div className='userWarningForm'>
-                  <label style={{ marginLeft: '10px' }}>警告内容 </label>
+                  <label style={{ marginLeft: '10px' }}>BAN理由 </label>
                   <textarea
                     value={warningContent}
                     onChange={(e) => setWarningContent(e.target.value)} 
-                    placeholder="警告内容を入力してください"
+                    placeholder="処罰理由を入力してください"
                     required
                   /><br />
                   
                 </div>
                 
                 <div className='userwarning-button'>
-                  <button type="submit">警告する</button>
+                  <button type="submit">BANする</button>
                 </div>
               
               </form>

@@ -19,9 +19,13 @@ const AdminDirectMessages = () => {
         const Chatsdata = await response.json();
         setChats(Chatsdata);
 
+        // UserIDとUserID2をそれぞれ取得
+        const userPromises = Chatsdata.flatMap(chat => [
+          fetch(`https://loopplus.mydns.jp/api/user/${chat.UserID}`).then(res => res.json()),
+          fetch(`https://loopplus.mydns.jp/api/user/${chat.UserID2}`).then(res => res.json())
+        ]);
+
         // ユーザー情報を取得
-        const userIds = [...new Set(Chatsdata.flatMap(chat => [chat.UserID, chat.UserID2]))]; // ユーザーIDを一意に取得
-        const userPromises = userIds.map(id => fetch(`https://loopplus.mydns.jp/api/user/${id}`).then(res => res.json()));
         const usersData = await Promise.all(userPromises);
 
         // ユーザー情報をオブジェクトとして保存

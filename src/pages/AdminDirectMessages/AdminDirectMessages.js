@@ -1,113 +1,86 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './AdminDirectMessages.css';
-import { Tooltip } from '@mui/material';
-import GppGoodIcon from '@mui/icons-material/GppGood';
-import BlockIcon from '@mui/icons-material/Block'; 
-import WarningIcon from '@mui/icons-material/Warning';
-import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
-import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import SearchIcon from '@mui/icons-material/Search';
 
 const AdminDirectMessages = () => {
   const [chats, setChats] = useState([]);
-  const [viewAdmins, setViewAdmins] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
-  const [loading, setLoading] = useState(true); // Loading state for data fetching
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
-
 
   useEffect(() => {
     const fetchData = async () => {
-      setLoading(true); // Set loading to true when fetch starts
+      setLoading(true);
       try {
         const response = await fetch('https://loopplus.mydns.jp/api/chat');
         if (!response.ok) throw new Error('Network response was not ok');
-        const data = await response.json();
-        setChats(data);
+        const Chatsdata = await response.json();
+        setChats(Chatsdata);
       } catch (error) {
         console.error('Error fetching data:', error);
       } finally {
-        setLoading(false); // Set loading to false after fetch completes
+        setLoading(false);
       }
     };
     fetchData();
   }, []);
 
- 
-  
-
-  // ユーザー情報をクリックして詳細ページに遷移
-//   const handleRowClick = (userId) => {
-//     navigate(`/admin/user-profile/${userId}`);
-//   };
-
-return (
-  <div>
-    {/* 検索機能と表示切り替え */}
-    <div className="search-container">
-      <div className="search-move-right">
-        <input
-          type="text"
-          placeholder="ユーザー名やメールアドレスで検索できます"
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-          style={{ padding: '5px', marginRight: '10px' }}
-        />
-        <SearchIcon style={{ color: '#757575', cursor: 'pointer' }} />
+  return (
+    <div>
+      {/* 検索機能 */}
+      <div className="search-container">
+        <div className="search-move-right">
+          <input
+            type="text"
+            placeholder="ユーザー名やメールアドレスで検索できます"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            style={{ padding: '5px', marginRight: '10px' }}
+          />
+          <SearchIcon style={{ color: '#757575', cursor: 'pointer' }} />
+        </div>
       </div>
-    </div>
 
-    {/* チャット情報を表示するテーブル */}
-    {loading ? ( 
-      <div className='loading-state' style={{ textAlign: 'center', color: 'gray' }}>
-        データを取得しています、少々お待ちください...
-      </div>
-    ) : (
-      <table className="fixed-tbody">
-        <thead>
-          <tr>
-            <th className="fixed-th">チャットID</th>
-            <th className="fixed-th">ユーザー</th>
-            <th className="fixed-th">メールアドレス</th>
-          </tr>
-        </thead>
-        <tbody>
+      {/* チャット情報を表示するテーブル */}
+      {loading ? (
+        <div className='loading-state' style={{ textAlign: 'center', color: 'gray' }}>
+          データを取得しています、少々お待ちください...
+        </div>
+      ) : (
+        <table className="fixed-tbody">
+          <thead>
             <tr>
-                <td>{chats.ChatsID}</td>
-                {/* <td>
-                    {user.Username}<br />
-                    {user.Username2}
-                </td> */}
-                <td>{chats.Email}</td>
+              <th className="fixed-th">チャットID</th>
+              <th className="fixed-th">ユーザー</th>
+              <th className="fixed-th">メールアドレス</th>
             </tr>
-          {/* {filteredUsers.length === 0 ? (
-            <tr>
-              <td colSpan="6" style={{ textAlign: 'center', color: 'red' }}>
-                検索結果はありません。
-              </td>
-            </tr>
-          ) : (
-            filteredUsers.map((chats, index) => (
-              <tr
-                key={chats.ChatsID}
-                onClick={() => handleRowClick(chats.ChatsID)}
-                className={index % 2 === 0 ? 'even-row' : ''}
-              >
-                <td>{chats.ChatsID}</td>
-                <td>
-                    {user.Username}<br />
-                    {user.Username2}
+          </thead>
+          <tbody>
+            {chats.length === 0 ? (
+              <tr>
+                <td colSpan="3" style={{ textAlign: 'center', color: 'red' }}>
+                  検索結果はありません。
                 </td>
-                <td>{chats.Email}</td>
               </tr>
-            ))
-          )} */}
-        </tbody>
-      </table>
-    )}
-  </div>
-);
+            ) : (
+              chats.map((chat, index) => (
+                <tr key={chat.ChatID} className={index % 2 === 0 ? 'even-row' : ''}>
+                  <td>{chat.ChatID}</td>
+                  <td>
+                    {/* ユーザー名を表示するロジックを追加 */}
+                    {/* ここでUserIDやUserID2からユーザー名を取得する必要があります */}
+                    {`UserID: ${chat.UserID}, UserID2: ${chat.UserID2}`} {/* 仮の表示 */}
+                  </td>
+                  <td>{chat.Email}</td>
+                </tr>
+              ))
+            )}
+          </tbody>
+        </table>
+      )}
+    </div>
+  );
 };
 
 export default AdminDirectMessages;

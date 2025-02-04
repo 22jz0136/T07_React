@@ -21,8 +21,14 @@ export const SidebarData = [
         link: "/admin/qalist",
     },
     {
+        title: "チャットを管理する",
+        icon: <LogoutIcon />,
+        link: "/admin/AdminDirectMessages", 
+    },
+    {
         title: "ログアウト",
         icon: <LogoutIcon />,
         link: "/admin/logout", 
     },
+    
 ];

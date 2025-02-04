@@ -57,7 +57,7 @@ const UserTable = () => {
             method: 'PUT',
             credentials: 'include',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(0),
+            body: JSON.stringify({ BanFlag: 0 }),
           });
   
           if (!response.ok) throw new Error(`HTTPエラー: ${response.status}`);

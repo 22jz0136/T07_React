@@ -21,7 +21,7 @@ const AdminDirectMessages = () => {
     const fetchData = async () => {
       setLoading(true); // Set loading to true when fetch starts
       try {
-        const response = await fetch('https://loopplus.mydns.jp/api/showAllChats');
+        const response = await fetch('https://loopplus.mydns.jp/api/chat');
         if (!response.ok) throw new Error('Network response was not ok');
         const data = await response.json();
         setChats(data);

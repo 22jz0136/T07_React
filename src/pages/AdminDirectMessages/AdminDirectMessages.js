@@ -75,10 +75,10 @@ return (
         <tbody>
             <tr>
                 <td>{chats.ChatsID}</td>
-                <td>
+                {/* <td>
                     {user.Username}<br />
                     {user.Username2}
-                </td>
+                </td> */}
                 <td>{chats.Email}</td>
             </tr>
           {/* {filteredUsers.length === 0 ? (

@@ -36,14 +36,14 @@ const UserBan = () => {
         method: 'PUT',
         credentials: 'include',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(1),
+        body: JSON.stringify({ BanFlag: 1 }),
       });
 
       if (!response.ok) throw new Error(`HTTPエラー: ${response.status}`);
 
       const data = await response.json();
       if (data.status === 'success') {
-        alert('ユーザーがBANされました。');
+        console.log('ユーザーがBANされました。');
       } else {
         alert(`処理に失敗しました: ${data.message}`);
       }

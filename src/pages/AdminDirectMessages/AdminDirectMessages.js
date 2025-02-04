@@ -5,7 +5,6 @@ import SearchIcon from '@mui/icons-material/Search';
 
 const AdminDirectMessages = () => {
   const [chats, setChats] = useState([]);
-  const [users, setUsers] = useState({});
   const [searchQuery, setSearchQuery] = useState('');
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
@@ -27,6 +26,13 @@ const AdminDirectMessages = () => {
     };
     fetchData();
   }, []);
+
+  // 検索機能
+  const filteredChats = chats.filter(chat => {
+    const user1Match = chat.user1.Username.toLowerCase().includes(searchQuery.toLowerCase());
+    const user2Match = chat.user2.Username.toLowerCase().includes(searchQuery.toLowerCase());
+    return user1Match || user2Match;
+  });
 
   return (
     <div>
@@ -61,20 +67,20 @@ const AdminDirectMessages = () => {
             </tr>
           </thead>
           <tbody>
-            {chats.length === 0 ? (
+            {filteredChats.length === 0 ? (
               <tr>
                 <td colSpan="5" style={{ textAlign: 'center', color: 'red' }}>
                   検索結果はありません。
                 </td>
               </tr>
             ) : (
-              chats.map((chat, index) => (
+              filteredChats.map((chat, index) => (
                 <tr key={chat.ChatID} className={index % 2 === 0 ? 'even-row' : ''}>
                   <td>{chat.ChatID}</td>
-                  <td>{[chat.user1]?.Username || '不明'}</td>
-                  <td>{[chat.user1]?.Email || '不明'}</td>
-                  <td>{[chat.user2]?.Username || '不明'}</td>
-                  <td>{[chat.user2]?.Email || '不明'}</td>
+                  <td>{chat.user1.Username}</td>
+                  <td>{chat.user1.Email}</td>
+                  <td>{chat.user2.Username}</td>
+                  <td>{chat.user2.Email}</td>
                 </tr>
               ))
             )}

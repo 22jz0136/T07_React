@@ -19,13 +19,6 @@ const AdminDirectMessages = () => {
         if (!response.ok) throw new Error('Network response was not ok');
         const Chatsdata = await response.json();
         setChats(Chatsdata);
-
-        // ユーザー情報をオブジェクトとして保存
-        const usersMap = {};
-        usersData.forEach(user => {
-          usersMap[user.UserID] = user; // UserIDをキーとしてユーザー情報を保存
-        });
-        setUsers(usersMap);
       } catch (error) {
         console.error('Error fetching data:', error);
       } finally {

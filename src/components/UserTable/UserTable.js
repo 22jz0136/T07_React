@@ -45,36 +45,41 @@ const UserTable = () => {
   // BAN処理
   const banUser = async (e, userId, isBanned) => {
     e.stopPropagation();
-    const confirmMessage = isBanned
-      ? 'このユーザーのBANを解除しますか？'
-      : 'このユーザーをBANしますか？';
+    if(!isBanned) {
+      navigate(`/admin/user-judgment/${userId}`);
+    }
+    else {
+      const confirmMessage = 'このユーザーのBANを解除しますか？';
 
-    if (window.confirm(confirmMessage)) {
-      try {
-        const response = await fetch(`https://loopplus.mydns.jp/api/user/${userId}`, {
-          method: 'PUT',
-          credentials: 'include',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ BanFlag: isBanned ? 0 : 1 }),
-        });
-
-        if (!response.ok) throw new Error(`HTTPエラー: ${response.status}`);
-
-        const data = await response.json();
-        if (data.status === 'success') {
-          alert(isBanned ? 'BANが解除されました。' : 'ユーザーがBANされました。');
-          setUsers((prev) =>
-            prev.map((user) =>
-              user.UserID === userId ? { ...user, BanFlag: isBanned ? 0 : 1 } : user
-            )
-          );
-        } else {
-          alert(`処理に失敗しました: ${data.message}`);
+      if (window.confirm(confirmMessage)) {
+        try {
+          const response = await fetch(`https://loopplus.mydns.jp/api/user/${userId}`, {
+            method: 'PUT',
+            credentials: 'include',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(0),
+          });
+  
+          if (!response.ok) throw new Error(`HTTPエラー: ${response.status}`);
+  
+          const data = await response.json();
+          if (data.status === 'success') {
+            alert('BANが解除されました。');
+            setUsers((prev) =>
+              prev.map((user) =>
+                user.UserID === userId ? { ...user, BanFlag: isBanned ? 0 : 1 } : user
+              )
+            );
+          } else {
+            alert(`処理に失敗しました: ${data.message}`);
+          }
+        } catch (error) {
+          alert('処理中にエラーが発生しました。');
         }
-      } catch (error) {
-        alert('処理中にエラーが発生しました。');
       }
     }
+
+    
   };
 
   // ユーザー情報をクリックして詳細ページに遷移

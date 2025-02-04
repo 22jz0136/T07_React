@@ -9,10 +9,11 @@ function UserProfile() {
   const { id } = useParams();
   const navigate = useNavigate();
   const [userData, setUserData] = useState(null);
-  const [loading, setLoading] = useState({ user: true, items: true, requests: true });
+  const [loading, setLoading] = useState({ user: true, items: true, requests: true, warnings: true });
   const [activeTab, setActiveTab] = useState('items');
   const [items, setItems] = useState([]);
   const [requests, setRequests] = useState([]);
+  const [warnings, setWarnings] = useState([]);
   const [filter, setFilter] = useState(0); // フィルタの状態を追加
   const [requestFilter, setRequestFilter] = useState(1); // リクエストフィルタの初期値を1（表示中）に設定
 
@@ -26,10 +27,11 @@ function UserProfile() {
       setUserData(data);
       setItems(data.Items);
       setRequests(data.Requests);
+      setWarnings(data.Warnings);
     } catch (error) {
       console.error('Error fetching user data:', error);
     } finally {
-      setLoading(prev => ({ ...prev, user: false, items: false, requests: false }));
+      setLoading(prev => ({ ...prev, user: false, items: false, requests: false, warnings: false }));
     }
   };
 
@@ -114,7 +116,12 @@ function UserProfile() {
     const iconSrc = userIcon && userIcon.startsWith('storage/images/')
       ? `https://loopplus.mydns.jp/${userIcon}`
       : userIcon;
-    const truncatedDescription = description.length > 36 
+
+    const truncatedTitle = title.length > 14 
+    ? title.slice(0, 14) + '…' 
+    : title;
+  
+    const truncatedDescription = description.length > 10 
     ? description.slice(0, 10) + '…' 
     : description;
 
@@ -137,7 +144,7 @@ function UserProfile() {
           <img src={imageSrc || 'default-image-url'} alt={title} className="product-image" />
           <div className="product-details">
             <div className='product-details-title'>
-              <p>{title}</p>
+              <p>{truncatedTitle}</p>
             </div>
             <p>{truncatedDescription}</p>
           </div>
@@ -170,6 +177,24 @@ function UserProfile() {
           </div>
         </div>
       </div>
+      </div>
+      
+    );
+  };
+
+  const Warning = ({ id, content, time }) => {
+
+    return (
+      <div >
+        <div className="request-item">
+          <div className="profile">
+            <span className="time">日時：{new Date(time).toLocaleString()}</span>
+          </div>
+          <div className="content">
+              <p className='warn-p'>内容</p>
+              <p>{content}</p>
+          </div>
+        </div>
       </div>
       
     );
@@ -225,18 +250,19 @@ function UserProfile() {
 
           <div className='Profile'>
             <ul className='ProfileList'>
-              {['items', 'requests'].map(tab => (
+              {['items', 'requests', 'warnings'].map(tab => ( // 'warnings' タブを追加
                 <li
                   key={tab}
                   className='Profilerow'
                   onClick={() => setActiveTab(tab)}
                   style={{ fontWeight: activeTab === tab ? 'bold' : 'normal' }}
                 >
-                  {tab === 'items' ? '物品情報' : 'リクエスト'}
+                  {tab === 'items' ? '物品情報' : tab === 'requests' ? 'リクエスト' : '警告'}
                 </li>
               ))}
             </ul>
           </div>
+
 
           {activeTab === 'items' && (
             <div className='filter-flex'>
@@ -308,6 +334,30 @@ function UserProfile() {
                 ))
               ) : (
                 <p>リクエストはありません。</p>
+              )}
+            </div>
+          )}
+
+          {activeTab === 'warnings' && (
+            <div className='overflow-request'>
+              <div className="filter-dropdown">
+                <p className={warnings.length === 1 ? 'warn-yellow' : (warnings.length > 1 ? 'warn-red' : '')}>
+                  警告回数：{warnings.length}
+                </p>
+              </div>
+              {loading.warnings ? (
+                <p>Loading warnings...</p>
+              ) : warnings.length > 0 ? (
+                warnings.map(warning => (
+                  <Warning
+                    key={warning.AnnounceID}
+                    id={warning.AnnounceID}
+                    time={warning.CreatedAt}
+                    content={warning.Content}
+                  />
+                ))
+              ) : (
+                <p>この人に対する警告はありません</p>
               )}
             </div>
           )}

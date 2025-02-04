@@ -72,7 +72,8 @@ function UserItemList({ userId }) {
     const handleWarn = (id) => {
         alert(`Item ${id} に警告を送りました`);
     };
-//aaaaaaaaaaaaaaaa
+
+
     return (
         <div>
             <Navbar />
@@ -100,26 +101,36 @@ function UserItemList({ userId }) {
 
                     <div>
                         <ul className="item-list">
-                            {items.map(item => (
-                                <li key={item.id} className="item-card">
-                                    <div className="item-content">
-                                        <img src={item.image} alt={item.title} className="item-image" />
-                                        <div className="item-details">
-                                            <h3 className="item-title">{item.title}</h3>
-                                            <p className="item-description">{item.description}</p>
-                                            <p>受け渡し場所: {item.location}</p>
-                                            <p>
-                                                ステータス: <span className={`status ${item.status === '完了' ? 'complete' : 'active'}`}>{item.status}</span>
-                                            </p>
+                            {items.map(item => {
+                                const truncatedTitle = item.title.length > 14 
+                                ? item.title.slice(0, 14) + '…' 
+                                : item.title;
+
+                                const truncatedDescription = item.description.length > 10
+                                ? item.description.slice(0, 10) + '…' 
+                                : item.description;
+
+                                return (
+                                    <li key={item.id} className="item-card">
+                                        <div className="item-content">
+                                            <img src={item.image} alt={item.title} className="item-image" />
+                                            <div className="item-details">
+                                                <h3 className="item-title">{truncatedTitle}</h3>
+                                                <p className="item-description">{truncatedDescription}</p>
+                                                <p>受け渡し場所: {item.location}</p>
+                                                <p>
+                                                    ステータス: <span className={`status ${item.status === '完了' ? 'complete' : 'active'}`}>{item.status}</span>
+                                                </p>
+                                            </div>
+                                            <div className="item-actions">
+                                                <button onClick={() => handleHide(item.id)}>非表示</button>
+                                                {item.expired && <button onClick={() => handleComplete(item.id)}>取引完了</button>}
+                                                <button onClick={() => handleWarn(item.id)}>警告</button>
+                                            </div>
                                         </div>
-                                        <div className="item-actions">
-                                            <button onClick={() => handleHide(item.id)}>非表示</button>
-                                            {item.expired && <button onClick={() => handleComplete(item.id)}>取引完了</button>}
-                                            <button onClick={() => handleWarn(item.id)}>警告</button>
-                                        </div>
-                                    </div>
-                                </li>
-                            ))}
+                                    </li>
+                                );
+                            })}
                         </ul>
                     </div>
                 </div>

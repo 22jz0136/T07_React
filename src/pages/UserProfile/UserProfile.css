@@ -112,6 +112,11 @@ h1 {
     padding: 5px;
 }
 
+.filter-dropdown p {
+    margin-left: 30px;
+    font-size: large;
+}
+
 .filter-select-flex {
     display: flex;
     align-items: center;
@@ -136,4 +141,16 @@ h1 {
 .overflow-request {
     overflow-y: scroll;
     height: 77vh;
+}
+
+.warn-yellow {
+    color: #b7b716;
+}
+
+.warn-red {
+    color: red;
+}
+
+.warn-p {
+    font-size: 0.9em
 }

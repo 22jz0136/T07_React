@@ -16,7 +16,7 @@
 }
 
 .usertable-y {
-    height: 90vh;
+    height: 85vh;
     list-style-type: none;
     margin: 0;
     padding: 0;
@@ -81,3 +81,10 @@
     display: block;
     width: 90%;
 }
+
+.table-scroll-container {
+    max-height: 80vh; /* 必要に応じて高さを調整 */
+    overflow-y: scroll; /* 縦方向のスクロールを有効にする */
+    overflow-x: hidden; /* 横方向のスクロールを隠す */
+  }
+  

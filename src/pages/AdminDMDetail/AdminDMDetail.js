@@ -111,7 +111,7 @@ const DirectMessage = ({ setIsFooterVisible }) => {
                         <img src={`https://loopplus.mydns.jp/${userIcon1}`}></img>
                         <div className='admin-dm-user'>{userID1} : {username1}</div><br />
                     </h2>
-                    <p>Email : {userEmail1}</p>
+                    <p className='user-email'>Email : {userEmail1}</p>
                     
                 </div>
 
@@ -120,7 +120,7 @@ const DirectMessage = ({ setIsFooterVisible }) => {
                         <img src={`https://loopplus.mydns.jp/${userIcon2}`}></img>
                         <div className='admin-dm-user'>{userID2} : {username2}</div><br />
                     </h2>
-                    <p>Email : {userEmail2}</p>
+                    <p className='user-email'>Email : {userEmail2}</p>
                     
                 </div>
             </div>

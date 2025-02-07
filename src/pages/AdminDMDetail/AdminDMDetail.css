@@ -183,3 +183,8 @@
 .user1-inf h2 {
     display: flex;
 }
+
+.user-email {
+    font-size: 15px;
+    margin-left: 10px;
+}

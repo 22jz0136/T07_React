@@ -34,6 +34,17 @@ const AdminDirectMessages = () => {
     return user1Match || user2Match;
   });
 
+  // 行クリック時の処理
+  const handleRowClick = (chat) => {
+    // セッションストレージに保存
+    sessionStorage.setItem('chatID', chat.ChatID);
+    sessionStorage.setItem('userID1', chat.user1.UserID); // ユーザーID1を追加
+    sessionStorage.setItem('userID2', chat.user2.UserID); // ユーザーID2を追加
+
+    // AdminDMDetailへ遷移
+    navigate('/admin/dm-detail');
+  };
+
   return (
     <div>
       {/* 検索機能 */}
@@ -75,7 +86,11 @@ const AdminDirectMessages = () => {
               </tr>
             ) : (
               filteredChats.map((chat, index) => (
-                <tr key={chat.ChatID} className={index % 2 === 0 ? 'even-row' : ''}>
+                <tr
+                  key={chat.ChatID}
+                  className={index % 2 === 0 ? 'even-row' : ''}
+                  onClick={() => handleRowClick(chat)} // 行クリック時の処理
+                >
                   <td>{chat.ChatID}</td>
                   <td>{chat.user1.Username}</td>
                   <td>{chat.user1.Email}</td>

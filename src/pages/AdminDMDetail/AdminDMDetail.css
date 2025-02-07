@@ -142,3 +142,9 @@
 .user-inf img {
     max-width: 100px;
 }
+
+.admin-dm-scroll {
+    max-height: 92vh;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}

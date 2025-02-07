@@ -45,9 +45,9 @@
     margin-bottom: 20px; /* 検索バーの下にマージン */
 }
 
-.search-move-right {
+.admin-search-move-right {
     display: flex;
-    align-items: center; /* 中央揃え */
+    margin-right: 20px;
 }
 
 /* ローディング状態のスタイル */
@@ -62,4 +62,5 @@
 
 .admin-dm-list {
     display: block;
+    width: 90%;
 }

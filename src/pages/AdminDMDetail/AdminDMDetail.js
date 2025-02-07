@@ -64,7 +64,7 @@ const DirectMessage = ({ setIsFooterVisible }) => {
         </div>
         <div className='admin-dm-box'>
             <Sidebar />
-            <div className="dm-container">
+            <div className="admin-dm-container">
                 <div className="dm-messages">
                     {messages.map((msg) => {
                     const messageDate = new Date(msg.CreatedAt);

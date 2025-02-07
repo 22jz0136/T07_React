@@ -1,9 +1,10 @@
 /* 全体コンテナ */
-.dm-container {
+.admin- {
     display: flex;
     flex-direction: column;
     background-color: white;
-    padding-top: 60px; /* ナビゲーションの高さを考慮 */
+    padding-top: 30px; /* ナビゲーションの高さを考慮 */
+    width: 100%;
 }
 
 /* ナビゲーションバー */

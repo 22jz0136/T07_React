@@ -1,0 +1,127 @@
+/* 全体コンテナ */
+.dm-container {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    padding-top: 60px; /* ナビゲーションの高さを考慮 */
+}
+
+/* ナビゲーションバー */
+.top-navigation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #e5e7eb;
+    background-color: #fff;
+    z-index: 1000;
+}
+
+.back-button {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+.back-icon {
+    color: #374151;
+    font-size: 1.5rem;
+}
+
+.page-title {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1.25rem;
+    color: #374151;
+}
+
+/* メッセージ表示領域 */
+.dm-messages {
+    display: flex;
+    flex-direction: column;
+    padding: 10px 16px;
+    gap: 10px; /* メッセージの間隔 */
+    overflow-y: auto; /* 縦スクロール可能 */
+    flex-grow: 1; /* 残りのスペースを埋める */
+    margin-top: 60px; /* ナビゲーションの高さを考慮 */
+}
+
+/* メッセージのバブル */
+.message-wrapper {
+    position: relative; /* 相対位置を設定 */
+    max-width: 70%; /* メッセージバブルの最大幅 */
+}
+
+/* 右寄せメッセージ */
+.message-wrapper.right {
+    align-self: flex-end; /* 右寄せ */
+    flex-direction: row-reverse;
+    margin-left: auto; /* 自動マージンで右寄せ */
+}
+
+/* 左寄せメッセージ */
+.message-wrapper.left {
+    align-self: flex-start; /* 左寄せ */
+}
+
+/* メッセージバブルのスタイル */
+.message-bubble {
+    background-color: #e1ffc7; /* 自分のメッセージ用の色 */
+    border-radius: 20px;
+    padding: 10px 15px;
+    word-wrap: break-word;
+    width: fit-content; /* コンテンツに合わせる */
+    margin: 5px; /* メッセージの間隔 */
+}
+
+/* 左側のメッセージバブル */
+.message-wrapper.left .message-bubble {
+    background-color: #ffffff; /* 相手のメッセージ用の色 */
+    border: 1px solid #ddd;
+}
+
+/* メッセージテキスト */
+.message-text {
+    margin: 0;
+    font-size: 14px;
+    color: #333; /* テキストカラー */
+}
+
+/* メッセージ画像 */
+.message-image {
+    width: 100%;
+    max-width: 200px; /* 最大幅を設定 */
+    margin-top: 5px;
+    border-radius: 10px;
+}
+
+/* メッセージの時間 */
+.span-time {
+    align-self: flex-end; /* 右寄せ */
+    margin-bottom: 5px;
+}
+
+.message-time {
+    font-size: 12px;
+    color: #999; /* 時間のカラー */
+}
+
+/* 日付表示スタイル */
+.date-message {
+    display: flex;
+    justify-content: center;
+    width: fit-content;
+    padding: 5px 15px; /* 縦横の余白 */
+    font-size: 14px; /* テキストサイズ */
+    font-weight: bold; /* 太字 */
+    color: #ffffff; /* テキストの色 */
+    background-color: #8f8f8f; /* 背景色 */
+    opacity: 0.5; /* 透明度 */
+    border-radius: 20px; /* 丸みをつける */
+    margin: 10px auto; /* 上下のマージン */
+}

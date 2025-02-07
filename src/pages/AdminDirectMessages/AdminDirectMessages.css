@@ -48,6 +48,14 @@
 .admin-search-move-right {
     display: flex;
     margin-right: 20px;
+    align-items: center;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 25px;
+    margin-top: 7px;
+    padding: 5px 15px;
+    position: relative;
+    right: 10px;
 }
 
 /* ローディング状態のスタイル */

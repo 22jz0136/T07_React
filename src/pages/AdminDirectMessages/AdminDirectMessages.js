@@ -57,7 +57,7 @@ const AdminDirectMessages = () => {
         <div className='admin-dm-list'>
           {/* 検索機能 */}
           <div className="search-container">
-            <div className="search-move-right">
+            <div className="admin-search-move-right">
               <input
                 type="text"
                 placeholder="ユーザー名やメールアドレスで検索できます"

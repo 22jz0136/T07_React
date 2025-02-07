@@ -170,6 +170,7 @@
     max-height: 92vh;
     overflow-y: scroll;
     overflow-x: hidden;
+    width: 52%;
 }
 
 .admin-dm-user {

@@ -167,3 +167,15 @@
     overflow-y: scroll;
     overflow-x: hidden;
 }
+
+.admin-dm-user {
+    align-self: center;
+}
+
+.user2-inf h2 {
+    display: flex;
+}
+
+.user1-inf h2 {
+    display: flex;
+}

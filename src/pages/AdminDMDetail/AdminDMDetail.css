@@ -49,7 +49,10 @@
     gap: 10px; /* メッセージの間隔 */
     overflow-y: auto; /* 縦スクロール可能 */
     flex-grow: 1; /* 残りのスペースを埋める */
-    margin-top: 60px; /* ナビゲーションの高さを考慮 */
+    margin-top: 20px; /* ナビゲーションの高さを考慮 */
+    border: 2px solid #ccc;
+    margin-left: 20px;
+    background-color: lightblue;
 }
 
 /* メッセージのバブル */

@@ -19,6 +19,7 @@ import SearchResult from './components/SearchBar/SearchResult';
 import PrivateRoute from './components/PrivateRoute';
 import GoogleCallback from './components/Callback/GoogleCallback';
 import AdminDirectMessages from './pages/AdminDirectMessages/AdminDirectMessages';
+import AdminDMDetail from './pages/AdminDMDetail/AdminDMDetail';
 
 function App() {
   

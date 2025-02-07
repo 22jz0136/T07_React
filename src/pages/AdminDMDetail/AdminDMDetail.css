@@ -82,6 +82,7 @@
     word-wrap: break-word;
     width: fit-content; /* コンテンツに合わせる */
     margin: 5px; /* メッセージの間隔 */
+    max-width: 100%;
 }
 
 /* 左側のメッセージバブル */

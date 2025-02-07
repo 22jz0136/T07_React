@@ -49,6 +49,7 @@ function App() {
           <Route path="/admin/searchresult" element={<PrivateRoute><SearchResult /></PrivateRoute>} />
           <Route path="/admin/product-detail" element={<PrivateRoute><ProductDetail /></PrivateRoute>} />
           <Route path="/admin/AdminDirectMessages" element={<PrivateRoute><AdminDirectMessages /></PrivateRoute>} />
+          <Route path="/admin/AdminDMDetail" element={<PrivateRoute><AdminDMDetail /></PrivateRoute>} />
           <Route path="/admin/callback" element={<GoogleCallback />} />
         </Routes>
       </BrowserRouter>

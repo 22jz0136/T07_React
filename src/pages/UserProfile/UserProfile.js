@@ -182,11 +182,13 @@ function UserProfile() {
     );
   };
 
-  const Warning = ({ id, content, time }) => {
+  const Warning = ({ id, content, time, flag }) => {
+
+    const className = flag === 2 ? 'request-item-red' : 'request-item';
 
     return (
       <div >
-        <div className="request-item">
+        <div className={className}>
           <div className="profile">
             <span className="time">日時：{new Date(time).toLocaleString()}</span>
           </div>
@@ -354,6 +356,7 @@ function UserProfile() {
                     id={warning.AnnounceID}
                     time={warning.CreatedAt}
                     content={warning.Content}
+                    flag={warning.WarnFlag}
                   />
                 ))
               ) : (

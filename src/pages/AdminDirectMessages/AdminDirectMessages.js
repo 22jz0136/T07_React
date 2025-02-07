@@ -42,7 +42,7 @@ const AdminDirectMessages = () => {
     sessionStorage.setItem('userID2', chat.user2.UserID); // ユーザーID2を追加
 
     // AdminDMDetailへ遷移
-    navigate('/admin/dm-detail');
+    navigate('/admin/AdminDMDetail');
   };
 
   return (

@@ -100,14 +100,20 @@ const DirectMessage = ({ setIsFooterVisible }) => {
             </div>
 
             <div className='user-inf'>
-                <div>
-                    {userID1} : {username1}<br />
-                    <img src={`https://loopplus.mydns.jp/${userIcon1}`}></img>
+                <div className='user1-inf'>
+                    <h2>
+                        <img src={`https://loopplus.mydns.jp/${userIcon1}`}></img>
+                        {userID1} : {username1}<br />
+                    </h2>
+                    
                 </div>
 
-                <div>
-                    {userID2} : {username2}<br />
-                    <img src={`https://loopplus.mydns.jp/${userIcon2}`}></img>
+                <div className='user2-inf'>
+                    <h2>
+                        <img src={`https://loopplus.mydns.jp/${userIcon2}`}></img>
+                        {userID2} : {username2}<br />
+                    </h2>
+                    
                 </div>
             </div>
         </div>

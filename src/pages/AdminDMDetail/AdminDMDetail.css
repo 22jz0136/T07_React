@@ -140,5 +140,24 @@
 }
 
 .user-inf img {
-    max-width: 100px;
+    height: 32px;
+    margin-right: 10px;
+    width: 32px;
+    border-radius: 50%;
+}
+
+.user1-inf {
+    border: 2px solid #ccc; /* 外枠の色と太さを設定 */
+    border-radius: 10px; /* 角を丸める（オプション） */
+    padding: 20px; /* 内側の余白を設定 */
+    margin: 20px; /* 外側の余白を設定 */
+    background-color: #fff; /* 背景色を設定 */
+}
+
+.user2-inf {
+    border: 2px solid #ccc; /* 外枠の色と太さを設定 */
+    border-radius: 10px; /* 角を丸める（オプション） */
+    padding: 20px; /* 内側の余白を設定 */
+    margin: 20px; /* 外側の余白を設定 */
+    background-color: #e1ffc7; /* 背景色を設定 */
 }

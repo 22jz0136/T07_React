@@ -125,3 +125,12 @@
     border-radius: 20px; /* 丸みをつける */
     margin: 10px auto; /* 上下のマージン */
 }
+
+.admin-dm-box {
+    display: flex;
+}
+
+.admin-dm-list {
+    display: block;
+    width: 90%;
+}

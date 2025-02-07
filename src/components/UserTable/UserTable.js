@@ -165,7 +165,7 @@ return (
 
     {/* ユーザー情報を表示するテーブル */}
     {loading ? ( 
-      <div className='loading-state' style={{ textAlign: 'center', color: 'gray' }}>
+      <div className='loading-state' >
         データを取得しています、少々お待ちください...
       </div>
     ) : (

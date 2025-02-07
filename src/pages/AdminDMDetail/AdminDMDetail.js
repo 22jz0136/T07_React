@@ -32,8 +32,8 @@ const DirectMessage = ({ setIsFooterVisible }) => {
     fetchChatMessages();
 
     // Pusherの設定
-    const pusher = new Pusher('YOUR_APP_KEY', {
-      cluster: 'YOUR_APP_CLUSTER',
+    const pusher = new Pusher('f155afe9e8a09487d9ea', {
+      cluster: 'ap3',
     });
 
     const channel = pusher.subscribe(`chat-room-${chatID}`);
@@ -74,7 +74,7 @@ const DirectMessage = ({ setIsFooterVisible }) => {
           });
 
           return (
-            <div key={msg.ChatContentID} className={`message-wrapper ${msg.UserID === userID1 ? 'right' : 'left'}`}>
+            <div key={msg.ChatContentID} className={`message-wrapper ${msg.UserID == userID1 ? 'right' : 'left'}`}>
               <div className="message-bubble">
                 <p className="message-text">{msg.Content}</p>
                 {msg.Image && (

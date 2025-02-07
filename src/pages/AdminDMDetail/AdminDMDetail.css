@@ -138,3 +138,7 @@
     display: block;
     width: 90%;
 }
+
+.user-inf img {
+    max-width: 100px;
+}

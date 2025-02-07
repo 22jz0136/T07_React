@@ -161,3 +161,9 @@
     margin: 20px; /* 外側の余白を設定 */
     background-color: #e1ffc7; /* 背景色を設定 */
 }
+
+.admin-dm-scroll {
+    max-height: 92vh;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}

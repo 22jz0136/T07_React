@@ -62,45 +62,38 @@ const DirectMessage = ({ setIsFooterVisible }) => {
         <div className='navbar'>
             <Navbar />
         </div>
-        <div>
+        <div className='admin-dm-box'>
             <Sidebar />
             <div className="dm-container">
-            <div className="top-navigation">
-                <button className="back-button" onClick={() => navigate('/admin/AdminDirectMessages')}>
-                <ArrowBackIcon className="back-icon" />
-                </button>
-                <h1 className="page-title">チャットの詳細</h1>
-            </div>
+                <div className="dm-messages">
+                    {messages.map((msg) => {
+                    const messageDate = new Date(msg.CreatedAt);
+                    const formattedTime = messageDate.toLocaleTimeString('ja-JP', {
+                        hour: '2-digit',
+                        minute: '2-digit',
+                        hour12: false,
+                    });
 
-            <div className="dm-messages">
-                {messages.map((msg) => {
-                const messageDate = new Date(msg.CreatedAt);
-                const formattedTime = messageDate.toLocaleTimeString('ja-JP', {
-                    hour: '2-digit',
-                    minute: '2-digit',
-                    hour12: false,
-                });
-
-                return (
-                    <div key={msg.ChatContentID} className={`message-wrapper ${msg.UserID == userID1 ? 'right' : 'left'}`}>
-                    <div className="message-bubble">
-                        <p className="message-text">{msg.Content}</p>
-                        {msg.Image && (
-                        <img
-                            src={`https://loopplus.mydns.jp/${msg.Image}`}
-                            alt="メッセージ画像"
-                            className="message-image"
-                        />
-                        )}
-                    </div>
-                    <div className="span-time">
-                        <span className="message-time">{formattedTime}</span>
-                    </div>
-                    </div>
-                );
-                })}
-                <div ref={messageEndRef} />
-            </div>
+                    return (
+                        <div key={msg.ChatContentID} className={`message-wrapper ${msg.UserID == userID1 ? 'right' : 'left'}`}>
+                        <div className="message-bubble">
+                            <p className="message-text">{msg.Content}</p>
+                            {msg.Image && (
+                            <img
+                                src={`https://loopplus.mydns.jp/${msg.Image}`}
+                                alt="メッセージ画像"
+                                className="message-image"
+                            />
+                            )}
+                        </div>
+                        <div className="span-time">
+                            <span className="message-time">{formattedTime}</span>
+                        </div>
+                        </div>
+                    );
+                    })}
+                    <div ref={messageEndRef} />
+                </div>
             </div>
         </div>
     </div>

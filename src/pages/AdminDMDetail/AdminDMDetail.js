@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useParams, useLocation } from 'react-router-dom';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import Pusher from 'pusher-js';
-import '../css/directMessage.css';
+import '../css/AdminDMDetail.css';
 
 const DirectMessage = ({ setIsFooterVisible }) => {
   const navigate = useNavigate();

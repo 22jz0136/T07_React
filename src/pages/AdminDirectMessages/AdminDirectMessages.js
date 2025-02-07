@@ -35,7 +35,6 @@ const AdminDirectMessages = () => {
     const user2Match = chat.user2.Username.toLowerCase().includes(searchQuery.toLowerCase());
     return user1Match || user2Match;
   });
-
   // 行クリック時の処理
   const handleRowClick = (chat) => {
     // セッションストレージに保存

@@ -45,6 +45,8 @@ const AdminDirectMessages = () => {
     sessionStorage.setItem('userName2', chat.user2.Username); // ユーザーID2を追加
     sessionStorage.setItem('userIcon1', chat.user1.Icon); // ユーザーID1を追加
     sessionStorage.setItem('userIcon2', chat.user2.Icon); // ユーザーID2を追加
+    sessionStorage.setItem('userEmail1', chat.user1.Email); // ユーザーID1を追加
+    sessionStorage.setItem('userEmail2', chat.user2.Email); // ユーザーID2を追加
 
     // AdminDMDetailへ遷移
     navigate('/admin/AdminDMDetail');

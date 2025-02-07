@@ -17,6 +17,8 @@ const DirectMessage = ({ setIsFooterVisible }) => {
   const username2 = sessionStorage.getItem('userName2'); // ユーザーname2を取得
   const userIcon1 = sessionStorage.getItem('userIcon1'); // ユーザーname1を取得
   const userIcon2 = sessionStorage.getItem('userIcon2'); // ユーザーname2を取得
+  const userEmail1 = sessionStorage.getItem('userEmail1'); // ユーザーname1を取得
+  const userEmeil2 = sessionStorage.getItem('userEmail2'); // ユーザーname2を取得
   const [messages, setMessages] = useState([]);
   const messageEndRef = useRef(null);
 
@@ -103,11 +105,13 @@ const DirectMessage = ({ setIsFooterVisible }) => {
             
 
             <div className='user-inf'>
+                <h1>ユーザー情報</h1>
                 <div className='user1-inf'>
                     <h2>
                         <img src={`https://loopplus.mydns.jp/${userIcon1}`}></img>
                         {userID1} : {username1}<br />
                     </h2>
+                    <p>Emeil : {userEmail1}</p>
                     
                 </div>
 
@@ -116,6 +120,7 @@ const DirectMessage = ({ setIsFooterVisible }) => {
                         <img src={`https://loopplus.mydns.jp/${userIcon2}`}></img>
                         {userID2} : {username2}<br />
                     </h2>
+                    <p>Emeil : {userEmail2}</p>
                     
                 </div>
             </div>

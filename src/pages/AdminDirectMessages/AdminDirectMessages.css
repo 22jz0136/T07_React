@@ -43,6 +43,8 @@
 /* 検索バーのスタイル */
 .search-container {
     margin-bottom: 20px; /* 検索バーの下にマージン */
+    display: flex;
+    justify-content: flex-end;
 }
 
 .admin-search-move-right {
@@ -58,6 +60,11 @@
     right: 10px;
 }
 
+.admin-search-move-right input {
+    border-style: none;
+    outline: none;
+    width: 290px;
+}
 /* ローディング状態のスタイル */
 .loading-state {
     text-align: center;

@@ -3,6 +3,7 @@ import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt';
 import InventoryIcon from '@mui/icons-material/Inventory';
 import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer';
 import LogoutIcon from '@mui/icons-material/Logout';
+import ForumIcon from '@mui/icons-material/Forum';
 
 export const SidebarData = [
     {
@@ -22,7 +23,7 @@ export const SidebarData = [
     },
     {
         title: "チャットを管理する",
-        icon: <LogoutIcon />,
+        icon: <ForumIcon />,
         link: "/admin/AdminDirectMessages", 
     },
     {

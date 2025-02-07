@@ -139,6 +139,10 @@
     width: 90%;
 }
 
+.user-inf {
+    width: 600px;
+}
+
 .user-inf img {
     height: 50px;
     margin-right: 10px;

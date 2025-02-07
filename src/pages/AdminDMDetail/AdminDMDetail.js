@@ -62,6 +62,11 @@ const DirectMessage = ({ setIsFooterVisible }) => {
     }
   }, [messages]);
 
+  // ユーザー情報をクリックして詳細ページに遷移
+    const handleRowClick = (userId) => {
+        navigate(`/admin/user-profile/${userId}`);
+    };
+
   return (
     <div>
         <div className='navbar'>
@@ -104,19 +109,19 @@ const DirectMessage = ({ setIsFooterVisible }) => {
 
             <div className='user-inf'>
                 <h1>ユーザー情報</h1>
-                <div className='user1-inf'>
+                <div className='user1-inf' onClick={() => handleRowClick(userID1)} style={{ cursor: 'pointer' }}>
                     <h2>
                         <img src={`https://loopplus.mydns.jp/${userIcon1}`}></img>
-                        <div className='admin-dm-user'>{userID1} : {username1}</div><br />
+                        <div className='admin-dm-user'>ユーザー1 : {username1}</div><br />
                     </h2>
                     <p className='user-email'>Email : {userEmail1}</p>
                     
                 </div>
 
-                <div className='user2-inf'>
+                <div className='user2-inf' onClick={() => handleRowClick(userID2)} style={{ cursor: 'pointer' }}>
                     <h2>
                         <img src={`https://loopplus.mydns.jp/${userIcon2}`}></img>
-                        <div className='admin-dm-user'>{userID2} : {username2}</div><br />
+                        <div className='admin-dm-user'>ユーザー2 : {username2}</div><br />
                     </h2>
                     <p className='user-email'>Email : {userEmail2}</p>
                     

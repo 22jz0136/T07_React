@@ -41,7 +41,7 @@
 }
 
 /* 検索バーのスタイル */
-.search-container {
+.admin-search-container {
     margin-top: 10px;
     margin-bottom: 20px; /* 検索バーの下にマージン */
     display: flex;

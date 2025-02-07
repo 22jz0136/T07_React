@@ -61,7 +61,7 @@ const AdminDirectMessages = () => {
         <Sidebar />
         <div className='admin-dm-list'>
           {/* 検索機能 */}
-          <div className="search-container">
+          <div className="admin-search-container">
             <div className="admin-search-move-right">
               <input
                 type="text"

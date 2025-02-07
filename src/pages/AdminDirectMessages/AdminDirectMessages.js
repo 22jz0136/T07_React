@@ -52,63 +52,65 @@ const AdminDirectMessages = () => {
       <div className='navbar'>
         <Navbar />
       </div>
-      <div>
+      <div className='admin-dm-box'>
         <Sidebar />
-        {/* 検索機能 */}
-        <div className="search-container">
-          <div className="search-move-right">
-            <input
-              type="text"
-              placeholder="ユーザー名やメールアドレスで検索できます"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              style={{ padding: '5px', marginRight: '10px' }}
-            />
-            <SearchIcon style={{ color: '#757575', cursor: 'pointer' }} />
+        <div className='admin-dm-list'>
+          {/* 検索機能 */}
+          <div className="search-container">
+            <div className="search-move-right">
+              <input
+                type="text"
+                placeholder="ユーザー名やメールアドレスで検索できます"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                style={{ padding: '5px', marginRight: '10px' }}
+              />
+              <SearchIcon style={{ color: '#757575', cursor: 'pointer' }} />
+            </div>
           </div>
-        </div>
 
-        {/* チャット情報を表示するテーブル */}
-        {loading ? (
-          <div className='loading-state' style={{ textAlign: 'center', color: 'gray' }}>
-            データを取得しています、少々お待ちください...
-          </div>
-        ) : (
-          <table className="fixed-tbody">
-            <thead>
-              <tr>
-                <th className="fixed-th">チャットID</th>
-                <th className="fixed-th">ユーザー1</th>
-                <th className="fixed-th">メールアドレス1</th>
-                <th className="fixed-th">ユーザー2</th>
-                <th className="fixed-th">メールアドレス2</th>
-              </tr>
-            </thead>
-            <tbody>
-              {filteredChats.length === 0 ? (
+          {/* チャット情報を表示するテーブル */}
+          {loading ? (
+            <div className='loading-state' style={{ textAlign: 'center', color: 'gray' }}>
+              データを取得しています、少々お待ちください...
+            </div>
+          ) : (
+            <table className="fixed-tbody">
+              <thead>
                 <tr>
-                  <td colSpan="5" style={{ textAlign: 'center', color: 'red' }}>
-                    検索結果はありません。
-                  </td>
+                  <th className="fixed-th">チャットID</th>
+                  <th className="fixed-th">ユーザー1</th>
+                  <th className="fixed-th">メールアドレス1</th>
+                  <th className="fixed-th">ユーザー2</th>
+                  <th className="fixed-th">メールアドレス2</th>
                 </tr>
-              ) : (
-                filteredChats.map((chat, index) => (
-                  <tr
-                    key={chat.ChatID}
-                    className={index % 2 === 0 ? 'even-row' : ''}
-                    onClick={() => handleRowClick(chat)} // 行クリック時の処理
-                  >
-                    <td>{chat.ChatID}</td>
-                    <td>{chat.user1.Username}</td>
-                    <td>{chat.user1.Email}</td>
-                    <td>{chat.user2.Username}</td>
-                    <td>{chat.user2.Email}</td>
+              </thead>
+              <tbody>
+                {filteredChats.length === 0 ? (
+                  <tr>
+                    <td colSpan="5" style={{ textAlign: 'center', color: 'red' }}>
+                      検索結果はありません。
+                    </td>
                   </tr>
-                ))
-              )}
-            </tbody>
-          </table>
-        )}
+                ) : (
+                  filteredChats.map((chat, index) => (
+                    <tr
+                      key={chat.ChatID}
+                      className={index % 2 === 0 ? 'even-row' : ''}
+                      onClick={() => handleRowClick(chat)} // 行クリック時の処理
+                    >
+                      <td>{chat.ChatID}</td>
+                      <td>{chat.user1.Username}</td>
+                      <td>{chat.user1.Email}</td>
+                      <td>{chat.user2.Username}</td>
+                      <td>{chat.user2.Email}</td>
+                    </tr>
+                  ))
+                )}
+              </tbody>
+            </table>
+          )}
+        </div>
       </div>
     </div>
 

@@ -1,0 +1,65 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.columnBrake {
+    display: flex;
+    height: 100vh; /* フルスクリーンの高さ */
+}
+
+.mainbody {
+    flex-grow: 1;
+    padding: 20px; /* メインコンテンツのパディング */
+    overflow-y: auto; /* スクロール可能にする */
+}
+
+.usertable-y {
+    height: 90vh;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow-y: scroll; /* 縦のスクロールを許可 */
+    width: 100%; /* 幅を100%に設定 */
+}
+
+.usertable-y .chat-item {
+    display: flex;
+    justify-content: space-between; /* アイテム内の要素を均等に配置 */
+    padding: 10px; /* パディングを追加 */
+    border-bottom: 1px solid #e5e7eb; /* 下にボーダーを追加 */
+    cursor: pointer; /* カーソルをポインターに */
+}
+
+.usertable-y .chat-item:hover {
+    background-color: #f4f4f8; /* ホバー時に背景色を変更 */
+}
+
+.usertable-y .even-row {
+    background-color: #f9f9f9; /* 偶数行の背景色 */
+}
+
+/* 検索バーのスタイル */
+.search-container {
+    margin-bottom: 20px; /* 検索バーの下にマージン */
+}
+
+.search-move-right {
+    display: flex;
+    align-items: center; /* 中央揃え */
+}
+
+/* ローディング状態のスタイル */
+.loading-state {
+    text-align: center;
+    color: gray;
+}
+
+.admin-dm-box {
+    display: flex;
+}
+
+.admin-dm-list {
+    display: block;
+}

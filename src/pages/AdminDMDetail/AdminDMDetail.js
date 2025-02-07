@@ -13,7 +13,10 @@ const DirectMessage = ({ setIsFooterVisible }) => {
   const chatID = sessionStorage.getItem('chatID'); // セッションストレージからチャットIDを取得
   const userID1 = sessionStorage.getItem('userID1'); // ユーザーID1を取得
   const userID2 = sessionStorage.getItem('userID2'); // ユーザーID2を取得
-
+  const username1 = sessionStorage.getItem('userName1'); // ユーザーname1を取得
+  const username2 = sessionStorage.getItem('userName2'); // ユーザーname2を取得
+  const userIcon1 = sessionStorage.getItem('userIcon1'); // ユーザーname1を取得
+  const userIcon2 = sessionStorage.getItem('userIcon2'); // ユーザーname2を取得
   const [messages, setMessages] = useState([]);
   const messageEndRef = useRef(null);
 
@@ -94,6 +97,18 @@ const DirectMessage = ({ setIsFooterVisible }) => {
                     })}
                     <div ref={messageEndRef} />
                 </div>
+            </div>
+
+            <div>
+                {userID1}<br />
+                {username1}<br />
+                <img src={`https://loopplus.mydns.jp/{userIcon1}`}></img><br />
+            </div>
+
+            <div>
+                {userID2}<br />
+                {username2}<br />
+                <img src={`https://loopplus.mydns.jp/{userIcon1}`}></img>
             </div>
         </div>
     </div>

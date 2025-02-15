@@ -25,7 +25,7 @@ const DirectMessage = ({ setIsFooterVisible }) => {
   useEffect(() => {
     const fetchChatMessages = async () => {
       try {
-        const response = await fetch(`https://loopplus.mydns.jp/api/chat/room/${chatID}`);
+        const response = await fetch(`https://loopplus.mydns.jp/api/chat/admin/room/${chatID}`);
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
@@ -87,7 +87,9 @@ const DirectMessage = ({ setIsFooterVisible }) => {
                   return (
                       <div key={msg.ChatContentID} className={`message-wrapper ${msg.UserID == userID1 ? 'right' : 'left'}`}>
                       <div className="message-bubble">
-                          <p className="message-text">{msg.Content}</p>
+                      <p className={msg.DisplayFlag == 0 ? "message-text2" : "message-text"}>
+                        {msg.Content}
+                      </p>
                           {msg.Image && (
                           <img
                               src={`https://loopplus.mydns.jp/${msg.Image}`}

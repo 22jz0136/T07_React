@@ -98,6 +98,12 @@
     color: #333; /* テキストカラー */
 }
 
+.message-text2 {
+    margin: 0;
+    font-size: 14px;
+    color: #9e9e9e; /* テキストカラー */
+}
+
 /* メッセージ画像 */
 .message-image {
     width: 100%;
